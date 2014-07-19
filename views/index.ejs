@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel='stylesheet' href='styles/standby.css'>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <link rel='stylesheet' href='style.css'>
+    <script src='scripts/standby.js'></script>
   </head>
   <body>
-    <a id='link' href='#'><%= url %></a>
+    <% redditPosts.forEach(function(post, i) { %>
+      <div>
+        <a class='cache' href='<%= post.url %>'><%= post.title %></a>
+      </div>
+    <% }); %>
 
     <div id='html'>
-      <%- html %>
     </div>
 
     <script type='text/javascript'>

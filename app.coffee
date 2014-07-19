@@ -11,9 +11,9 @@ app.use(bodyParser.json())
 
 app.get '/', (req, res) ->
   url = "http://idlewords.com/2014/07/sana_a.htm"
-  request.get url, (response) ->
-    html = response.text
-    res.render 'index', {url, html}
+  request.get "http://www.reddit.com/r/all.json", (response) ->
+    redditPosts = response.body.data.children.map (p) -> p.data
+    res.render 'index', {redditPosts}
 
 app.get '/cache', (req, res) ->
   url = req.query.url
