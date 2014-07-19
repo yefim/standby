@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel='stylesheet' href='style.css'>
+  </head>
+  <body>
+    <a id='link' href='#'><%= url %></a>
+
+    <div id='html'>
+      <%- html %>
+    </div>
+
+    <script type='text/javascript'>
+      $('#link').on('click', function() {
+        $('#html').css('display', 'block');
+      });
+    </script>
+  </body>
+</html>
