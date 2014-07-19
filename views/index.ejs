@@ -26,5 +26,24 @@
 
     <div id='html'>
     </div>
+
+    <div id='page-wrap'>
+      <div id='icon-section'>
+          <div id='logo' class='left-stack'></div>
+          <div id='hn' class='left-stack'></div>
+          <div id='ph' class='left-stack'></div>
+          <div id='reddit' class='left-stack'></div>
+      </div>
+      <div id='link-section'>
+        <div id='content'>
+        </div>
+      </div>
+    </div>
+
+    <script type='text/javascript'>
+      $('#link').on('click', function() {
+        $('#html').css('display', 'block');
+      });
+    </script>
   </body>
 </html>
