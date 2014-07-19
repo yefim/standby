@@ -8,17 +8,12 @@
   <body>
     <% redditPosts.forEach(function(post, i) { %>
       <div>
-        <a class='cache' href='<%= post.url %>'><%= post.title %></a>
+        <a class='cache' data-id='reddit-<%= i %>' href='<%= post.url %>'><%= post.title %></a>
+        <iframe class='content' id='reddit-<%= i %>'></iframe>
       </div>
     <% }); %>
 
     <div id='html'>
     </div>
-
-    <script type='text/javascript'>
-      $('#link').on('click', function() {
-        $('#html').css('display', 'block');
-      });
-    </script>
   </body>
 </html>
