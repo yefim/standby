@@ -27,9 +27,20 @@ body {
   color: limegreen;
 }
 
+#icon-section {
+  height: 900px;
+}
+
 .left-stack {
-    width: 80px;
-    height: 80px;
-    float: left;
-    clear: left;
+  width: 160px;
+  float: left;
+  clear: left;
+}
+
+#logo {
+  height: 5%;
+}
+
+.third-party {
+  height: 30%;
 }
