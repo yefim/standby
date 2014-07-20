@@ -20,3 +20,26 @@ body {
 
 .cache.loaded {
   color: limegreen; }
+
+#icon-section {
+  height: 900px;
+  width: 160px;
+  float: left; }
+
+#link-section {
+  width: 700px;
+  margin-left: 160px; }
+
+.left-stack {
+  float: left;
+  clear: left; }
+
+#logo {
+  height: 5%; }
+
+.third-party {
+  height: 30%; }
+
+#footer {
+  margin-top: 5px;
+  text-align: center; }

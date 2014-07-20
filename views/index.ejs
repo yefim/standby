@@ -21,7 +21,7 @@
         <h1>Hacker News</h1>
         <% hackernewsPosts.forEach(function(post, i) { %>
           <div>
-            <a class='cache' data-id='hackernews-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a> - <a class='cache' data-id='hackernews-link-<%= i %>' href='https://news.ycombinator.com/item?id=<%= post.id %>'>Comments</a>
+            <a class='cache' data-id='hackernews-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a> - <a class='cache' data-id='hackernews-comments-<%= i %>' href='https://news.ycombinator.com/item?id=<%= post.id %>'>Comments</a>
             <iframe class='content' id='hackernews-link-<%= i %>'></iframe>
             <iframe class='content' id='hackernews-comments-<%= i %>'></iframe>
           </div>

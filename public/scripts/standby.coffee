@@ -1,6 +1,6 @@
 $ ->
   console.log "done"
-
+  window.onload = -> console.log('loaded')
   $('.cache').each (i, el) ->
     $el = $(el)
     $.get '/cache', {url: el.href}, (html) ->
@@ -11,8 +11,22 @@ $ ->
       iframe.document.open()
       iframe.document.write(html)
       iframe.document.close()
-      iframe.onload = -> $el.addClass('loaded')
+      waitForLoaded(id, $el, (el) ->
+        el.addClass('loaded')
+      )
       $el.on 'click', (e) ->
         e.preventDefault()
         id = $(@).data('id')
         $("##{id}").css('display', 'block')
+
+waitForLoaded = (id, $el, cb) ->
+  iframe = document.getElementById(id)
+  if iframe.contentWindow and iframe.contentWindow.document and iframe.contentWindow.document.body and iframe.contentWindow.document.body.innerHTML
+    console.log('loaded!!!!!!!!!!!')
+    setTimeout((()->
+      cb($el)
+    ), 500)
+  else
+    setTimeout((() ->
+      waitForLoaded(id, $el, cb)
+      ),333)

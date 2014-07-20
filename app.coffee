@@ -2,7 +2,7 @@ express = require('express')
 bodyParser = require('body-parser')
 path = require("path")
 request = require('superagent')
-htmlFixer = require('./addcss.coffee')
+helper = require('./helper.coffee')
 app = express()
 
 app.set('view engine', 'ejs')
@@ -27,20 +27,17 @@ app.get '/', (req, res) ->
 
 app.get '/cache', (req, res) ->
   url = req.query.url
-  if isImage(url)
+  if helper.isImage(url)
+    console.log(url)
     res.send "<img src='#{url}'>"
   else
     request.get url, (response) ->
       html = response.text
       # parse relative css and js links
       if response.headers["content-type"].indexOf('html') > -1
-        html = htmlFixer.fixLinks(html, url)
+        html = helper.fixLinks(html, url)
 
       res.send html
 
 app.listen 3000, -> console.log "Listening on 3000"
 
-types = ["gif", "jpg", "jpeg", "png", "tiff", "tif"]
-isImage = (url) ->
-  arr = url.toLowerCase().split('.')
-  arr[arr.length-1] in types
