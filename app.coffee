@@ -2,10 +2,15 @@ express = require('express')
 bodyParser = require('body-parser')
 path = require("path")
 request = require('superagent')
-redis = require("redis")
 helper = require('./helper.coffee')
-client = redis.createClient()
 app = express()
+
+if process.env.REDISTOGO_URL
+  rtg   = require("url").parse(process.env.REDISTOGO_URL)
+  client = require("redis").createClient(rtg.port, rtg.hostname)
+  client.auth(rtg.auth.split(":")[1])
+else
+  client = require("redis").createClient()
 
 app.set('view engine', 'ejs')
 app.set("views", path.join(__dirname, "views"))
@@ -71,4 +76,5 @@ app.get '/add', (req, res) ->
   else
     res.json []
 
-app.listen 3000, -> console.log "Listening on http://localhost:3000"
+port = Number(process.env.PORT or 3000)
+app.listen port, -> console.log "Listening on http://localhost:3000"
