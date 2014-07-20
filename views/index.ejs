@@ -33,7 +33,6 @@
       </div>
 
       <div id='hn-section' class='content-section'>
-        <h1>Hacker News</h1>
         <% hackernewsPosts.forEach(function(post, i) { %>
           <div>
             <div class='section-link'>
@@ -48,7 +47,6 @@
       </div>
 
       <div id='ph-section' class='content-section'>
-        <h1>Product Hunt</h1>
         <% productHuntPosts.forEach(function(post, i) { %>
           <div>
             <div class='section-link'>
@@ -64,7 +62,6 @@
       </div>
 
       <div id='reddit-section' class='content-section active-section'>
-        <h1>Reddit</h1>
         <% redditPosts.forEach(function(post, i) { %>
           <div>
             <div class='section-link'>
@@ -78,7 +75,6 @@
         <% }); %>
       </div>
       <div id='medium-section' class='content-section'>
-        <h1>Medium</h1>
         <% mediumPosts.forEach(function(post, i) { %>
           <div>
             <a class='cache' data-id='medium-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a>
