@@ -65,11 +65,20 @@
             </div>
           <% }); %>
         </div>
+        <div id='medium-section' class='content-section'>
+          <h1>Medium</h1>
+          <% mediumPosts.forEach(function(post, i) { %>
+            <div>
+              <a class='cache' data-id='medium-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a>
+              <iframe class='content' id='medium-link-<%= i %>'></iframe>
+            </div>
+          <% }); %>
+        </div>
       </div>
     </div>
 
     <div id='footer'>
-        <span>Built With Love at Greylock Hackfest 2014</span>
+        <span>Built with caffeine at GreylockU Hackfest 2014 by <a href="https://github.com/awiss">Alex</a>, <a href="http://yef.im/">Geoff</a>, <a href="http://connolly.io">Ian</a> &amp; <a href="https://twitter.com/kathleen_warner">Kathleen</a></span>
     </div>
 
     <div id='overlay'></div>

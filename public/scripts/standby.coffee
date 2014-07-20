@@ -32,7 +32,7 @@ $ ->
       iframe = document.getElementById(id)
       iframe = iframe.contentWindow or iframe.contentDocument.document or iframe.contentDocument
       iframe.document.open()
-      iframe.document.write(html)
+      iframe.document.write(html.replace('window.top.location','hahaiwin'))
       iframe.document.close()
       waitForLoaded id, $el, (el) ->
         el.addClass('loaded')
@@ -60,6 +60,7 @@ $ ->
   $('.left-text').each (i, el) ->
     $el = $(el)
     $el.on 'click', (e) ->
+      console.log('preventDefault')
       e.preventDefault()
       target = @.target
       $('.active-section').each (j, ell) ->

@@ -13,22 +13,25 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(bodyParser.json())
 
 STANDBY = "OUR.URL.COM"
+REDDIT = "http://www.reddit.com/r/all.json"
+PH = "http://hook-api.herokuapp.com/today"
+HN ="http://api.ihackernews.com/page"
 
 app.get '/', (req, res) ->
-  res.render 'index', {redditPosts: [], productHuntPosts: [], hackernewsPosts: []}
-  ###
-  request.get "http://www.reddit.com/r/all.json", (redditResponse) ->
-    redditPosts = redditResponse.body.data.children.map((p) -> p.data)[0..1]
+  request.get REDDIT, (redditResponse) ->
+    redditPosts = redditResponse.body.data.children.map((p) -> p.data)[0..10]
     redditPosts = redditPosts.filter (link) -> link isnt STANDBY
-    request.get "http://hook-api.herokuapp.com/today", (productHuntResponse) ->
-      # productHuntPosts = productHuntResponse.body.hunts[0..1]
+    # request.get PH, (productHuntResponse) ->
+    #   productHuntPosts = productHuntResponse.body.hunts[0..1]
+    #   productHuntPosts = productHuntPosts.filter (link) -> link isnt STANDBY
+    request.get HN, (hackernewsResponse) ->
+      # hackernewsPosts = hackernewsResponse.body.items[0..1]
+      hackernewsPosts = []
       productHuntPosts = []
-      productHuntPosts = productHuntPosts.filter (link) -> link isnt STANDBY
-      request.get "http://api.ihackernews.com/page", (hackernewsResponse) ->
-        hackernewsPosts = hackernewsResponse.body.items[0..1]
-        hackernewsPosts = hackernewsPosts.filter (link) -> link isnt STANDBY
-        res.render 'index', {redditPosts, productHuntPosts, hackernewsPosts}
-  ###
+      hackernewsPosts = hackernewsPosts.filter (link) -> link isnt STANDBY
+      request.get "https://medium.com/top-100", (mediumResponse) ->
+        mediumPosts = helper.parseMedium(mediumResponse.text)
+        res.render 'index', {redditPosts, productHuntPosts, hackernewsPosts, mediumPosts}
 
 app.get '/cache', (req, res) ->
   url = req.query.url
