@@ -19,16 +19,20 @@ HN ="http://api.ihackernews.com/page"
 
 app.get '/', (req, res) ->
   request.get REDDIT, (redditResponse) ->
+    console.log "loaded Reddit."
     redditPosts = redditResponse.body.data.children.map((p) -> p.data)
     redditPosts = redditPosts.filter (link) -> link isnt STANDBY
     request.get PH, (productHuntResponse) ->
+      console.log "loaded Product Hunt."
       productHuntPosts = productHuntResponse.body.hunts
       productHuntPosts = productHuntPosts.filter (link) -> link isnt STANDBY
       request.get HN, (hackernewsResponse) ->
+        console.log "loaded HN."
         # hackernewsPosts = hackernewsResponse.body.items
         hackernewsPosts = []
         hackernewsPosts = hackernewsPosts.filter (link) -> link isnt STANDBY
         request.get "https://medium.com/top-100", (mediumResponse) ->
+          console.log "loaded Medium."
           mediumPosts = helper.parseMedium(mediumResponse.text)
           res.render 'index', {redditPosts, productHuntPosts, hackernewsPosts, mediumPosts}
 
@@ -39,7 +43,7 @@ app.get '/cache', (req, res) ->
       res.send html
     else
       if helper.isImage(url)
-        html = "<img src='#{url}'>"
+        html = "<style>body { margin: 0; padding: 0; }</style><img style='max-width: 100%; max-height: 100%;' src='#{url}'>"
         client.set url, html
         res.send html
       else
