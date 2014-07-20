@@ -30,4 +30,6 @@ To install the node dependencies just run ```npm install```
 Running
 =========
 
-Run ```coffee app.coffee``` and navigate to ```http://localhost:3000```
+* Run ```redis-server``` or ```redis-server &```
+
+* Run ```coffee app.coffee``` and navigate to ```http://localhost:3000```
