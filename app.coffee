@@ -15,17 +15,20 @@ app.use(bodyParser.json())
 STANDBY = "OUR.URL.COM"
 
 app.get '/', (req, res) ->
+  res.render 'index', {redditPosts: [], productHuntPosts: [], hackernewsPosts: []}
+  ###
   request.get "http://www.reddit.com/r/all.json", (redditResponse) ->
     redditPosts = redditResponse.body.data.children.map((p) -> p.data)[0..1]
     redditPosts = redditPosts.filter (link) -> link isnt STANDBY
     request.get "http://hook-api.herokuapp.com/today", (productHuntResponse) ->
-      productHuntPosts = productHuntResponse.body.hunts[0..1]
+      # productHuntPosts = productHuntResponse.body.hunts[0..1]
+      productHuntPosts = []
       productHuntPosts = productHuntPosts.filter (link) -> link isnt STANDBY
       request.get "http://api.ihackernews.com/page", (hackernewsResponse) ->
-        # hackernewsPosts = hackernewsResponse.body.items[0..1]
-        hackernewsPosts = []
+        hackernewsPosts = hackernewsResponse.body.items[0..1]
         hackernewsPosts = hackernewsPosts.filter (link) -> link isnt STANDBY
         res.render 'index', {redditPosts, productHuntPosts, hackernewsPosts}
+  ###
 
 app.get '/cache', (req, res) ->
   url = req.query.url

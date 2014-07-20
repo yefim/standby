@@ -5,7 +5,6 @@ $ ->
       openLink(hash)
     else
       hideLink()
-    console.log hash
 
   openLink = (id) ->
     $("##{id}").addClass('fucklightboxes')
@@ -14,7 +13,7 @@ $ ->
     document.body.style.overflow = 'hidden';
     $('#overlay').on 'click', (e) ->
       e.preventDefault()
-      hideLink()
+      window.location.hash = ""
       $('#overlay').off('click')
 
   hideLink = ->
@@ -23,7 +22,7 @@ $ ->
     document.body.style.overflow = 'auto';
 
   $(document).keyup (e) ->
-    hideLink() if e.keyCode is 27
+    window.location.hash = "" if e.keyCode is 27
 
   $('.cache').each (i, el) ->
     $el = $(el)
@@ -52,3 +51,17 @@ $ ->
       setTimeout (->
         waitForLoaded(id, $el, cb)
       ), 200
+
+  $('#icons li:not(.logo)').on 'click', (e) ->
+    $this = $(@)
+    $('#icons li:not(.logo)').removeClass('selected')
+    $this.addClass('selected')
+
+  $('.left-text').each (i, el) ->
+    $el = $(el)
+    $el.on 'click', (e) ->
+      e.preventDefault()
+      target = @.target
+      $('.active-section').each (j, ell) ->
+        $(ell).removeClass('active-section')
+      $("##{target}").addClass('active-section')
