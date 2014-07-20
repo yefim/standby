@@ -14,9 +14,7 @@ exports.fixLinks = (html, url) ->
     if val.attribs and val.attribs.src
       val.attribs.src = remotizeURL(val.attribs.src, url)
 
-  for key,val of $('video')
-    if val.attribs
-      val.attribs.autoplay = null
+  $('video').removeAttr('autoplay')
 
   $.html()
 

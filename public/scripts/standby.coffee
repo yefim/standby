@@ -9,6 +9,11 @@ $ ->
       hideLink()
 
   cacheLinks = ->
+    NProgress.start()
+    total = $('.cache:not(.loaded)').length
+    curr = 0
+    stillInLoading = true
+    old_pct = 0
     $('.cache:not(.loaded)').each (i, el) ->
       $el = $(el)
       $.get '/cache', {url: el.href}, (html) ->
@@ -22,7 +27,18 @@ $ ->
           iframe.document.open()
           iframe.document.write(html.replace('window.top.location','hahaiwin'))
           iframe.document.close()
-          waitForLoaded id, $el, (el) ->
+          waitForLoaded 0, id, $el, (el) ->
+            curr++
+            pct = Math.floor(curr / total * 100)
+            console.log(pct)
+            if stillInLoading
+              if pct > 95
+                stillInLoading = false
+                setTimeout(() ->
+                  NProgress.done()
+                , 2000)
+              else
+                NProgress.set(curr / total)
             el.addClass('loaded')
           $el.on 'click', (e) ->
             e.preventDefault()
@@ -49,15 +65,15 @@ $ ->
   cacheLinks()
   $('#x').on 'click', -> window.location.hash = ""
 
-  waitForLoaded = (id, $el, cb) ->
+  waitForLoaded = (i, id, $el, cb) ->
     iframe = document.getElementById(id)
-    if iframe.contentWindow and iframe.contentWindow.document and iframe.contentWindow.document.body and iframe.contentWindow.document.body.innerHTML
+    if i > 20 or iframe.contentWindow and iframe.contentWindow.document and iframe.contentWindow.document.body and iframe.contentWindow.document.body.innerHTML
       setTimeout (->
         cb($el)
-      ), 500
+      ), 200
     else
       setTimeout (->
-        waitForLoaded(id, $el, cb)
+        waitForLoaded(i+1, id, $el, cb)
       ), 200
 
   # $('#icons li:not(.add-section)').on 'click', (e) ->

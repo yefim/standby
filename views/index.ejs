@@ -15,7 +15,8 @@
     <!-- <script src='scripts/modernizr.custom.js'></script> -->
     <!-- <script src='scripts/jquery.dlmenu.js'></script> -->
     <!-- <script src='scripts/pagetransitions.js'></script> -->
-
+    <script src='scripts/nprogress.js'></script>
+    <link rel='stylesheet' href='styles/nprogress.css'/>
     <script src='scripts/standby.js'></script>
   </head>
   <body>
@@ -61,7 +62,7 @@
                 </div>
               </div>
               <iframe sandbox="allow-same-origin" class='content' id='hackernews-link-<%= i %>'></iframe>
-              <iframe class='content' id='hackernews-comments-<%= i %>'></iframe>
+              <iframe sandbox="allow-same-origin allow-scripts" class='content' id='hackernews-comments-<%= i %>'></iframe>
             </div>
           <% }); %>
         </div>
@@ -82,7 +83,7 @@
                 </div>
               </div>
               <iframe sandbox="allow-same-origin" class='content' id='reddit-link-<%= i %>'></iframe>
-              <iframe class='content' id='reddit-comments-<%= i %>'></iframe>
+              <iframe sandbox="allow-same-origin allow-scripts" class='content' id='reddit-comments-<%= i %>'></iframe>
             </div>
           <% }); %>
         </div>
@@ -92,7 +93,7 @@
               <div class='section-link'>
                 <a class='cache site-link' data-id='medium-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a>
               </div>
-              <iframe sandbox="allow-same-origin" class='content' id='medium-link-<%= i %>'></iframe>
+              <iframe class='content' id='medium-link-<%= i %>'></iframe>
             </div>
           <% }); %>
         </div>
@@ -103,7 +104,8 @@
       </div>
     </div>
     <img id="x" src="/images/exit-button.png">
-    <div id='overlay'></div>
+    <div id='overlay' class='dark'></div>
+    <!-- <img id="loading-spinner" src="/images/loading-spinner.gif"> -->
 
     <div class="modal fade">
       <div class="modal-dialog">
