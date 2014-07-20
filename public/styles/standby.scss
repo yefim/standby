@@ -19,13 +19,15 @@ iframe {
 }
 
 .section-link {
-  margin-top: 10px;
-  margin-bottom: 10px;
   margin-left: 20px;
+  margin-bottom: 1.5em;
+  margin-top: 1.5em;
 }
 
 .site-link {
   font-weight: 300;
+  line-height: 1.2;
+  margin-right: 0.25em;
   font-size: 24px;
   color: #858585;
 }
@@ -39,8 +41,8 @@ iframe {
 .comments {
   font-weight: 300;
   font-size: 14px;
-  color: #C1C1C1
-
+  display: block;
+  color: #C1C1C1;
 }
 
 .upvote {
