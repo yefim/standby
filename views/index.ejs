@@ -80,7 +80,9 @@
         <div id='medium-section' class='content-section'>
           <% mediumPosts.forEach(function(post, i) { %>
             <div>
-              <a class='cache site-link' data-id='medium-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a>
+              <div class='section-link'>
+                <a class='cache site-link' data-id='medium-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a>
+              </div>
               <iframe class='content' id='medium-link-<%= i %>'></iframe>
             </div>
           <% }); %>
