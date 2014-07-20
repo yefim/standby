@@ -69,11 +69,21 @@ $ ->
 
 
   $('#icons li.add-section').on 'click', (e) ->
-    service = "reddit"
-    subreddit = "askreddit"
     # open modal
+    $('.modal').modal()
+
+  $('#modal-subreddit').on 'keyup', (e) ->
+    if e.keyCode is 13
+      addToStandBy("reddit", $('#modal-subreddit').val())
+      $('.modal').modal('hide')
+      $('#modal-subreddit').val('')
+
+  $('.modal-producthunt').on 'click', (e) ->
+    addToStandBy("producthunt")
+    $('.modal').modal('hide')
+
+  addToStandBy = (service, subreddit = "") ->
     $.get '/add', {service, subreddit}, (posts) ->
-      console.log posts
       section = subreddit or service
       section += "-section"
       img = if subreddit then "Reddit_on.png" else "Product_on.png"

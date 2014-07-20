@@ -11,6 +11,7 @@
 		<!-- <link rel="stylesheet" type="text/css" href="styles/animations.css" /> -->
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <!-- <script src='scripts/modernizr.custom.js'></script> -->
     <!-- <script src='scripts/jquery.dlmenu.js'></script> -->
     <!-- <script src='scripts/pagetransitions.js'></script> -->
@@ -106,5 +107,26 @@
     <div id='progress'></div>
     <img id="x" src="/images/exit-button.png">
     <div id='overlay'></div>
+
+    <div class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Add to Stand By</h4>
+          </div>
+          <div class="modal-body">
+            <div class='modal-producthunt'>
+              <img class='modal-images' src='/images/Product_on.png'>
+              <span>Product Hunt</span>
+            </div>
+            <hr>
+            <div class='modal-reddit'>
+              <img class='modal-images'src='/images/Reddit_on.png'>
+              <input type='text' class='input-lg' id='modal-subreddit' placeholder='/r/pics'>
+            </div>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
   </body>
 </html>
