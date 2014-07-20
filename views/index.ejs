@@ -17,63 +17,74 @@
           <li class='logo'><i class='standby'></i></li>
         </ul>
       </section>
-      <div id='link-section'>
-        <div id='blurb-section' class='content-section active-section'>
-          <p>
-            Quinoa mixtape kale chips keffiyeh Etsy vegan readymade, raw denim four loko craft beer synth actually ugh. Distillery Cosby sweater meh Odd Future Williamsburg. Etsy biodiesel roof party beard, blog Odd Future Cosby sweater American Apparel raw denim meggings slow-carb skateboard Marfa fingerstache. Put a bird on it tattooed pickled, XOXO salvia Cosby sweater 3 wolf moon twee +1 semiotics vinyl fap direct trade. XOXO roof party gluten-free letterpress. Pinterest farm-to-table vegan post-ironic mixtape Etsy tofu tousled. Intelligentsia wolf Etsy, typewriter fap chambray twee organic +1 cornhole drinking vinegar aesthetic viral.
-          </p>
-          <p>
-            Vice sriracha disrupt umami pickled dreamcatcher. Messenger bag sriracha flannel leggings pour-over. Ennui fanny pack synth swag, Echo Park Portland crucifix tousled lo-fi Thundercats dreamcatcher Shoreditch 8-bit. Quinoa Bushwick Wes Anderson McSweeney's, +1 sustainable paleo direct trade gentrify meggings keytar. 90's raw denim butcher bitters chia ugh fanny pack. Literally chia Echo Park, selfies Austin squid narwhal Etsy fashion axe yr pug fingerstache cornhole. Plaid meggings Pinterest, tote bag Banksy hashtag Kickstarter American Apparel banh mi iPhone narwhal Blue Bottle fixie PBR squid.
-          </p>
-          <p>
-            Ethical photo booth lo-fi typewriter pork belly fanny pack polaroid put a bird on it trust fund. Pop-up literally kogi photo booth fingerstache. Cred Shoreditch Austin cornhole semiotics Neutra, swag small batch actually XOXO pop-up seitan drinking vinegar pour-over. Lo-fi Bushwick ethical, Cosby sweater Vice narwhal synth Wes Anderson farm-to-table lomo yr leggings fixie chia pop-up. 8-bit gentrify Neutra, selfies freegan try-hard Kickstarter fanny pack occupy Austin Godard. Cliche Banksy skateboard art party Neutra butcher tofu, synth Brooklyn wolf craft beer yr before they sold out. Neutra kale chips leggings, chambray Banksy Austin Intelligentsia trust fund artisan chia typewriter.
-          </p>
-          <p>
-            Literally retro narwhal, banjo aesthetic cred gluten-free meh messenger bag Vice. Paleo distillery hashtag Odd Future. Wolf lo-fi artisan slow-carb pork belly single-origin coffee. Mixtape single-origin coffee squid hella Echo Park. Odd Future American Apparel wayfarers Cosby sweater, normcore sustainable gentrify kitsch farm-to-table ennui fanny pack ethnic swag seitan. Retro hoodie Marfa crucifix. Flexitarian Tumblr Blue Bottle Etsy, pug roof party retro Kickstarter Carles squid.
-          </p>
-        </div>
+      <div id='blurb-section' class='content-section'>
+        <p>
+          Quinoa mixtape kale chips keffiyeh Etsy vegan readymade, raw denim four loko craft beer synth actually ugh. Distillery Cosby sweater meh Odd Future Williamsburg. Etsy biodiesel roof party beard, blog Odd Future Cosby sweater American Apparel raw denim meggings slow-carb skateboard Marfa fingerstache. Put a bird on it tattooed pickled, XOXO salvia Cosby sweater 3 wolf moon twee +1 semiotics vinyl fap direct trade. XOXO roof party gluten-free letterpress. Pinterest farm-to-table vegan post-ironic mixtape Etsy tofu tousled. Intelligentsia wolf Etsy, typewriter fap chambray twee organic +1 cornhole drinking vinegar aesthetic viral.
+        </p>
+        <p>
+          Vice sriracha disrupt umami pickled dreamcatcher. Messenger bag sriracha flannel leggings pour-over. Ennui fanny pack synth swag, Echo Park Portland crucifix tousled lo-fi Thundercats dreamcatcher Shoreditch 8-bit. Quinoa Bushwick Wes Anderson McSweeney's, +1 sustainable paleo direct trade gentrify meggings keytar. 90's raw denim butcher bitters chia ugh fanny pack. Literally chia Echo Park, selfies Austin squid narwhal Etsy fashion axe yr pug fingerstache cornhole. Plaid meggings Pinterest, tote bag Banksy hashtag Kickstarter American Apparel banh mi iPhone narwhal Blue Bottle fixie PBR squid.
+        </p>
+        <p>
+          Ethical photo booth lo-fi typewriter pork belly fanny pack polaroid put a bird on it trust fund. Pop-up literally kogi photo booth fingerstache. Cred Shoreditch Austin cornhole semiotics Neutra, swag small batch actually XOXO pop-up seitan drinking vinegar pour-over. Lo-fi Bushwick ethical, Cosby sweater Vice narwhal synth Wes Anderson farm-to-table lomo yr leggings fixie chia pop-up. 8-bit gentrify Neutra, selfies freegan try-hard Kickstarter fanny pack occupy Austin Godard. Cliche Banksy skateboard art party Neutra butcher tofu, synth Brooklyn wolf craft beer yr before they sold out. Neutra kale chips leggings, chambray Banksy Austin Intelligentsia trust fund artisan chia typewriter.
+        </p>
+        <p>
+          Literally retro narwhal, banjo aesthetic cred gluten-free meh messenger bag Vice. Paleo distillery hashtag Odd Future. Wolf lo-fi artisan slow-carb pork belly single-origin coffee. Mixtape single-origin coffee squid hella Echo Park. Odd Future American Apparel wayfarers Cosby sweater, normcore sustainable gentrify kitsch farm-to-table ennui fanny pack ethnic swag seitan. Retro hoodie Marfa crucifix. Flexitarian Tumblr Blue Bottle Etsy, pug roof party retro Kickstarter Carles squid.
+        </p>
+      </div>
 
-        <div id='hn-section' class='content-section'>
-          <h1>Hacker News</h1>
-          <% hackernewsPosts.forEach(function(post, i) { %>
-            <div>
-              <a class='cache' data-id='hackernews-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a> - <a class='cache' data-id='hackernews-comments-<%= i %>' href='https://news.ycombinator.com/item?id=<%= post.id %>'>Comments</a>
-              <iframe class='content' id='hackernews-link-<%= i %>'></iframe>
-              <iframe class='content' id='hackernews-comments-<%= i %>'></iframe>
+      <div id='hn-section' class='content-section'>
+        <h1>Hacker News</h1>
+        <% hackernewsPosts.forEach(function(post, i) { %>
+          <div>
+            <div class='section-link'>
+              <a class='cache' data-id='hackernews-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a>
+              <span class='website'>(<%= post.url.replace('http://','').replace('https://','').split(/[/?#]/)[0] %>)</span>
+              <a class='comments' data-id='hackernews-comments-<%= i %>' href='https://news.ycombinator.com/item?id=<%= post.id %>'>Comments</a>
             </div>
-          <% }); %>
-        </div>
+            <iframe class='content' id='hackernews-link-<%= i %>'></iframe>
+            <iframe class='content' id='hackernews-comments-<%= i %>'></iframe>
+          </div>
+        <% }); %>
+      </div>
 
-        <div id='ph-section' class='content-section'>
-          <h1>Product Hunt</h1>
-          <% productHuntPosts.forEach(function(post, i) { %>
-            <div>
-              <a class='cache' data-id='product-hunt-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a> - <a class='cache' data-id='product-hunt-comments-<%= i %>' href='http://producthunt.com<%= post.permalink %>'>Comments</a>
-              <iframe class='content' id='product-hunt-link-<%= i %>'></iframe>
-              <iframe class='content' id='product-hunt-comments-<%= i %>'></iframe>
+      <div id='ph-section' class='content-section'>
+        <h1>Product Hunt</h1>
+        <% productHuntPosts.forEach(function(post, i) { %>
+          <div>
+            <div class='section-link'>
+              <a class='cache' data-id='product-hunt-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a>
+              <span class='website'>(<%= post.url.replace('http://','').replace('https://','').split(/[/?#]/)[0] %>)</span>
+              <a class='comments' data-id='product-hunt-comments-<%= i %>' href='http://producthunt.com<%= post.permalink %>'>Comments</a>
             </div>
-          <% }); %>
-        </div>
+            <iframe class='content' id='product-hunt-link-<%= i %>'></iframe>
+            <iframe class='content' id='product-hunt-comments-<%= i %>'></iframe>
+            </div>
+          </div>
+        <% }); %>
+      </div>
 
-        <div id='reddit-section' class='content-section'>
-          <h1>Reddit</h1>
-          <% redditPosts.forEach(function(post, i) { %>
-            <div>
-              <a class='cache' data-id='reddit-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a> - <a class='cache' data-id='reddit-comments-<%= i %>' href='http://reddit.com<%= post.permalink %>'>Comments</a>
-              <iframe class='content' id='reddit-link-<%= i %>'></iframe>
-              <iframe class='content' id='reddit-comments-<%= i %>'></iframe>
+      <div id='reddit-section' class='content-section active-section'>
+        <h1>Reddit</h1>
+        <% redditPosts.forEach(function(post, i) { %>
+          <div>
+            <div class='section-link'>
+              <a class='cache' data-id='reddit-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a>
+              <span class='website'>(<%= post.url.replace('http://','').replace('https://','').split(/[/?#]/)[0] %>)</span>
+              <a class='comments' data-id='reddit-comments-<%= i %>' href='http://reddit.com<%= post.permalink %>'>Comments</a>
             </div>
-          <% }); %>
-        </div>
-        <div id='medium-section' class='content-section'>
-          <h1>Medium</h1>
-          <% mediumPosts.forEach(function(post, i) { %>
-            <div>
-              <a class='cache' data-id='medium-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a>
-              <iframe class='content' id='medium-link-<%= i %>'></iframe>
-            </div>
-          <% }); %>
-        </div>
+            <iframe class='content' id='reddit-link-<%= i %>'></iframe>
+            <iframe class='content' id='reddit-comments-<%= i %>'></iframe>
+          </div>
+        <% }); %>
+      </div>
+      <div id='medium-section' class='content-section'>
+        <h1>Medium</h1>
+        <% mediumPosts.forEach(function(post, i) { %>
+          <div>
+            <a class='cache' data-id='medium-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a>
+            <iframe class='content' id='medium-link-<%= i %>'></iframe>
+          </div>
+        <% }); %>
       </div>
     </div>
 
