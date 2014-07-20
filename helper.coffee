@@ -44,3 +44,20 @@ exports.isImage = (url) ->
     if file.indexOf(t) > -1
       return true
   return false
+
+exports.parseMedium = (html) ->
+  $ = cheerio.load(html)
+  mediumPosts = []
+  for val,i in $('a[data-action="open-post"]')
+    spl = val.attribs.title.split(' by ')
+    title = spl[0]
+    author = spl[1]
+    url = remotizeURL(val.attribs.href, "https://medium.com/top-100")
+    mediumPosts.push({title,author,url})
+    console.log(val.attribs.title)
+
+  for val,i in $('span.readingTime')
+    mediumPosts[i].time = parseInt(val.children[0].data)
+
+  mediumPosts
+

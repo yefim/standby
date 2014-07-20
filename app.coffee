@@ -25,7 +25,9 @@ app.get '/', (req, res) ->
         # hackernewsPosts = hackernewsResponse.body.items[0..1]
         hackernewsPosts = []
         hackernewsPosts = hackernewsPosts.filter (link) -> link isnt STANDBY
-        res.render 'index', {redditPosts, productHuntPosts, hackernewsPosts}
+        request.get "https://medium.com/top-100", (mediumResponse) ->
+          mediumPosts = helper.parseMedium(mediumResponse.text)
+          res.render 'index', {redditPosts, productHuntPosts, hackernewsPosts, mediumPosts}
 
 app.get '/cache', (req, res) ->
   url = req.query.url
