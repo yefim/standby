@@ -1,6 +1,4 @@
 .DS_Store
 node_modules/
-public/scripts/standby.js
 *.swp
 .sass-cache
-public/styles/standby.css
