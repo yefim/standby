@@ -47,4 +47,3 @@ app.get '/cache', (req, res) ->
           res.send html
 
 app.listen 3000, -> console.log "Listening on 3000"
-
