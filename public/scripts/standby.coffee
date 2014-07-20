@@ -23,6 +23,7 @@ $ ->
           e.preventDefault()
           $el.addClass('site-link-visited')
           id = $(@).data('id')
+          $("#arrow-#{id}").addClass('arrow-seen')
           window.location.hash = id
 
   openLink = (id) ->
