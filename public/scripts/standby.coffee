@@ -23,6 +23,7 @@ $ ->
           e.preventDefault()
           $el.addClass('site-link-visited')
           id = $(@).data('id')
+          $("#arrow-#{id}").addClass('arrow-seen')
           window.location.hash = id
 
   openLink = (id) ->
@@ -93,7 +94,7 @@ $ ->
             <div>
               <div class='section-link'>
                 <div class='upvotes'>
-                  <div class='arrow'></div>
+                  <div class='arrow' id="arrow-#{section}-link-#{i}"></div>
                   <div>#{post.score}</div>
                 </div>
                 <div class='post-data'>

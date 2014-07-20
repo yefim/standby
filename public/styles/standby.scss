@@ -30,6 +30,7 @@ iframe {
   padding-right: 20px;
   padding-top: 5px;
   vertical-align: middle;
+  color: #858585;
 }
 .post-data {
   display: table-cell;
@@ -48,8 +49,11 @@ iframe {
   height: 0;
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
+  border-bottom: 15px solid #858585;
+}
 
-  border-bottom: 15px solid black;
+.arrow-seen {
+  border-bottom-color: #C1C1C1;
 }
 .website {
   font-weight: 200;
