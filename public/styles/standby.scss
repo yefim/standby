@@ -25,8 +25,27 @@ iframe {
 }
 
 .cache {
-  text-decoration: none;
-  color: #444;
+  font-weight: 300;
+  font-size: 28pt;
+  color: #858585;
+}
+
+.website {
+  font-weight: 200;
+  font-size: 16pt;
+  color: #D3D3D3;
+}
+
+.comments {
+  font-weight: 300;
+  font-size: 14pt;
+  color: #C1C1C1
+
+}
+
+.upvote {
+  font-weight: 400;
+  font-size: 14;
 }
 
 .cache:visited {

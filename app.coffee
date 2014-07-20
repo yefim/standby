@@ -19,7 +19,7 @@ HN ="http://api.ihackernews.com/page"
 
 app.get '/', (req, res) ->
   request.get REDDIT, (redditResponse) ->
-    redditPosts = redditResponse.body.data.children.map((p) -> p.data)[0..1]
+    redditPosts = redditResponse.body.data.children.map((p) -> p.data)[0..10]
     redditPosts = redditPosts.filter (link) -> link isnt STANDBY
     # request.get PH, (productHuntResponse) ->
     #   productHuntPosts = productHuntResponse.body.hunts[0..1]
@@ -32,6 +32,7 @@ app.get '/', (req, res) ->
       request.get "https://medium.com/top-100", (mediumResponse) ->
         mediumPosts = helper.parseMedium(mediumResponse.text)
         res.render 'index', {redditPosts, productHuntPosts, hackernewsPosts, mediumPosts}
+
 
 app.get '/cache', (req, res) ->
   url = req.query.url
