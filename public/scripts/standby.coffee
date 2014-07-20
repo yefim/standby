@@ -45,7 +45,7 @@ $ ->
     window.location.hash = "" if e.keyCode is 27
 
   cacheLinks()
-  $('#x').on('click', hideLink)
+  $('#x').on 'click', -> window.location.hash = ""
 
   waitForLoaded = (id, $el, cb) ->
     iframe = document.getElementById(id)
