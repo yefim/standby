@@ -21,7 +21,7 @@ app.get '/', (req, res) ->
   request.get REDDIT, (redditResponse) ->
     console.log "loaded Reddit."
     redditPosts = redditResponse.body.data.children.map((p) -> p.data)
-    redditPosts = redditPosts.filter (link) -> link isnt STANDBY
+    redditPosts = redditPosts.filter (link) -> link.domain isnt STANDBY and not /nytimes.com/.test(link.url)
     request.get PH, (productHuntResponse) ->
       console.log "loaded Product Hunt."
       productHuntPosts = productHuntResponse.body.hunts

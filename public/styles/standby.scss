@@ -117,7 +117,30 @@ iframe {
   z-index: 100;
 }
 
+#progress {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: #444;
+  opacity: 0.8;
+  z-index: 100;
+  background-size:0%;
+}
+
 #icons-section {
+}
+
+#x {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 106px;
+  height: 106px;
+  z-index: 2000;
 }
 
 #icons {

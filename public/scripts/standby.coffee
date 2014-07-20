@@ -9,6 +9,7 @@ $ ->
   openLink = (id) ->
     $("##{id}").addClass('fucklightboxes')
     $('#overlay').addClass('dark')
+    $('#x').show()
     # disable scrolling on parent
     document.body.style.overflow = 'hidden';
     $('#overlay').on 'click', (e) ->
@@ -19,10 +20,14 @@ $ ->
   hideLink = ->
     $('#overlay').removeClass('dark')
     $('iframe').removeClass('fucklightboxes')
+    $('#x').hide()
     document.body.style.overflow = 'auto';
 
   $(document).keyup (e) ->
     window.location.hash = "" if e.keyCode is 27
+
+  $('#x').on('click', hideLink)
+
 
   $('.cache').each (i, el) ->
     $el = $(el)
