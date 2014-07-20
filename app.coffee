@@ -48,6 +48,7 @@ app.get '/cache', (req, res) ->
           if response.headers["content-type"].indexOf('html') > -1
             html = helper.fixLinks(html, url)
           client.set url, html
+          client.expire url, 180
           res.send html
 
 app.get '/add', (req, res) ->
