@@ -2,3 +2,5 @@
 node_modules/
 public/scripts/standby.js:
 *.swp
+.sass-cache
+public/scripts/standby.js
