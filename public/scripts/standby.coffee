@@ -94,7 +94,7 @@ $ ->
             <div>
               <div class='section-link'>
                 <div class='upvotes'>
-                  <div class='arrow'></div>
+                  <div class='arrow' id="arrow-#{section}-link-#{i}"></div>
                   <div>#{post.score}</div>
                 </div>
                 <div class='post-data'>
