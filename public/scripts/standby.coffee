@@ -34,6 +34,7 @@ $ ->
   $('.left-text').each (i, el) ->
     $el = $(el)
     $el.on 'click', (e) ->
+      console.log('preventDefault')
       e.preventDefault()
       target = @.target
       $('.active-section').each (j, ell) ->

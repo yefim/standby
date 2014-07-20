@@ -21,10 +21,9 @@
           <div id='reddit' class='left-stack third-party'>
             <a href="#" target="reddit-section" class="left-text">Reddit</a>
           </div>
-          <!-- <div id='medium' class='left-stack third-party'>
-            <a href="medium-section" class="left-text">Medium</a>
+          <div id='medium' class='left-stack third-party'>
+            <a href="#" target="medium-section" class="left-text">Medium</a>
           </div>
-          -->
       </div>
       <div id='link-section'>
         <div id='blurb-section' class='content-section active-section'>
@@ -71,6 +70,15 @@
               <a class='cache' data-id='reddit-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a> - <a class='cache' data-id='reddit-comments-<%= i %>' href='http://reddit.com<%= post.permalink %>'>Comments</a>
               <iframe class='content' id='reddit-link-<%= i %>'></iframe>
               <iframe class='content' id='reddit-comments-<%= i %>'></iframe>
+            </div>
+          <% }); %>
+        </div>
+        <div id='medium-section' class='content-section'>
+          <h1>Medium</h1>
+          <% mediumPosts.forEach(function(post, i) { %>
+            <div>
+              <a class='cache' data-id='medium-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a>
+              <iframe class='content' id='medium-link-<%= i %>'></iframe>
             </div>
           <% }); %>
         </div>
