@@ -19,16 +19,17 @@ HN ="http://api.ihackernews.com/page"
 
 app.get '/', (req, res) ->
   request.get REDDIT, (redditResponse) ->
-    redditPosts = redditResponse.body.data.children.map((p) -> p.data)[0..1]
+    redditPosts = redditResponse.body.data.children.map((p) -> p.data)[0..10]
     redditPosts = redditPosts.filter (link) -> link isnt STANDBY
-    request.get PH, (productHuntResponse) ->
-      productHuntPosts = productHuntResponse.body.hunts[0..1]
-      productHuntPosts = productHuntPosts.filter (link) -> link isnt STANDBY
-      request.get HN, (hackernewsResponse) ->
-        # hackernewsPosts = hackernewsResponse.body.items[0..1]
-        hackernewsPosts = []
-        hackernewsPosts = hackernewsPosts.filter (link) -> link isnt STANDBY
-        res.render 'index', {redditPosts, productHuntPosts, hackernewsPosts}
+    #request.get PH, (productHuntResponse) ->
+      #productHuntPosts = productHuntResponse.body.hunts[0..1]
+      #productHuntPosts = productHuntPosts.filter (link) -> link isnt STANDBY
+    #request.get HN, (hackernewsResponse) ->
+      # hackernewsPosts = hackernewsResponse.body.items[0..1]
+    productHuntPosts = []
+    hackernewsPosts = []
+    hackernewsPosts = hackernewsPosts.filter (link) -> link isnt STANDBY
+    res.render 'index', {redditPosts, productHuntPosts, hackernewsPosts}
 
 app.get '/cache', (req, res) ->
   url = req.query.url
