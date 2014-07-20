@@ -63,6 +63,14 @@ iframe {
   height: 30%;
 }
 
+.content-section {
+  display: none;
+}
+
+.active-section {
+  display: block;
+}
+
 #footer {
   margin-top: 5px;
   text-align: center;

@@ -14,7 +14,7 @@
         return hideLink();
       }
     });
-    return $('.cache').each(function(i, el) {
+    $('.cache').each(function(i, el) {
       var $el;
       $el = $(el);
       return $.get('/cache', {
@@ -43,6 +43,19 @@
             return $('#overlay').off('click');
           });
         });
+      });
+    });
+    return $('.left-text').each(function(i, el) {
+      var $el;
+      $el = $(el);
+      return $el.on('click', function(e) {
+        var target;
+        e.preventDefault();
+        target = this.target;
+        $('.active-section').each(function(j, ell) {
+          return $(ell).removeClass('active-section');
+        });
+        return $("#" + target).addClass('active-section');
       });
     });
   });

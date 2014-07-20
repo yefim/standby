@@ -31,6 +31,15 @@ $ ->
           hideLink()
           $('#overlay').off('click')
 
+  $('.left-text').each (i, el) ->
+    $el = $(el)
+    $el.on 'click', (e) ->
+      e.preventDefault()
+      target = @.target
+      $('.active-section').each (j, ell) ->
+        $(ell).removeClass('active-section')
+      $("##{target}").addClass('active-section')
+
 waitForLoaded = (id, $el, cb) ->
   iframe = document.getElementById(id)
   if iframe.contentWindow and iframe.contentWindow.document and iframe.contentWindow.document.body and iframe.contentWindow.document.body.innerHTML
