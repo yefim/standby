@@ -1,15 +1,22 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #eee;
-}
+  background-color: #eee; }
 
 #html {
-  display: none;
-}
+  display: none; }
 
 .content {
   display: none;
   width: 100%;
-  height: 200px;
-}
+  height: 200px; }
+
+.cache {
+  text-decoration: none;
+  color: #444; }
+
+.cache:visited {
+  color: #444; }
+
+.cache.loaded {
+  color: limegreen; }

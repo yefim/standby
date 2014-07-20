@@ -11,6 +11,7 @@ $ ->
       iframe.document.open()
       iframe.document.write(html)
       iframe.document.close()
+      iframe.onload = -> $el.addClass('loaded')
       $el.on 'click', (e) ->
         e.preventDefault()
         id = $(@).data('id')
