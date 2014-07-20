@@ -2,7 +2,9 @@ express = require('express')
 bodyParser = require('body-parser')
 path = require("path")
 request = require('superagent')
+redis = require("redis")
 htmlFixer = require('./addcss.coffee')
+client = redis.createClient()
 app = express()
 
 app.set('view engine', 'ejs')
@@ -17,21 +19,28 @@ app.get '/', (req, res) ->
     request.get "http://hook-api.herokuapp.com/today", (productHuntResponse) ->
       productHuntPosts = productHuntResponse.body.hunts[0..1]
       request.get "http://api.ihackernews.com/page", (hackernewsResponse) ->
-        hackernewsPosts = hackernewsResponse.body.items[0..1]
+        # hackernewsPosts = hackernewsResponse.body.items[0..1]
+        hackernewsPosts = []
         res.render 'index', {redditPosts, productHuntPosts, hackernewsPosts}
 
 app.get '/cache', (req, res) ->
   url = req.query.url
-  if isImage(url)
-    res.send "<img src='#{url}'>"
-  else
-    request.get url, (response) ->
-      html = response.text
-      # parse relative css and js links
-      if response.headers["content-type"].indexOf('html') > -1
-        html = htmlFixer.fixLinks(html, url)
-
+  client.get url, (err, html) ->
+    if html
       res.send html
+    else
+      if isImage(url)
+        html = "<img src='#{url}'>"
+        client.set url, html
+        res.send html
+      else
+        request.get url, (response) ->
+          html = response.text or ""
+          # parse relative css and js links
+          if response.headers["content-type"].indexOf('html') > -1
+            html = htmlFixer.fixLinks(html, url)
+          client.set url, html
+          res.send html
 
 app.listen 3000, -> console.log "Listening on 3000"
 
