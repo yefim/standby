@@ -2,6 +2,7 @@ express = require('express')
 bodyParser = require('body-parser')
 path = require("path")
 request = require('superagent')
+htmlFixer = require('./addcss.coffee')
 app = express()
 
 app.set('view engine', 'ejs')
@@ -22,6 +23,9 @@ app.get '/cache', (req, res) ->
   request.get url, (response) ->
     html = response.text
     # parse relative css and js links
+    if (response.headers["content-type"].indexOf('html') > -1)
+      html = htmlFixer.fixLinks(html, url)
+
     res.send html
 
 app.listen 3000, -> console.log "Listening on 3000"

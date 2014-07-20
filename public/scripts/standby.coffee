@@ -11,6 +11,7 @@ $ ->
       iframe.document.open()
       iframe.document.write(html)
       iframe.document.close()
+      console.log i
       $el.on 'click', (e) ->
         e.preventDefault()
         id = $(@).data('id')
