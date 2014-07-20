@@ -70,8 +70,6 @@ iframe {
 }
 
 #content-section-wrap {
-  margin-left: 25px;
-  margin-right: 25px;
   background: white;
 }
 
@@ -128,12 +126,12 @@ iframe {
   margin: 0;
   li {
     display: inline-block;
-    margin: 10px;
     transition: all 0.1s ease-in;
     cursor: pointer;
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
     opacity: 0.4;
+    background-color: white;
     img {
       height: 106px;
       width: 106px;
