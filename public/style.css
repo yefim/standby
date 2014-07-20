@@ -11,7 +11,7 @@ body {
 =======
 
 #icon-section {
-  height: 900px;
+  height: 700px;
 }
 
 .left-stack {
@@ -27,4 +27,11 @@ body {
 .third-party {
   height: 30%;
 }
+<<<<<<< HEAD
 >>>>>>> left sidebar
+=======
+
+#footer {
+  text-align: center;
+}
+>>>>>>> more layout
