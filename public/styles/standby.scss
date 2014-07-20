@@ -5,7 +5,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #f5f5f5;
+  background-color: #f5f5f5 !important;
 }
 
 iframe {
@@ -112,32 +112,23 @@ iframe {
   li {
     display: inline-block;
     margin: 10px;
-    background-color: #eae9e9;
-    padding: 53px;
-    border-radius: 5px;
-    opacity: 1;
-    // transition: all 1.4s linear;
+    transition: all 0.1s ease-in;
     cursor: pointer;
-    i {
-      filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    opacity: 0.4;
+    img {
+      height: 106px;
+      width: 106px;
     }
     &.selected {
-      background-color: white;
-      i {
-        filter: grayscale(0);
-      }
+      -webkit-filter: grayscale(0);
+      filter: grayscale(0);
+      opacity: 1;
     }
     &:not(.selected):hover {
       // background-color: white;
-      // opacity: 0.5;
-    }
-    .hackernews {
-    }
-    .reddit {
-    }
-    .producthunt {
-    }
-    .medium {
+      opacity: 0.6;
     }
     &.logo {
       float: right;

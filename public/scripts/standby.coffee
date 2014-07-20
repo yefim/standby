@@ -52,10 +52,14 @@ $ ->
         waitForLoaded(id, $el, cb)
       ), 200
 
-  $('#icons li:not(.logo)').on 'click', (e) ->
+  $('#icons li').on 'click', (e) ->
     $this = $(@)
-    $('#icons li:not(.logo)').removeClass('selected')
+    $('#icons li').removeClass('selected')
     $this.addClass('selected')
+
+    $('.content-section').removeClass('active-section')
+    $("##{$this.data('section')}").addClass('active-section')
+
 
   $('.left-text').each (i, el) ->
     $el = $(el)
