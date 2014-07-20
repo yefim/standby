@@ -69,12 +69,8 @@ iframe {
   font-size: 14px;
 }
 
-.cache:visited {
-  color: #444;
-}
-
-.cache.loaded {
-  color: limegreen;
+.site-link-visited {
+  color: #c1c1c1;
 }
 
 #logo {
@@ -162,6 +158,7 @@ iframe {
   width: 106px;
   height: 106px;
   z-index: 2000;
+  cursor: pointer;
 }
 
 #icons {
@@ -191,7 +188,6 @@ iframe {
     }
     &.logo {
       float: right;
-      padding: 30px 75px;
     }
   }
 }
