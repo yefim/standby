@@ -13,15 +13,18 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(bodyParser.json())
 
 STANDBY = "OUR.URL.COM"
+REDDIT = "http://www.reddit.com/r/all.json"
+PH = "http://hook-api.herokuapp.com/today"
+HN ="http://api.ihackernews.com/page"
 
 app.get '/', (req, res) ->
-  request.get "http://www.reddit.com/r/all.json", (redditResponse) ->
-    redditPosts = redditResponse.body.data.children.map((p) -> p.data)[0..10]
+  request.get REDDIT, (redditResponse) ->
+    redditPosts = redditResponse.body.data.children.map((p) -> p.data)[0..1]
     redditPosts = redditPosts.filter (link) -> link isnt STANDBY
-    request.get "http://hook-api.herokuapp.com/today", (productHuntResponse) ->
+    request.get PH, (productHuntResponse) ->
       productHuntPosts = productHuntResponse.body.hunts[0..1]
       productHuntPosts = productHuntPosts.filter (link) -> link isnt STANDBY
-      request.get "http://api.ihackernews.com/page", (hackernewsResponse) ->
+      request.get HN, (hackernewsResponse) ->
         # hackernewsPosts = hackernewsResponse.body.items[0..1]
         hackernewsPosts = []
         hackernewsPosts = hackernewsPosts.filter (link) -> link isnt STANDBY
@@ -49,4 +52,3 @@ app.get '/cache', (req, res) ->
           res.send html
 
 app.listen 3000, -> console.log "Listening on 3000"
-

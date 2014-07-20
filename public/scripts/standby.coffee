@@ -1,6 +1,12 @@
 $ ->
-  console.log "done"
-  window.onload = -> console.log('loaded')
+  hideLink = ->
+    $('#overlay').removeClass('dark')
+    $('iframe').removeClass('fucklightboxes')
+    document.body.style.overflow = 'auto';
+
+  $(document).keyup (e) ->
+    hideLink() if e.keyCode is 27
+
   $('.cache').each (i, el) ->
     $el = $(el)
     $.get '/cache', {url: el.href}, (html) ->
@@ -11,22 +17,36 @@ $ ->
       iframe.document.open()
       iframe.document.write(html)
       iframe.document.close()
-      waitForLoaded(id, $el, (el) ->
+      waitForLoaded id, $el, (el) ->
         el.addClass('loaded')
-      )
       $el.on 'click', (e) ->
         e.preventDefault()
         id = $(@).data('id')
-        $("##{id}").css('display', 'block')
+        $("##{id}").addClass('fucklightboxes')
+        $('#overlay').addClass('dark')
+        # disable scrolling on parent
+        document.body.style.overflow = 'hidden';
+        $('#overlay').on 'click', (e) ->
+          e.preventDefault()
+          hideLink()
+          $('#overlay').off('click')
+
+  $('.left-text').each (i, el) ->
+    $el = $(el)
+    $el.on 'click', (e) ->
+      e.preventDefault()
+      target = @.target
+      $('.active-section').each (j, ell) ->
+        $(ell).removeClass('active-section')
+      $("##{target}").addClass('active-section')
 
 waitForLoaded = (id, $el, cb) ->
   iframe = document.getElementById(id)
   if iframe.contentWindow and iframe.contentWindow.document and iframe.contentWindow.document.body and iframe.contentWindow.document.body.innerHTML
-    console.log('loaded!!!!!!!!!!!')
-    setTimeout((()->
+    setTimeout (->
       cb($el)
-    ), 500)
+    ), 500
   else
-    setTimeout((() ->
+    setTimeout (->
       waitForLoaded(id, $el, cb)
-      ),333)
+    ), 200
