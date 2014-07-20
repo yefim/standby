@@ -54,7 +54,6 @@ exports.parseMedium = (html) ->
     author = spl[1]
     url = remotizeURL(val.attribs.href, "https://medium.com/top-100")
     mediumPosts.push({title,author,url})
-    console.log(val.attribs.title)
 
   for val,i in $('span.readingTime')
     mediumPosts[i].time = parseInt(val.children[0].data)
