@@ -24,7 +24,7 @@ app.get '/', (req, res) ->
     redditPosts = redditPosts.filter (link) -> link.domain isnt STANDBY and not /nytimes.com/.test(link.url) and not link.over_18
     request.get HN, (hackernewsResponse) ->
       console.log "loaded HN."
-      hackernewsPosts = []
+      hackernewsPosts = hackernewsResponse.body?.items or []
       hackernewsPosts = hackernewsPosts.filter (link) -> link isnt STANDBY
       request.get "https://medium.com/top-100", (mediumResponse) ->
         console.log "loaded Medium."
