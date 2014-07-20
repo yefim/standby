@@ -34,7 +34,7 @@ iframe {
 }
 
 #icon-section {
-  height: 900px;
+  height: 400px;
   width: 160px;
   float: left;
 }
@@ -47,10 +47,16 @@ iframe {
 .left-stack {
   float: left;
   clear: left;
+  display: table;
 }
 
 #logo {
   height: 5%;
+  margin-bottom: 10px;
+}
+
+.left-text {
+  text-align: center;
 }
 
 .third-party {

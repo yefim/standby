@@ -3,7 +3,7 @@ bodyParser = require('body-parser')
 path = require("path")
 request = require('superagent')
 redis = require("redis")
-htmlFixer = require('./addcss.coffee')
+helper = require('./helper.coffee')
 client = redis.createClient()
 app = express()
 
@@ -15,7 +15,6 @@ app.use(bodyParser.json())
 STANDBY = "OUR.URL.COM"
 
 app.get '/', (req, res) ->
-  url = "http://idlewords.com/2014/07/sana_a.htm"
   request.get "http://www.reddit.com/r/all.json", (redditResponse) ->
     redditPosts = redditResponse.body.data.children.map((p) -> p.data)[0..1]
     redditPosts = redditPosts.filter (link) -> link isnt STANDBY
@@ -34,7 +33,7 @@ app.get '/cache', (req, res) ->
     if html
       res.send html
     else
-      if isImage(url)
+      if helper.isImage(url)
         html = "<img src='#{url}'>"
         client.set url, html
         res.send html
@@ -43,13 +42,9 @@ app.get '/cache', (req, res) ->
           html = response.text or ""
           # parse relative css and js links
           if response.headers["content-type"].indexOf('html') > -1
-            html = htmlFixer.fixLinks(html, url)
+            html = helper.fixLinks(html, url)
           client.set url, html
           res.send html
 
 app.listen 3000, -> console.log "Listening on 3000"
 
-types = ["gif", "jpg", "jpeg", "png", "tiff", "tif"]
-isImage = (url) ->
-  arr = url.toLowerCase().split('.')
-  arr[arr.length-1] in types

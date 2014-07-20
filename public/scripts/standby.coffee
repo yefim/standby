@@ -17,7 +17,8 @@ $ ->
       iframe.document.open()
       iframe.document.write(html)
       iframe.document.close()
-      iframe.onload = -> $el.addClass('loaded')
+      waitForLoaded id, $el, (el) ->
+        el.addClass('loaded')
       $el.on 'click', (e) ->
         e.preventDefault()
         id = $(@).data('id')
@@ -29,3 +30,14 @@ $ ->
           e.preventDefault()
           hideLink()
           $('#overlay').off('click')
+
+waitForLoaded = (id, $el, cb) ->
+  iframe = document.getElementById(id)
+  if iframe.contentWindow and iframe.contentWindow.document and iframe.contentWindow.document.body and iframe.contentWindow.document.body.innerHTML
+    setTimeout (->
+      cb($el)
+    ), 500
+  else
+    setTimeout (->
+      waitForLoaded(id, $el, cb)
+    ), 200
