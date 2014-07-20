@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Standby</title>
     <link rel='stylesheet' href='styles/standby.css'>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src='scripts/standby.js'></script>
@@ -11,11 +12,21 @@
 
     <div id='page-wrap'>
       <div id='icon-section'>
-          <div id='logo' class='left-stack'></div>
-          <div id='hn' class='left-stack third-party'></div>
-          <div id='ph' class='left-stack third-party'></div>
-          <div id='reddit' class='left-stack third-party'></div>
-          <div id='medium' class='left-stack third-party'></div>
+          <div id='logo' class='left-stack'>
+            <span class="left-text">Standby</span>
+          </div>
+          <div id='hn' class='left-stack third-party'>
+            <span class="left-text">Hacker News</span>
+          </div>
+          <div id='ph' class='left-stack third-party'>
+            <span class="left-text">Product Hunt</span>
+          </div>
+          <div id='reddit' class='left-stack third-party'>
+            <span class="left-text">Reddit</span>
+          </div>
+          <div id='medium' class='left-stack third-party'>
+            <span class="left-text">Medium</span>
+          </div>
       </div>
       <div id='link-section'>
         <h1>Hacker News</h1>
@@ -50,11 +61,5 @@
     <div id='footer'>
         <span>Built With Love at Greylock Hackfest 2014</span>
     </div>
-
-    <script type='text/javascript'>
-      $('#link').on('click', function() {
-        $('#html').css('display', 'block');
-      });
-    </script>
   </body>
 </html>
