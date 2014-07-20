@@ -21,14 +21,13 @@ app.get '/', (req, res) ->
   request.get REDDIT, (redditResponse) ->
     console.log "loaded Reddit."
     redditPosts = redditResponse.body.data.children.map((p) -> p.data)
-    redditPosts = redditPosts.filter (link) -> link.domain isnt STANDBY and not /nytimes.com/.test(link.url)
+    redditPosts = redditPosts.filter (link) -> link.domain isnt STANDBY and not /nytimes.com/.test(link.url) and not link.over_18
     request.get PH, (productHuntResponse) ->
       console.log "loaded Product Hunt."
       productHuntPosts = productHuntResponse.body.hunts
       productHuntPosts = productHuntPosts.filter (link) -> link isnt STANDBY
       request.get HN, (hackernewsResponse) ->
         console.log "loaded HN."
-        # hackernewsPosts = hackernewsResponse.body.items
         hackernewsPosts = []
         hackernewsPosts = hackernewsPosts.filter (link) -> link isnt STANDBY
         request.get "https://medium.com/top-100", (mediumResponse) ->
