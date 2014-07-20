@@ -92,9 +92,16 @@ $ ->
           html += """
             <div>
               <div class='section-link'>
-                <a class='cache site-link' data-id='#{section}-link-#{i}' href='#{post.url}'>#{post.title}</a>
-                <span class='website'>(#{post.url.replace('http://','').replace('https://','').split(/[/?#]/)[0]})</span>
-                <a class='cache comments' data-id='#{section}-comments-#{i}' href='http://reddit.com#{post.permalink}'>Comments</a>
+                <div class='upvotes'>
+                  <div class='arrow'></div>
+                  <div>#{post.score}</div>
+                </div>
+                <div class='post-data'>
+                  <a class='cache site-link' data-id='#{section}-link-#{i}' href='#{post.url}'>#{post.title}</a>
+                  <span class='website'>(#{post.url.replace('http://','').replace('https://','').split(/[/?#]/)[0]})</span>
+                  <a class='cache comments' data-id='#{section}-comments-#{i}' href='http://reddit.com#{post.permalink}'>#{post.num_comments} comments
+                  </a>
+                </div>
               </div>
               <iframe class='content' id='#{section}-link-#{i}'></iframe>
               <iframe class='content' id='#{section}-comments-#{i}'></iframe>
