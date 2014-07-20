@@ -60,7 +60,7 @@
                   <a class='cache comments' data-id='hackernews-comments-<%= i %>' href='https://news.ycombinator.com/item?id=<%= post.id %>'><%= post.commentCount %> comments</a>
                 </div>
               </div>
-              <iframe class='content' id='hackernews-link-<%= i %>'></iframe>
+              <iframe sandbox="allow-same-origin" class='content' id='hackernews-link-<%= i %>'></iframe>
               <iframe class='content' id='hackernews-comments-<%= i %>'></iframe>
             </div>
           <% }); %>
@@ -81,7 +81,7 @@
                   </a>
                 </div>
               </div>
-              <iframe class='content' id='reddit-link-<%= i %>'></iframe>
+              <iframe sandbox="allow-same-origin" class='content' id='reddit-link-<%= i %>'></iframe>
               <iframe class='content' id='reddit-comments-<%= i %>'></iframe>
             </div>
           <% }); %>
@@ -92,7 +92,7 @@
               <div class='section-link'>
                 <a class='cache site-link' data-id='medium-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a>
               </div>
-              <iframe class='content' id='medium-link-<%= i %>'></iframe>
+              <iframe sandbox="allow-same-origin" class='content' id='medium-link-<%= i %>'></iframe>
             </div>
           <% }); %>
         </div>

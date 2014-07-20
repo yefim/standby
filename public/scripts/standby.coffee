@@ -1,4 +1,6 @@
 $ ->
+  document.write = (p...) -> console.log(p)
+
   window.onhashchange = ->
     hash = window.location.hash.substring(1)
     if hash
@@ -104,7 +106,7 @@ $ ->
                   </a>
                 </div>
               </div>
-              <iframe class='content' id='#{section}-link-#{i}'></iframe>
+              <iframe sandbox="allow-same-origin" class='content' id='#{section}-link-#{i}'></iframe>
               <iframe class='content' id='#{section}-comments-#{i}'></iframe>
             </div>
           """
@@ -117,7 +119,7 @@ $ ->
                 <span class='website'>(#{post.url.replace('http://','').replace('https://','').split(/[/?#]/)[0]})</span>
                 <a class='cache comments' data-id='#{section}-comments-#{i}' href='http://producthunt.com#{post.permalink}'>Comments</a>
               </div>
-              <iframe class='content' id='#{section}-link-#{i}'></iframe>
+              <iframe sandbox="allow-same-origin" class='content' id='#{section}-link-#{i}'></iframe>
               <iframe class='content' id='#{section}-comments-#{i}'></iframe>
             </div>
           """
