@@ -175,3 +175,10 @@ iframe {
 
 .modal-producthunt {
   cursor: pointer; }
+
+.last-line {
+  opacity: 0;
+  transition: opacity 1s ease-in; }
+
+.last-line.done {
+  opacity: 1; }

@@ -35,6 +35,7 @@ $ ->
               if pct > 95
                 stillInLoading = false
                 setTimeout(() ->
+                  $('.last-line').addClass('done')
                   NProgress.done()
                 , 2000)
               else
@@ -64,6 +65,11 @@ $ ->
 
   cacheLinks()
   $('#x').on 'click', -> window.location.hash = ""
+
+  $('.tab-link').on 'click', (e) ->
+    $this = $(@)
+    tab = $this.data('tab')
+    $("li[data-section='#{tab}']").click()
 
   waitForLoaded = (i, id, $el, cb) ->
     iframe = document.getElementById(id)

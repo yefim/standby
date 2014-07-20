@@ -51,6 +51,7 @@
                 if (pct > 95) {
                   stillInLoading = false;
                   setTimeout(function() {
+                    $('.last-line').addClass('done');
                     return NProgress.done();
                   }, 2000);
                 } else {
@@ -89,6 +90,12 @@
     cacheLinks();
     $('#x').on('click', function() {
       return window.location.hash = "";
+    });
+    $('.tab-link').on('click', function(e) {
+      var $this, tab;
+      $this = $(this);
+      tab = $this.data('tab');
+      return $("li[data-section='" + tab + "']").click();
     });
     waitForLoaded = function(i, id, $el, cb) {
       var iframe;
