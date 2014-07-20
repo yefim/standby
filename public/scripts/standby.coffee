@@ -8,14 +8,9 @@ $ ->
 
   openLink = (id) ->
     $("##{id}").addClass('fucklightboxes')
-    $('#overlay').addClass('dark')
     $('#x').show()
     # disable scrolling on parent
     document.body.style.overflow = 'hidden';
-    $('#overlay').on 'click', (e) ->
-      e.preventDefault()
-      window.location.hash = ""
-      $('#overlay').off('click')
 
   hideLink = ->
     $('#overlay').removeClass('dark')

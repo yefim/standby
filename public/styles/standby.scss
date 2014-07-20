@@ -23,6 +23,18 @@ iframe {
   margin-bottom: 1.5em;
   margin-top: 1.5em;
 }
+.upvotes {
+  display: table-cell;
+  text-align: center;
+  margin-right: 10px;
+  padding-right: 20px;
+  padding-top: 5px;
+  vertical-align: middle;
+}
+.post-data {
+  display: table-cell;
+  max-width: 95%;
+}
 
 .site-link {
   font-weight: 300;
@@ -31,7 +43,14 @@ iframe {
   font-size: 24px;
   color: #858585;
 }
+.arrow {
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
 
+  border-bottom: 15px solid black;
+}
 .website {
   font-weight: 200;
   font-size: 16px;
@@ -96,10 +115,10 @@ iframe {
 .fucklightboxes {
   display: block;
   position: fixed;
-  width: 96%;
-  right: 2%;
-  height: 90%;
-  top: 5%;
+  width: 100%;
+  right: 0;
+  height: 100%;
+  top: 0;
 }
 
 #overlay {

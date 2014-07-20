@@ -39,9 +39,15 @@
           <% hackernewsPosts.forEach(function(post, i) { %>
             <div>
               <div class='section-link'>
-                <a class='cache site-link' data-id='hackernews-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a>
-                <span class='website'>(<%= post.url.replace('http://','').replace('https://','').split(/[/?#]/)[0] %>)</span>
-                <a class='cache comments' data-id='hackernews-comments-<%= i %>' href='https://news.ycombinator.com/item?id=<%= post.id %>'><%= post.commentCount %> comments</a>
+                <div class='upvotes'>
+                  <div class='arrow'></div>
+                  <div><%= post.points %></div>
+                </div>
+                <div class='post-data'>
+                  <a class='cache site-link' data-id='hackernews-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a>
+                  <span class='website'>(<%= post.url.replace('http://','').replace('https://','').split(/[/?#]/)[0] %>)</span>
+                  <a class='cache comments' data-id='hackernews-comments-<%= i %>' href='https://news.ycombinator.com/item?id=<%= post.id %>'><%= post.commentCount %> comments</a>
+                </div>
               </div>
               <iframe class='content' id='hackernews-link-<%= i %>'></iframe>
               <iframe class='content' id='hackernews-comments-<%= i %>'></iframe>
@@ -53,9 +59,15 @@
           <% productHuntPosts.forEach(function(post, i) { %>
             <div>
               <div class='section-link'>
-                <a class='cache site-link' data-id='product-hunt-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a>
-                <span class='website'>(<%= post.url.replace('http://','').replace('https://','').split(/[/?#]/)[0] %>)</span>
-                <a class='cache comments' data-id='product-hunt-comments-<%= i %>' href='http://producthunt.com<%= post.permalink %>'><%= post.comment_count %> comments</a>
+                <div class='upvotes'>
+                  <div class='arrow'></div>
+                  <div><%= post.votes %></div>
+                </div>
+                <div class='post-data'>
+                  <a class='cache site-link' data-id='product-hunt-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a>
+                  <span class='website'>(<%= post.url.replace('http://','').replace('https://','').split(/[/?#]/)[0] %>)</span>
+                  <a class='cache comments' data-id='product-hunt-comments-<%= i %>' href='http://producthunt.com<%= post.permalink %>'><%= post.comment_count %> comments</a>
+                </div>
               </div>
               <iframe class='content' id='product-hunt-link-<%= i %>'></iframe>
               <iframe class='content' id='product-hunt-comments-<%= i %>'></iframe>
@@ -67,9 +79,16 @@
           <% redditPosts.forEach(function(post, i) { %>
             <div>
               <div class='section-link'>
-                <a class='cache site-link' data-id='reddit-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a>
-                <span class='website'>(<%= post.url.replace('http://','').replace('https://','').split(/[/?#]/)[0] %>)</span>
-                <a class='cache comments' data-id='reddit-comments-<%= i %>' href='http://reddit.com<%= post.permalink %>'><%= post.num_comments %> comments</a>
+                <div class='upvotes'>
+                  <div class='arrow'></div>
+                  <div><%= post.score %></div>
+                </div>
+                <div class='post-data'>
+                  <a class='cache site-link' data-id='reddit-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a>
+                  <span class='website'>(<%= post.url.replace('http://','').replace('https://','').split(/[/?#]/)[0] %>)</span>
+                  <a class='cache comments' data-id='reddit-comments-<%= i %>' href='http://reddit.com<%= post.permalink %>'><%= post.num_comments %> comments
+                  </a>
+                </div>
               </div>
               <iframe class='content' id='reddit-link-<%= i %>'></iframe>
               <iframe class='content' id='reddit-comments-<%= i %>'></iframe>
@@ -92,7 +111,6 @@
           <span>Built with caffeine at GreylockU Hackfest 2014 by <a href="https://github.com/awiss">Alex</a>, <a href="http://yef.im/">Geoff</a>, <a href="http://connolly.io">Ian</a> &amp; <a href="https://twitter.com/kathleen_warner">Kathleen</a></span>
       </div>
     </div>
-    <div id='progress'></div>
     <img id="x" src="/images/exit-button.png">
     <div id='overlay'></div>
   </body>

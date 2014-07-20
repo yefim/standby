@@ -28,7 +28,7 @@ app.get '/', (req, res) ->
       productHuntPosts = productHuntPosts.filter (link) -> link isnt STANDBY
       request.get HN, (hackernewsResponse) ->
         console.log "loaded HN."
-        # hackernewsPosts = hackernewsResponse.body.items
+        console.log(hackernewsResponse.body.items[0])
         hackernewsPosts = []
         hackernewsPosts = hackernewsPosts.filter (link) -> link isnt STANDBY
         request.get "https://medium.com/top-100", (mediumResponse) ->
