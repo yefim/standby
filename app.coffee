@@ -17,7 +17,6 @@ REDDIT = "http://www.reddit.com/r/all.json"
 PH = "http://hook-api.herokuapp.com/today"
 HN ="http://api.ihackernews.com/page"
 
-hit = false
 app.get '/', (req, res) ->
   request.get REDDIT, (redditResponse) ->
     console.log "loaded Reddit."
@@ -44,20 +43,14 @@ app.get '/cache', (req, res) ->
         client.set url, html
         res.send html
       else
-        try
-          request.get url, (response) ->
-            if response.err
-              res.send {err:response.err}
-            html = response.text or ""
-            # parse relative css and js links
-            if response.headers["content-type"].indexOf('html') > -1
-              html = helper.fixLinks(html, url)
-            client.set url, html
-            res.send html
-        catch error
-          console.log('asdfasdf:',url)
-          res.send {err:error}
-
+        request.get url, (response) ->
+          html = response.text or ""
+          # parse relative css and js links
+          if response.headers["content-type"].indexOf('html') > -1
+            html = helper.fixLinks(html, url)
+          client.set url, html
+          client.expire url, 180
+          res.send html
 
 app.get '/add', (req, res) ->
   service = req.query.service
