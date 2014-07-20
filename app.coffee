@@ -19,10 +19,6 @@ HN ="http://api.ihackernews.com/page"
 
 hit = false
 app.get '/', (req, res) ->
-  if hit
-    res.send 200
-  else
-    hit = true
   request.get REDDIT, (redditResponse) ->
     console.log "loaded Reddit."
     redditPosts = redditResponse.body.data.children.map((p) -> p.data)
@@ -30,6 +26,7 @@ app.get '/', (req, res) ->
     request.get HN, (hackernewsResponse) ->
       console.log "loaded HN."
       hackernewsPosts = hackernewsResponse.body?.items or []
+      hackernewsPosts = []
       hackernewsPosts = hackernewsPosts.filter (link) -> link isnt STANDBY
       request.get "https://medium.com/top-100", (mediumResponse) ->
         console.log "loaded Medium."
@@ -47,13 +44,20 @@ app.get '/cache', (req, res) ->
         client.set url, html
         res.send html
       else
-        request.get url, (response) ->
-          html = response.text or ""
-          # parse relative css and js links
-          if response.headers["content-type"].indexOf('html') > -1
-            html = helper.fixLinks(html, url)
-          client.set url, html
-          res.send html
+        try
+          request.get url, (response) ->
+            if response.err
+              res.send {err:response.err}
+            html = response.text or ""
+            # parse relative css and js links
+            if response.headers["content-type"].indexOf('html') > -1
+              html = helper.fixLinks(html, url)
+            client.set url, html
+            res.send html
+        catch error
+          console.log('asdfasdf:',url)
+          res.send {err:error}
+
 
 app.get '/add', (req, res) ->
   service = req.query.service
@@ -63,13 +67,14 @@ app.get '/add', (req, res) ->
     request.get url, (redditResponse) ->
       console.log "loaded Reddit."
       redditPosts = redditResponse.body.data.children.map((p) -> p.data)
-      redditPosts = redditPosts.filter (link) -> link isnt STANDBY
+      redditPosts = redditPosts.filter (link) -> link.domain isnt STANDBY and not /nytimes.com/.test(link.url) and not link.over_18
       res.json redditPosts
   else if service == "producthunt"
     request.get PH, (productHuntResponse) ->
+      console.log(productHuntResponse)
       console.log "loaded Product Hunt."
       productHuntPosts = productHuntResponse.body.hunts
-      productHuntPosts = productHuntPosts.filter (link) -> link isnt STANDBY
+      productHuntPosts = productHuntPosts.filter (link) -> link.domain isnt STANDBY and not /matterkit/.test(link.url)
       res.json productHuntPosts
   else
     res.json []

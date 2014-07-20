@@ -10,21 +10,24 @@ $ ->
     $('.cache:not(.loaded)').each (i, el) ->
       $el = $(el)
       $.get '/cache', {url: el.href}, (html) ->
-        console.log "fetched #{el.href}"
-        id = $el.data('id')
-        iframe = document.getElementById(id)
-        iframe = iframe.contentWindow or iframe.contentDocument.document or iframe.contentDocument
-        iframe.document.open()
-        iframe.document.write(html.replace('window.top.location','hahaiwin'))
-        iframe.document.close()
-        waitForLoaded id, $el, (el) ->
-          el.addClass('loaded')
-        $el.on 'click', (e) ->
-          e.preventDefault()
-          $el.addClass('site-link-visited')
-          id = $(@).data('id')
-          $("#arrow-#{id}").addClass('arrow-seen')
-          window.location.hash = id
+        if html.err
+          console.log(html.err)
+        else
+          console.log "fetched #{el.href}"
+          id = $el.data('id')
+          iframe = document.getElementById(id)
+          iframe = iframe.contentWindow or iframe.contentDocument.document or iframe.contentDocument
+          iframe.document.open()
+          iframe.document.write(html.replace('window.top.location','hahaiwin'))
+          iframe.document.close()
+          waitForLoaded id, $el, (el) ->
+            el.addClass('loaded')
+          $el.on 'click', (e) ->
+            e.preventDefault()
+            $el.addClass('site-link-visited')
+            id = $(@).data('id')
+            $("#arrow-#{id}").addClass('arrow-seen')
+            window.location.hash = id
 
   openLink = (id) ->
     $("##{id}").addClass('fucklightboxes')
@@ -99,7 +102,7 @@ $ ->
                 </div>
                 <div class='post-data'>
                   <a class='cache site-link' data-id='#{section}-link-#{i}' href='#{post.url}'>#{post.title}</a>
-                  <span class='website'>(#{post.url.replace('http://','').replace('https://','').split(/[/?#]/)[0]})</span>
+                  <span class='website'>(#{post.url.replace('http://','').replace('https://','').split(/[\/?#]/)[0]})</span>
                   <a class='cache comments' data-id='#{section}-comments-#{i}' href='http://reddit.com#{post.permalink}'>#{post.num_comments} comments
                   </a>
                 </div>
@@ -111,16 +114,23 @@ $ ->
         # we only support producthunt atm
         else
           html += """
-            <div>
-              <div class='section-link'>
-                <a class='cache site-link' data-id='#{section}-link-#{i}' href='#{post.url}'>#{post.title}</a>
-                <span class='website'>(#{post.url.replace('http://','').replace('https://','').split(/[/?#]/)[0]})</span>
-                <a class='cache comments' data-id='#{section}-comments-#{i}' href='http://producthunt.com#{post.permalink}'>Comments</a>
-              </div>
-              <iframe class='content' id='#{section}-link-#{i}'></iframe>
-              <iframe class='content' id='#{section}-comments-#{i}'></iframe>
-            </div>
-          """
+                <div>
+                  <div class='section-link'>
+                    <div class='upvotes'>
+                      <div class='arrow'></div>
+                      <div>#{ post.votes }</div>
+                    </div>
+                    <div class='post-data'>
+                      <a class='cache site-link' data-id='product-hunt-link-#{ i }' href='#{ post.url }'>#{ post.title }</a>
+                      <span class='website'>(#{ post.url.replace('http://','').replace('https://','').split(/[\/?#]/)[0] })</span>
+                      <a class='cache comments' data-id='product-hunt-comments-#{ i }' href='http://producthunt.com#{ post.permalink }'>#{ post.comment_count } comments</a>
+                    </div>
+                  </div>
+                  <iframe class='content' id='product-hunt-link-#{ i }'></iframe>
+                  <iframe class='content' id='product-hunt-comments-#{ i }'></iframe>
+                </div>
+                  """
+
       html += "</div>"
       $('#content-section-wrap').append html
 
