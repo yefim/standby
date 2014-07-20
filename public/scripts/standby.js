@@ -16,7 +16,9 @@
         iframe.document.open();
         iframe.document.write(html);
         iframe.document.close();
-        console.log(i);
+        iframe.onload = function() {
+          return $el.addClass('loaded');
+        };
         return $el.on('click', function(e) {
           e.preventDefault();
           id = $(this).data('id');
