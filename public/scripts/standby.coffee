@@ -1,5 +1,11 @@
 $ ->
-  console.log "done"
+  hideLink = ->
+    $('#overlay').removeClass('dark')
+    $('iframe').removeClass('fucklightboxes')
+    document.body.style.overflow = 'auto';
+
+  $(document).keyup (e) ->
+    hideLink() if e.keyCode is 27
 
   $('.cache').each (i, el) ->
     $el = $(el)
@@ -15,4 +21,11 @@ $ ->
       $el.on 'click', (e) ->
         e.preventDefault()
         id = $(@).data('id')
-        $("##{id}").css('display', 'block')
+        $("##{id}").addClass('fucklightboxes')
+        $('#overlay').addClass('dark')
+        # disable scrolling on parent
+        document.body.style.overflow = 'hidden';
+        $('#overlay').on 'click', (e) ->
+          e.preventDefault()
+          hideLink()
+          $('#overlay').off('click')

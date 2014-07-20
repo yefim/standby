@@ -4,6 +4,12 @@ body {
   background-color: #eee;
 }
 
+iframe {
+  border: none;
+  background-color: white;
+  z-index: 1000;
+}
+
 #html {
   display: none;
 }
@@ -54,4 +60,31 @@ body {
 #footer {
   margin-top: 5px;
   text-align: center;
+}
+
+// I JUST CENTERED THAT BITCH
+.fucklightboxes {
+  display: block;
+  position: fixed;
+  width: 96%;
+  right: 2%;
+  height: 90%;
+  top: 5%;
+}
+
+#overlay {
+  // opacity: 0;
+  // transition: opacity 0.5s ease-in;
+}
+
+#overlay.dark {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #444;
+  opacity: 0.8;
+  z-index: 100;
 }
