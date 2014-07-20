@@ -184,8 +184,8 @@ iframe {
     display: inline-block;
     transition: all 0.1s ease-in;
     cursor: pointer;
-    -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
+    // -webkit-filter: grayscale(100%);
+    // filter: grayscale(100%);
     opacity: 0.4;
     background-color: white;
     img {
@@ -193,8 +193,8 @@ iframe {
       width: 106px;
     }
     &.selected {
-      -webkit-filter: grayscale(0);
-      filter: grayscale(0);
+      // -webkit-filter: grayscale(0);
+      // filter: grayscale(0);
       opacity: 1;
     }
     &:not(.selected):hover {

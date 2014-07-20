@@ -153,16 +153,12 @@ iframe {
     display: inline-block;
     transition: all 0.1s ease-in;
     cursor: pointer;
-    -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
     opacity: 0.4;
     background-color: white; }
     #icons li img {
       height: 106px;
       width: 106px; }
     #icons li.selected {
-      -webkit-filter: grayscale(0);
-      filter: grayscale(0);
       opacity: 1; }
     #icons li:not(.selected):hover {
       opacity: 0.6; }
