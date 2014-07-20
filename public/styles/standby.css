@@ -82,8 +82,9 @@ iframe {
   color: #858585; }
 
 #blurb-content {
-  margin-top: 2em;
-  color: #858585; }
+  color: #858585;
+  max-width: 700px;
+  margin: 2em auto; }
 
 #content-section-wrap {
   background: white; }
