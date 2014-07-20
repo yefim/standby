@@ -25,7 +25,6 @@
           <ul id='icons'>
             <li data-section='hn-section'><img src='/images/YC_on.png'></li>
             <li data-section='reddit-section'><img src='/images/Reddit_on.png'></li>
-            <li data-section='ph-section'><img src='/images/Product_on.png'></li>
             <li data-section='medium-section'><img src='/images/Medium_on.png'></li>
             <li class='add-section'><img src='/images/Plus.png'></li>
             <li data-section='blurb-section' class='selected logo'><img src='/images/Logo.png'></li>
@@ -63,26 +62,6 @@
               </div>
               <iframe class='content' id='hackernews-link-<%= i %>'></iframe>
               <iframe class='content' id='hackernews-comments-<%= i %>'></iframe>
-            </div>
-          <% }); %>
-        </div>
-
-        <div id='ph-section' class='content-section'>
-          <% productHuntPosts.forEach(function(post, i) { %>
-            <div>
-              <div class='section-link'>
-                <div class='upvotes'>
-                  <div class='arrow'></div>
-                  <div><%= post.votes %></div>
-                </div>
-                <div class='post-data'>
-                  <a class='cache site-link' data-id='product-hunt-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a>
-                  <span class='website'>(<%= post.url.replace('http://','').replace('https://','').split(/[/?#]/)[0] %>)</span>
-                  <a class='cache comments' data-id='product-hunt-comments-<%= i %>' href='http://producthunt.com<%= post.permalink %>'><%= post.comment_count %> comments</a>
-                </div>
-              </div>
-              <iframe class='content' id='product-hunt-link-<%= i %>'></iframe>
-              <iframe class='content' id='product-hunt-comments-<%= i %>'></iframe>
             </div>
           <% }); %>
         </div>
