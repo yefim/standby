@@ -17,7 +17,7 @@ app.set("views", path.join(__dirname, "views"))
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(bodyParser.json())
 
-STANDBY = "OUR.URL.COM"
+STANDBY = "http://trystandby.herokuapp.com"
 REDDIT = "http://www.reddit.com/r/all.json"
 PH = "http://hook-api.herokuapp.com/today"
 HN ="http://api.ihackernews.com/page"
