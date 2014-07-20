@@ -43,7 +43,7 @@ app.get '/cache', (req, res) ->
       res.send html
     else
       if helper.isImage(url)
-        html = "<style>body { margin: 0; padding: 0; }</style><img style='max-width: 100%; max-height: 100%;' src='#{url}'>"
+        html = "<style>body { margin: 0; padding: 0; }</style><img style='max-width: 100%; max-height: 100%' src='#{url}'>"
         client.set url, html
         res.send html
       else
@@ -54,5 +54,24 @@ app.get '/cache', (req, res) ->
             html = helper.fixLinks(html, url)
           client.set url, html
           res.send html
+
+app.get '/add', (req, res) ->
+  service = req.query.service
+  if service == "reddit"
+    subreddit = req.query.subreddit
+    url = "http://www.reddit.com/r/#{subreddit}.json"
+    request.get url, (redditResponse) ->
+      console.log "loaded Reddit."
+      redditPosts = redditResponse.body.data.children.map((p) -> p.data)
+      redditPosts = redditPosts.filter (link) -> link isnt STANDBY
+      res.json redditPosts
+  else if service == "producthunt"
+    request.get PH, (productHuntResponse) ->
+      console.log "loaded Product Hunt."
+      productHuntPosts = productHuntResponse.body.hunts
+      productHuntPosts = productHuntPosts.filter (link) -> link isnt STANDBY
+      res.json productHuntPosts
+  else
+    res.json []
 
 app.listen 3000, -> console.log "Listening on 3000"
