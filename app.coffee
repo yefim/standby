@@ -17,7 +17,12 @@ REDDIT = "http://www.reddit.com/r/all.json"
 PH = "http://hook-api.herokuapp.com/today"
 HN ="http://api.ihackernews.com/page"
 
+hit = false
 app.get '/', (req, res) ->
+  if hit
+    res.send 200
+  else
+    hit = true
   request.get REDDIT, (redditResponse) ->
     console.log "loaded Reddit."
     redditPosts = redditResponse.body.data.children.map((p) -> p.data)
@@ -69,4 +74,4 @@ app.get '/add', (req, res) ->
   else
     res.json []
 
-app.listen 3000, -> console.log "Listening on 3000"
+app.listen 3000, -> console.log "Listening on http://localhost:3000"
