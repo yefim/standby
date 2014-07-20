@@ -12,15 +12,20 @@ app.set("views", path.join(__dirname, "views"))
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(bodyParser.json())
 
+STANDBY = "OUR.URL.COM"
+
 app.get '/', (req, res) ->
   url = "http://idlewords.com/2014/07/sana_a.htm"
   request.get "http://www.reddit.com/r/all.json", (redditResponse) ->
     redditPosts = redditResponse.body.data.children.map((p) -> p.data)[0..10]
+    redditPosts = redditPosts.filter (link) -> link isnt STANDBY
     request.get "http://hook-api.herokuapp.com/today", (productHuntResponse) ->
       productHuntPosts = productHuntResponse.body.hunts[0..1]
+      productHuntPosts = productHuntPosts.filter (link) -> link isnt STANDBY
       request.get "http://api.ihackernews.com/page", (hackernewsResponse) ->
         # hackernewsPosts = hackernewsResponse.body.items[0..1]
         hackernewsPosts = []
+        hackernewsPosts = hackernewsPosts.filter (link) -> link isnt STANDBY
         res.render 'index', {redditPosts, productHuntPosts, hackernewsPosts}
 
 app.get '/cache', (req, res) ->
