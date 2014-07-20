@@ -29,10 +29,16 @@ body {
 
 #icon-section {
   height: 900px;
+  width: 160px;
+  float: left;
+}
+
+#link-section {
+  width: 700px;
+  margin-left: 160px;
 }
 
 .left-stack {
-  width: 160px;
   float: left;
   clear: left;
 }
@@ -43,4 +49,9 @@ body {
 
 .third-party {
   height: 30%;
+}
+
+#footer {
+  margin-top: 5px;
+  text-align: center;
 }

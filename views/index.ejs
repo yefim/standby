@@ -6,24 +6,6 @@
     <script src='scripts/standby.js'></script>
   </head>
   <body>
-    <h1>Product Hunt</h1>
-    <% productHuntPosts.forEach(function(post, i) { %>
-      <div>
-        <a class='cache' data-id='product-hunt-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a> - <a class='cache' data-id='product-hunt-comments-<%= i %>' href='http://producthunt.com<%= post.permalink %>'>Comments</a>
-        <iframe class='content' id='product-hunt-link-<%= i %>'></iframe>
-        <iframe class='content' id='product-hunt-comments-<%= i %>'></iframe>
-      </div>
-    <% }); %>
-
-    <h1>Reddit</h1>
-    <% redditPosts.forEach(function(post, i) { %>
-      <div>
-        <a class='cache' data-id='reddit-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a> - <a class='cache' data-id='reddit-comments-<%= i %>' href='http://reddit.com<%= post.permalink %>'>Comments</a>
-        <iframe class='content' id='reddit-link-<%= i %>'></iframe>
-        <iframe class='content' id='reddit-comments-<%= i %>'></iframe>
-      </div>
-    <% }); %>
-
     <div id='html'>
     </div>
 
@@ -36,6 +18,23 @@
           <div id='medium' class='left-stack third-party'></div>
       </div>
       <div id='link-section'>
+        <h1>Product Hunt</h1>
+        <% productHuntPosts.forEach(function(post, i) { %>
+          <div>
+            <a class='cache' data-id='product-hunt-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a> - <a class='cache' data-id='product-hunt-comments-<%= i %>' href='http://producthunt.com<%= post.permalink %>'>Comments</a>
+            <iframe class='content' id='product-hunt-link-<%= i %>'></iframe>
+            <iframe class='content' id='product-hunt-comments-<%= i %>'></iframe>
+          </div>
+        <% }); %>
+
+        <h1>Reddit</h1>
+        <% redditPosts.forEach(function(post, i) { %>
+          <div>
+            <a class='cache' data-id='reddit-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a> - <a class='cache' data-id='reddit-comments-<%= i %>' href='http://reddit.com<%= post.permalink %>'>Comments</a>
+            <iframe class='content' id='reddit-link-<%= i %>'></iframe>
+            <iframe class='content' id='reddit-comments-<%= i %>'></iframe>
+          </div>
+        <% }); %>
       </div>
     </div>
 
