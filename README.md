@@ -18,6 +18,7 @@ We've already pre-fetched Hacker News, Reddit, and some of the best of Medium. T
 * [ ] Do not show the links with empty HTML (e.g., some NYTimes posts for some reason)
 * [ ] Make the front page not just an image
 * [ ] Do not start loading/caching anything until the user hits a button on the front page or something
+* [ ] Disable the site while loading content and make the loading bar more obvious (take up the entire page or something)
 
 ## Wishlist
 
