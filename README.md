@@ -26,7 +26,8 @@ We've already pre-fetched Hacker News, Reddit, and some of the best of Medium. T
 * Add Reddit Custom Frontpage
 * Have users so we can save their tabs/visited links
 * Gmail offline
-* Mobile friendly version
+* Mobile friendly version (download only a few articles/make an app)
+
 ## Installation
 
 We depend on
