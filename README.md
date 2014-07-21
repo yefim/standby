@@ -32,4 +32,8 @@ Running
 
 * Run ```redis-server``` or ```redis-server &```
 
+* Compile the CoffeeScript with ```coffee -cw public/scripts```
+
+* Compile the Sass with ```sass --watch public/styles```
+
 * Run ```coffee app.coffee``` and navigate to ```http://localhost:3000```
