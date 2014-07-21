@@ -11,15 +11,6 @@ Stand By pre-fetches the best content from Hacker News, Reddit, Medium, and more
 
 We've already pre-fetched Hacker News, Reddit, and some of the best of Medium. Turn off your Wi-Fi and see!
 
-## TODO before launch
-
-* [ ] Fix the 500s (Heroku Application Errors)
-* [ ] Fix the page fetching errors
-* [ ] Do not show the links with empty HTML (e.g., some NYTimes posts for some reason)
-* [ ] Make the front page not just an image
-* [ ] Do not start loading/caching anything until the user hits a button on the front page or something
-* [ ] Disable the site while loading content and make the loading bar more obvious (take up the entire page or something)
-
 ## Wishlist
 
 * Add Pocket
