@@ -25,7 +25,8 @@ We've already pre-fetched Hacker News, Reddit, and some of the best of Medium. T
 * Add Pocket
 * Add Reddit Custom Frontpage
 * Have users so we can save their tabs/visited links
-
+* Gmail offline
+* Mobile friendly version
 ## Installation
 
 We depend on
