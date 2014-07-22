@@ -39,6 +39,6 @@ To install the node dependencies just run ```npm install```
 
 * Compile the CoffeeScript with ```coffee -cw public/scripts```
 
-* Compile the Sass with ```sass --watch public/styles```
+* Compile the Sass with ```sass --watch public/styles --style compressed```
 
 * Run ```coffee app.coffee``` and navigate to ```http://localhost:3000```
