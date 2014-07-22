@@ -30,7 +30,6 @@ $ ->
           waitForLoaded 0, id, $el, (el) ->
             curr++
             pct = Math.floor(curr / total * 100)
-            console.log(pct)
             if stillInLoading
               if pct > 95
                 stillInLoading = false
@@ -55,7 +54,6 @@ $ ->
     document.body.style.overflow = 'hidden';
 
   hideLink = ->
-    $('#overlay').removeClass('dark')
     $('iframe').removeClass('fucklightboxes')
     $('#x').hide()
     document.body.style.overflow = 'auto';

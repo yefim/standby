@@ -145,27 +145,6 @@ iframe {
     100% { left: 0; }
 }
 
-
-
-
-#overlay {
-  // opacity: 0;
-  // transition: opacity 0.5s ease-in;
-}
-
-#overlay.dark {
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 0%;
-  height: 100%;
-  background-color: #444;
-  opacity: 0.8;
-  z-index: 100;
-  transition: width 0.5s;
-}
-
 #progress {
   display: block;
   position: fixed;

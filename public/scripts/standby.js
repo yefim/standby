@@ -46,7 +46,6 @@
               var pct;
               curr++;
               pct = Math.floor(curr / total * 100);
-              console.log(pct);
               if (stillInLoading) {
                 if (pct > 95) {
                   stillInLoading = false;
@@ -77,7 +76,6 @@
       return document.body.style.overflow = 'hidden';
     };
     hideLink = function() {
-      $('#overlay').removeClass('dark');
       $('iframe').removeClass('fucklightboxes');
       $('#x').hide();
       return document.body.style.overflow = 'auto';
