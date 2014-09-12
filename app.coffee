@@ -23,6 +23,12 @@ PH = "http://hook-api.herokuapp.com/today"
 HN ="http://api.ihackernews.com/page"
 
 app.get '/', (req, res) ->
+  res.render 'index', {
+    redditPosts: []
+    hackernewsPosts: []
+    mediumPosts: []
+  }
+  ###
   request.get REDDIT, (redditResponse) ->
     console.log "loaded Reddit."
     redditPosts = redditResponse.body.data.children.map((p) -> p.data)
@@ -35,7 +41,7 @@ app.get '/', (req, res) ->
         console.log "loaded Medium."
         mediumPosts = helper.parseMedium(mediumResponse.text)
         res.render 'index', {redditPosts, hackernewsPosts, mediumPosts}
-
+  ###
 app.get '/cache', (req, res) ->
   url = req.query.url
   client.get url, (err, html) ->

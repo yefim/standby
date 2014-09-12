@@ -2,17 +2,19 @@
 <html>
   <head>
     <title>Standby</title>
-    <link rel='stylesheet' href='styles/standby.css'>
     <link rel='stylesheet' href='styles/bootstrap.min.css'>
+    <link rel='stylesheet' href='styles/standby.css'>
     <link rel="icon" type="image/png" href='images/favicon.png'>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src='scripts/jquery.js'></script>
+    <script src='scripts/bootstrap.min.js'></script>
     <script src='scripts/nprogress.js'></script>
+
     <link rel='stylesheet' href='styles/nprogress.css'/>
     <script src='scripts/standby.js'></script>
   </head>
   <body>
+
     <div class='container pt-perspective' id='pt-main'>
       <div id='page-wrap'>
         <section id='icons-section'>
@@ -25,9 +27,20 @@
           </ul>
         </section>
       </div>
+
+
+  <wrapper>
+    <h1>Browse without Wifi.</h1>
+    <h2>We're loading your favorite sites<br>
+      so you can bring them all over the world. </h2>
+  </wrapper>
+
+  <div class='pace'>
+  </div>
+      
       <div id="content-section-wrap">
-        <div id='blurb-section' class='content-section active-section'>
-        </div>
+        
+
 
         <div id='hn-section' class='content-section'>
           <% hackernewsPosts.forEach(function(post, i) { %>
@@ -81,10 +94,15 @@
         </div>
       </div>
 
-      <div id='footer'>
-          <span>Built with caffeine at GreylockU Hackfest 2014 by <a href="https://github.com/awiss">Alex</a>, <a href="http://yef.im/">Geoff</a>, <a href="http://connolly.io">Ian</a> &amp; <a href="https://twitter.com/kathleen_warner">Kathleen</a></span>
+      
+    </div>
+
+    <div class='footer'>
+      <div id="footer-text">
+      <span >Built with caffeine at GreylockU Hackfest 2014 by <a href="https://github.com/awiss">Alex</a>, <a href="http://yef.im/">Geoff</a>, <a href="http://connolly.io">Ian</a> &amp; <a href="https://twitter.com/kathleen_warner">Kathleen</a></span>
       </div>
     </div>
+
     <img id="x" src="/images/exit-button.png">
 
     <div class="modal fade">
