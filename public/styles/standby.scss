@@ -13,26 +13,37 @@ body {
   background-position: center;
 }
 
-wrapper {
+/*wrapper {
   margin-top: 100px;
-}
+} */
 
 h1 {
-  font-size: 35px;
+  font-size: 64px;
   display: block;
   text-align:center;
+  margin-top: 100px;
   color: #ffffff;
   font-weight:100;
   letter-spacing: 0.01em;
 }
 
 h2 {
-    font-size: 20px;
+    font-size: 26px;
     display: block;
     color: #575757;
     font-weight:100;
+    margin-top: 12px;
     text-align:center;
-    margin-top: 100px;
+    line-height: 32px; 
+   
+}
+
+
+.icons-front {
+ /*   display: block;
+    margin-left: auto;
+    margin-right: auto */
+
 }
 
 
@@ -59,16 +70,16 @@ h2 {
   user-select: none;
 
   z-index: 2000;
-  position: fixed;
   margin: auto;
+  margin-top: 50px;
   top: 12px;
   left: 0;
   right: 0;
   bottom: 0;
   width: 200px;
-  height: 25px;
+  height: 25px; 
   border: 2px solid #29d;
-  background-color: #fff;
+  background-color: #fff; 
 }
 
 .pace .pace-progress {
@@ -96,15 +107,14 @@ h2 {
   transform: translate3d(0, 0, 0);
 
   max-width: 190px;
-  position: fixed;
   z-index: 2000;
   display: block;
-  position: absolute;
+  position: absolute; 
   left: 3px;
   top: 3px;
   height: 15px;
   font-size: 12px;
-  background: #29d;
+  background: #29d; 
   color: #29d;
   line-height: 60px;
   font-weight: bold;
@@ -122,11 +132,6 @@ h2 {
 
 
 
-
-
-
-
-
 .footer {
   position:absolute; 
   bottom:0;
@@ -139,8 +144,11 @@ h2 {
 }
 
 #footer-text {
-  margin-top: auto;
-  margin-bottom: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  /*vertical-align: middle;
+  position: inline-block;
+  height: 100%; */
 }
 
 iframe {
@@ -291,7 +299,7 @@ iframe {
   opacity: 0.8;
   z-index: 100;
   background-size:0%;
-}
+} 
 
 #icons-section {
   opacity:0;
@@ -299,7 +307,7 @@ iframe {
 
 #x {
   display: none;
-  position: fixed;
+  position: fixed; 
   top: 0;
   right: 0;
   width: 106px;
