@@ -39,12 +39,12 @@ h2 {
 }
 
 
-.icons-front {
- /*   display: block;
+/*.icons-front {
+    display: block;
     margin-left: auto;
-    margin-right: auto */
+    margin-right: auto 
 
-}
+} */
 
 
 
@@ -71,15 +71,19 @@ h2 {
 
   z-index: 2000;
   margin: auto;
-  margin-top: 50px;
+  margin-top: 33px;
   top: 12px;
   left: 0;
   right: 0;
   bottom: 0;
-  width: 200px;
+  width: 225px;
   height: 25px; 
-  border: 2px solid #29d;
-  background-color: #fff; 
+  border: 3px solid #fff;
+  padding: 20px 80px;
+  /*background-color: #fff; */
+  background: none;
+  border-radius: 0 !important;
+
 }
 
 .pace .pace-progress {
@@ -131,6 +135,48 @@ h2 {
 }
 
 
+/*.button {
+  border: 3px solid #fff;
+color: #fff;
+  border: none;
+font-family: inherit;
+font-size: inherit;
+color: inherit;
+background: none;
+cursor: pointer;
+padding: 25px 80px;
+display: inline-block;
+margin: 15px 30px;
+text-transform: uppercase;
+letter-spacing: 1px;
+font-weight: 700;
+outline: none;
+position: relative;
+-webkit-transition: all 0.3s;
+-moz-transition: all 0.3s;
+transition: all 0.3s;
+box-sizing: border-box;
+width: 0%;
+height: 100%;
+top: 0;
+left: 0;
+background: #fff;
+content: '';
+position: absolute;
+z-index: -1;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
 
 .footer {
   position:absolute; 
@@ -139,7 +185,7 @@ h2 {
   height:80px;
   display: block;
   text-align:center;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(92, 92, 92, 0.5);
 
 }
 
