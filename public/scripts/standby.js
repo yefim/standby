@@ -25,6 +25,12 @@
       curr = 0;
       stillInLoading = true;
       old_pct = 0;
+      $('#percentage').text('Loading...');
+      if (total === 0) {
+        NProgress.done();
+        $('#percentage').text('Loaded!');
+        stillInLoading = false;
+      }
       return $('.cache:not(.loaded)').each(function(i, el) {
         var $el;
         $el = $(el);
@@ -51,10 +57,13 @@
                   stillInLoading = false;
                   setTimeout(function() {
                     $('.last-line').addClass('done');
-                    return NProgress.done();
+                    NProgress.done();
+                    return $('#percentage').hide();
                   }, 2000);
                 } else {
                   NProgress.set(curr / total);
+                  console.log(pct);
+                  $('#percentage').text(pct + '%');
                 }
               }
               return el.addClass('loaded');

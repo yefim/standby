@@ -37,10 +37,27 @@ h2 {
     line-height: 32px; 
    
 }
+#percentage {
+  width:100%;
+  height:100%;
+  display:block;
+  color:black;
+  text-align:Center;
+  z-index: 9999;
+  position: absolute;
+  top: 3px;
+  left: 0;
+  font-size: 1.7em;  
+  font-family: "Helvetica Neue LT STD", Helvetica, Arial, sans-serif !important;
+  font-weight: 100;
+}
+#nprogress .peg  {
+  display:none!important;
+}
 
-
-
-
+#nprogress .bar {
+  height:100%!important;
+}
 .icons-front {
  /*   display: block;
     margin-left: auto;
@@ -56,17 +73,26 @@ h2 {
 } */
 
 #fb-root iframe {
-  background:none}
-
+  background:none;
+  position:fixed;
+  top:1em;
+  right:5em;
+}
 
 
 .fb-like iframe {
   background:none;
+  position:fixed;
+  top:1em;
+  right:5em;
 }
 
 iframe#twitter-widget-0 {
     background:none;
-}
+    position:fixed;
+    top:1em;
+    right:5em;
+ }
 
 
 
@@ -74,11 +100,11 @@ iframe#twitter-widget-0 {
 .bar {
   position:fixed;
   top:40%;
-  /* try that ..i */
 }
 
 
 .pace {
+  position:relative;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;

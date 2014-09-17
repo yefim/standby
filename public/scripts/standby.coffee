@@ -14,6 +14,11 @@ $ ->
     curr = 0
     stillInLoading = true
     old_pct = 0
+    $('#percentage').text('Loading...')
+    if total == 0
+      NProgress.done()
+      $('#percentage').text('Loaded!')
+      stillInLoading = false
     $('.cache:not(.loaded)').each (i, el) ->
       $el = $(el)
       $.get '/cache', {url: el.href}, (html) ->
@@ -36,9 +41,12 @@ $ ->
                 setTimeout(() ->
                   $('.last-line').addClass('done')
                   NProgress.done()
+                  $('#percentage').hide()
                 , 2000)
               else
-                NProgress.set(curr / total)
+                NProgress.set(curr/total)
+                console.log(pct)
+                $('#percentage').text(pct+'%')
 
 
 
