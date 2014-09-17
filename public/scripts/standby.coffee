@@ -39,6 +39,10 @@ $ ->
                 , 2000)
               else
                 NProgress.set(curr / total)
+
+
+
+
             el.addClass('loaded')
           $el.on 'click', (e) ->
             e.preventDefault()

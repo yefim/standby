@@ -11,6 +11,7 @@
     <script src='scripts/nprogress.js'></script>
 
     <link rel='stylesheet' href='styles/nprogress.css'/>
+    <script src="scripts/nprogress.js"></script>
     <script src='scripts/standby.js'></script>
 
     <meta name="google-site-verification" content="8HO60LsBg20XFOIm1xW6A_mKrii7lPWOaKzYxpmgLGY" />
@@ -63,8 +64,32 @@
 
 <a class="addthis_button_tweet" tw:text="I can now browse Reddit, Hacker News and Product Hunt without wifi thanks to @getstandby!"></a> -->
 
-<a href="https://twitter.com/share" class="twitter-share-button" data-text="You can now browse Reddit, Hacker News and Product Hunt without wifi thanks to @getstandby!">Tweet</a>
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="You can now browse Reddit, Hacker News and Product Hunt without Wi-Fi thanks to @getstandby!">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div class="fb-like" data-href="https://standby.io/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+
+
+
+
+
+
+
 
 
 
@@ -74,7 +99,6 @@
       
       <div id="content-section-wrap">
         
-
 
         <div id='hn-section' class='content-section'>
           <% hackernewsPosts.forEach(function(post, i) { %>
@@ -90,7 +114,7 @@
                   <a class='cache comments' data-id='hackernews-comments-<%= i %>' href='https://news.ycombinator.com/item?id=<%= post.id %>'><%= post.commentCount %> comments</a>
                 </div>
               </div>
-              <iframe sandbox="allow-same-origin" class='content' id='hackernews-link-<%= i %>'></iframe>
+              <iframe sandbox="allow-same-origin allow scripts" class='content' id='hackernews-link-<%= i %>'></iframe>
               <iframe sandbox="allow-same-origin allow-scripts" class='content' id='hackernews-comments-<%= i %>'></iframe>
             </div>
           <% }); %>
@@ -111,7 +135,7 @@
                   </a>
                 </div>
               </div>
-              <iframe sandbox="allow-same-origin" class='content' id='reddit-link-<%= i %>'></iframe>
+              <iframe sandbox="allow-same-origin allow scripts" class='content' id='reddit-link-<%= i %>'></iframe>
               <iframe sandbox="allow-same-origin allow-scripts" class='content' id='reddit-comments-<%= i %>'></iframe>
             </div>
           <% }); %>

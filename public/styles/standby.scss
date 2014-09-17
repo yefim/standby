@@ -39,10 +39,7 @@ h2 {
 }
 
 
-img.test {
-border: 0 !important;
-padding: 0 !important;
-}
+
 
 .icons-front {
  /*   display: block;
@@ -58,6 +55,27 @@ padding: 0 !important;
 
 } */
 
+#fb-root iframe {
+  background:none}
+
+
+
+.fb-like iframe {
+  background:none;
+}
+
+iframe#twitter-widget-0 {
+    background:none;
+}
+
+
+
+
+.bar {
+  position:fixed;
+  top:40%;
+  /* try that ..i */
+}
 
 
 .pace {
@@ -84,7 +102,7 @@ padding: 0 !important;
   z-index: 2000;
   margin: auto;
   margin-top: 33px;
-  top: 12px;
+  top: 50%;
   left: 0;
   right: 0;
   bottom: 0;
@@ -101,6 +119,15 @@ padding: 0 !important;
   border: 2px solid #29d;
   background-color: #fff; 
 }
+
+
+
+
+/*.pace is the loading bar
+
+try that..
+*/
+
 
 .pace .pace-progress {
   -webkit-box-sizing: border-box;
