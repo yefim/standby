@@ -1,5 +1,6 @@
 * {
  /*  font-family: "Helvetica Neue LT STD", Helvetica, Arial, sans-serif !important; */
+ /*font-family: Futura, "Trebuchet MS", Arial, sans-serif; */
 }
 
 body {
@@ -72,12 +73,17 @@ h2 {
 
 } */
 
+
+
+
+/*
+
 #fb-root iframe {
   background:none;
   position:fixed;
   top:1em;
-  right:5em;
-}
+  right:5em; 
+} 
 
 
 .fb-like iframe {
@@ -86,6 +92,9 @@ h2 {
   top:1em;
   right:5em;
 }
+
+*/
+
 
 iframe#twitter-widget-0 {
     background:none;
@@ -249,16 +258,15 @@ z-index: -1;
   height:80px;
   display: block;
   text-align:center;
-  background: rgba(92, 92, 92, 0.5);
+  background: rgba(255, 255, 255, 0.3);
 
 }
 
 #footer-text {
   margin-top: 30px;
   margin-bottom: 30px;
-  /*vertical-align: middle;
-  position: inline-block;
-  height: 100%; */
+font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   font-weight: 300;  height: 100%; 
 }
 
 iframe {
