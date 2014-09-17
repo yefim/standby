@@ -10,12 +10,10 @@
   } else {
     root.NProgress = factory();
   }
-
 })(this, function() {
   var NProgress = {};
 
   NProgress.version = '0.1.6';
-
   var Settings = NProgress.settings = {
     minimum: 0.08,
     easing: 'ease',
@@ -27,10 +25,10 @@
     showSpinner: true,
     barSelector: '[role="bar"]',
     spinnerSelector: '[role="spinner"]',
-    parent: 'body',
+    parent: 'div.pace',
     template: '<div class="bar" role="bar"><div class="peg"></div></div><div class="spinner" role="spinner"><div class="spinner-icon"></div></div>'
   };
-
+  
   /**
    * Updates configuration.
    *
