@@ -23,7 +23,7 @@
           <ul id='icons'>
             <li data-section='hn-section'><img src='/images/YC_on.png'></li>
             <li data-section='reddit-section'><img src='/images/Reddit_on.png'></li>
-            <!--<li data-section='medium-section'><img src='/images/Medium_on.png'></li> -->
+            <li data-section='medium-section'><img src='/images/Medium_on.png'></li> 
             <li class='add-section'><img src='/images/Plus.png'></li>
             <li data-section='blurb-section' class='selected logo'><img src='/images/Logo.png'></li>
           </ul>
@@ -137,26 +137,30 @@
             </div>
           <% }); %>
         </div>
-    <!--    <div id='medium-section' class='content-section'>
+       <div id='medium-section' class='content-section'>
           <% mediumPosts.forEach(function(post, i) { %>
-            <div>
+            <div class="medium-post-container">
               <div class='section-link'>
-                <a class='cache site-link' data-id='medium-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a>
+                <div class="medium-img"> <a class='cache site-link' data-id='medium-link-<%= i %>' href='<%= post.url %>'><img src="<%= post.image %>" /></a></div>
+                <div class="post-data">
+                   <a class='cache site-link' data-id='medium-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a>  
+                   <span class="medium-meta">By: <%= post.author %> | <%= post.time %></span>
+                </div>               
               </div>
-              <iframe class='content' id='medium-link-<%= i %>'></iframe>
+              <iframe class='content' sandbox="allow-same-origin allow-scripts" id='medium-link-<%= i %>'></iframe>
             </div>
           <% }); %>
         </div>
-      </div> -->
-
-      
-    </div>
-
-    <div class='footer'>
+      </div>
+    <div class='footer container'>
       <div id="footer-text">
       <span >Built with caffeine at GreylockU Hackfest 2014 by <a href="https://github.com/awiss">Alex</a>, <a href="http://yef.im/">Geoff</a>, <a href="http://connolly.io">Ian</a> &amp; <a href="https://twitter.com/kathleen_warner">Kathleen</a></span>
       </div>
     </div>
+      
+    </div>
+
+
 
     <img id="x" src="/images/exit-button.png">
 

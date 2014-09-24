@@ -50,15 +50,44 @@ exports.isImage = (url) ->
 exports.parseMedium = (html) ->
   $ = cheerio.load(html)
   mediumPosts = []
-  for val,i in $('a[data-action="open-post"]')
-    spl = val.attribs.title.split(' by ')
-    title = spl[0]
-    author = spl[1]
-    url = remotizeURL(val.attribs.href, "https://medium.com/top-100")
-    mediumPosts.push({title,author,url})
+  # for val,i in $('a[data-action="open-post"]')
+    # spl = val.attribs.title.split(' by ')
+    # title = val.attribs.title
+    # author = spl[1]
+    # url = remotizeURL(val.attribs.href, "https://medium.com/top-100")
+    # console.log {title, author, url}
+    # mediumPosts.push({title,author,url})
 
-  for val,i in $('span.readingTime')
-    mediumPosts[i].time = parseInt(val.children[0].data)
+  # for val,i in $('span.readingTime')
+  #   mediumPosts[i].time = parseInt(val.children[0].data)
+
+  imageRegex = new RegExp(".*?(\\(.*\\))",["i"])
+
+  for val, i in $('.block--list')
+    image = imageRegex.exec(String(val.children[0].attribs.style));
+    if image != null
+      image = image[1].replace(/([()])/g, '') #.match(imageRegex)[0]
+    else
+      image = ""
+
+    url = "https://medium.com"+val.children[0].attribs.href
+    mediumPosts.push({image, url})
+
+
+  for val, i in $('h3.block-title')
+    # title = val.
+    # title = val.children[0].data
+    title = val.children[0].children[0].data
+    url = "https://medium.com"+val.children[0].attribs.href
+    # console.log val
+    mediumPosts[i].title = title
+    mediumPosts[i].url = url
+
+  for val, i in $('.block-postMeta')
+    mediumPosts[i].author = val.children[0].children[0].data
+    mediumPosts[i].time = val.children[1].children[0].children[0].data
+
+  # console.log mediumPosts
 
   mediumPosts
 
