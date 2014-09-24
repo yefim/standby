@@ -23,25 +23,26 @@ PH = "http://hook-api.herokuapp.com/today"
 HN ="http://api.ihackernews.com/page"
 
 app.get '/', (req, res) ->
-  res.render 'index', {
-    redditPosts: []
-    hackernewsPosts: []
-    mediumPosts: []
-  }
-  ###
+  # res.render 'index', {
+  #   redditPosts: []
+  #   hackernewsPosts: []
+  #   mediumPosts: []
+  # }
   request.get REDDIT, (redditResponse) ->
     console.log "loaded Reddit."
     redditPosts = redditResponse.body.data.children.map((p) -> p.data)
     redditPosts = redditPosts.filter (link) -> link.domain isnt STANDBY and not /nytimes.com/.test(link.url) and not link.over_18
+    # redditPosts = []
     request.get HN, (hackernewsResponse) ->
       console.log "loaded HN."
       hackernewsPosts = hackernewsResponse.body?.items or []
       hackernewsPosts = hackernewsPosts.filter (link) -> link isnt STANDBY
+      # hackernewsPosts = []
       request.get "https://medium.com/top-100", (mediumResponse) ->
         console.log "loaded Medium."
         mediumPosts = helper.parseMedium(mediumResponse.text)
-        res.render 'index', {redditPosts, hackernewsPosts, mediumPosts}
-  ###
+        res.render 'index', {redditPosts, hackernewsPosts, mediumPosts} 
+
 app.get '/cache', (req, res) ->
   url = req.query.url
   client.get url, (err, html) ->
@@ -75,9 +76,12 @@ app.get '/add', (req, res) ->
   else if service == "producthunt"
     request.get PH, (productHuntResponse) ->
       console.log "loaded Product Hunt."
-      productHuntPosts = productHuntResponse.body.hunts
-      productHuntPosts = productHuntPosts.filter (link) -> link.domain isnt STANDBY and not /matterkit/.test(link.url)
-      res.json productHuntPosts
+      if productHuntResponse.ok
+        productHuntPosts = productHuntResponse.body.hunts
+        productHuntPosts = productHuntPosts.filter (link) -> link.domain isnt STANDBY and not /matterkit/.test(link.url)
+        res.json productHuntPosts
+      else
+        res.json []
   else
     res.json []
 
