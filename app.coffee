@@ -75,9 +75,12 @@ app.get '/add', (req, res) ->
   else if service == "producthunt"
     request.get PH, (productHuntResponse) ->
       console.log "loaded Product Hunt."
-      productHuntPosts = productHuntResponse.body.hunts
-      productHuntPosts = productHuntPosts.filter (link) -> link.domain isnt STANDBY and not /matterkit/.test(link.url)
-      res.json productHuntPosts
+      if productHuntResponse.ok
+        productHuntPosts = productHuntResponse.body.hunts
+        productHuntPosts = productHuntPosts.filter (link) -> link.domain isnt STANDBY and not /matterkit/.test(link.url)
+        res.json productHuntPosts
+      else
+        res.json []
   else
     res.json []
 
