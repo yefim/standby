@@ -57,10 +57,11 @@ app.get '/cache', (req, res) ->
         request.get url, (response) ->
           html = response.text or ""
           # parse relative css and js links
-          if response.headers["content-type"].indexOf('html') > -1
-            html = helper.fixLinks(html, url)
-          client.set url, html
-          client.expire url, 180
+          if response.headers["content-type"]
+            if response.headers["content-type"].indexOf('html') > -1
+              html = helper.fixLinks(html, url)
+            client.set url, html
+            client.expire url, 180
           res.send html
 
 app.get '/add', (req, res) ->
