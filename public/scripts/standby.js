@@ -3,7 +3,7 @@
   var __slice = [].slice;
 
   $(function() {
-    var addToStandBy, cacheLinks, hideLink, openLink, waitForLoaded;
+    var addToStandBy, cacheLinks, hideLink, imageUrl, openLink, waitForLoaded;
     document.write = function() {
       var p;
       p = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
@@ -34,39 +34,38 @@
           var id, iframe;
           if (html.err) {
             return console.log(html.err);
-          } else {
-            console.log("fetched " + el.href);
-            id = $el.data('id');
-            iframe = document.getElementById(id);
-            iframe = iframe.contentWindow || iframe.contentDocument.document || iframe.contentDocument;
-            iframe.document.open();
-            iframe.document.write(html.replace('window.top.location', 'hahaiwin'));
-            iframe.document.close();
-            waitForLoaded(0, id, $el, function(el) {
-              var pct;
-              curr++;
-              pct = Math.floor(curr / total * 100);
-              if (stillInLoading) {
-                if (pct > 95) {
-                  stillInLoading = false;
-                  setTimeout(function() {
-                    $('.last-line').addClass('done');
-                    return NProgress.done();
-                  }, 2000);
-                } else {
-                  NProgress.set(curr / total);
-                }
-              }
-              return el.addClass('loaded');
-            });
-            return $el.on('click', function(e) {
-              e.preventDefault();
-              $el.addClass('site-link-visited');
-              id = $(this).data('id');
-              $("#arrow-" + id).addClass('arrow-seen');
-              return window.location.hash = id;
-            });
           }
+          console.log("fetched " + el.href);
+          id = $el.data('id');
+          iframe = document.getElementById(id);
+          iframe = iframe.contentWindow || iframe.contentDocument.document || iframe.contentDocument;
+          iframe.document.open();
+          iframe.document.write(html.replace('window.top.location', 'hahaiwin'));
+          iframe.document.close();
+          waitForLoaded(0, id, $el, function(el) {
+            var pct;
+            curr++;
+            pct = Math.floor(curr / total * 100);
+            if (stillInLoading) {
+              if (pct > 95) {
+                stillInLoading = false;
+                setTimeout(function() {
+                  $('.last-line').addClass('done');
+                  return NProgress.done();
+                }, 2000);
+              } else {
+                NProgress.set(curr / total);
+              }
+            }
+            return el.addClass('loaded');
+          });
+          return $el.on('click', function(e) {
+            e.preventDefault();
+            $el.addClass('site-link-visited');
+            id = $(this).data('id');
+            $("#arrow-" + id).addClass('arrow-seen');
+            return window.location.hash = id;
+          });
         });
       });
     };
@@ -85,7 +84,12 @@
         return window.location.hash = "";
       }
     });
-    cacheLinks();
+    imageUrl = '/images/background.png';
+    $('<img/>').attr('src', imageUrl).load(function() {
+      $(this).remove();
+      $('body').css('background-image', "url(" + imageUrl + ")");
+      return cacheLinks();
+    });
     $('#x').on('click', function() {
       return window.location.hash = "";
     });

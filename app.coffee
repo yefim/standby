@@ -23,16 +23,12 @@ PH = "http://hook-api.herokuapp.com/today"
 HN ="http://api.ihackernews.com/page"
 
 app.get '/', (req, res) ->
-  res.render 'index', {
-    redditPosts: []
-    hackernewsPosts: []
-    mediumPosts: []
-  }
-  ###
   request.get REDDIT, (redditResponse) ->
     console.log "loaded Reddit."
     redditPosts = redditResponse.body.data.children.map((p) -> p.data)
     redditPosts = redditPosts.filter (link) -> link.domain isnt STANDBY and not /nytimes.com/.test(link.url) and not link.over_18
+    res.render 'index', {redditPosts, hackernewsPosts: [], mediumPosts: []}
+    ###
     request.get HN, (hackernewsResponse) ->
       console.log "loaded HN."
       hackernewsPosts = hackernewsResponse.body?.items or []
@@ -41,7 +37,8 @@ app.get '/', (req, res) ->
         console.log "loaded Medium."
         mediumPosts = helper.parseMedium(mediumResponse.text)
         res.render 'index', {redditPosts, hackernewsPosts, mediumPosts}
-  ###
+    ###
+
 app.get '/cache', (req, res) ->
   url = req.query.url
   client.get url, (err, html) ->
@@ -56,7 +53,7 @@ app.get '/cache', (req, res) ->
         request.get url, (response) ->
           html = response.text or ""
           # parse relative css and js links
-          if response.headers["content-type"].indexOf('html') > -1
+          if response.headers["content-type"]?.indexOf('html') > -1
             html = helper.fixLinks(html, url)
           client.set url, html
           client.expire url, 180
