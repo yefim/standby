@@ -1,3 +1,5 @@
+MAX_PINGS = 20
+
 $ ->
   document.write = (p...) -> console.log(p)
 
@@ -25,19 +27,21 @@ $ ->
         iframe.document.open()
         iframe.document.write(html.replace('window.top.location','hahaiwin'))
         iframe.document.close()
-        waitForLoaded 0, id, $el, (el) ->
+        waitForLoaded 0, iframe, $el, (el) ->
           curr++
           pct = Math.floor(curr / total * 100)
+          el.addClass('loaded')
           if stillInLoading
-            if pct > 95
+            if pct == 100
               stillInLoading = false
-              setTimeout(() ->
-                $('.last-line').addClass('done')
-                NProgress.done()
-              , 2000)
+              finishedLoading()
+            else if pct > 95
+              stillInLoading = false
+              setTimeout(->
+                finishedLoading()
+              , 1000)
             else
               NProgress.set(curr / total)
-          el.addClass('loaded')
         $el.on 'click', (e) ->
           e.preventDefault()
           $el.addClass('site-link-visited')
@@ -74,16 +78,20 @@ $ ->
     tab = $this.data('tab')
     $("li[data-section='#{tab}']").click()
 
-  waitForLoaded = (i, id, $el, cb) ->
-    iframe = document.getElementById(id)
-    if i > 20 or iframe.contentWindow and iframe.contentWindow.document and iframe.contentWindow.document.body and iframe.contentWindow.document.body.innerHTML
+  waitForLoaded = (pings, iframe, $el, cb) ->
+    if pings > MAX_PINGS or iframe.contentWindow and iframe.contentWindow.document and iframe.contentWindow.document.body and iframe.contentWindow.document.body.innerHTML
+      # already pinged the same iframe enough times, assume it loaded
       setTimeout (->
         cb($el)
       ), 200
     else
       setTimeout (->
-        waitForLoaded(i+1, id, $el, cb)
+        waitForLoaded(pings+1, iframe, $el, cb)
       ), 200
+
+  finishedLoading = ->
+    $('.last-line').addClass('done')
+    NProgress.done()
 
   $('#icons').delegate 'li:not(.add-section)', 'click', (e) ->
     $this = $(@)
