@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Standby</title>
+    <title>Stand By</title>
     <link rel='stylesheet' href='styles/bootstrap.min.css'>
+    <link rel='stylesheet' href='styles/nprogress.css'/>
     <link rel='stylesheet' href='styles/standby.css'>
+
     <link rel="icon" type="image/png" href='images/favicon.png'>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src='scripts/nprogress.js'></script>
-
-    <link rel='stylesheet' href='styles/nprogress.css'/>
     <script src='scripts/standby.js'></script>
 
     <meta name="google-site-verification" content="8HO60LsBg20XFOIm1xW6A_mKrii7lPWOaKzYxpmgLGY" />
@@ -34,85 +34,88 @@
           }(document, 'script', 'twitter-wjs');
         </script>
       </div>
-      <h1>Browse without Wifi.</h1>
-      <h2>
-        We're loading your favorite sites<br/>
-        so you can bring them all over the world.
-      </h2>
-      <div class='pace'></div>
+      <div class='animate' id='landing'>
+        <h1>Browse without Wifi.</h1>
+        <h2>
+          We're loading your favorite sites<br/>
+          so you can bring them all over the world.
+        </h2>
+        <div class='pace'></div>
+      </div>
     </div>
 
-    <div class='container'>
-      <div id='page-wrap'>
-        <section id='icons-section'>
-          <ul id='icons'>
-            <li data-section='hn-section'><img src='/images/YC_on.png'></li>
-            <li data-section='reddit-section'><img src='/images/Reddit_on.png'></li>
-            <li data-section='medium-section'><img src='/images/Medium_on.png'></li>
-            <li class='add-section'><img src='/images/Plus.png'></li>
-            <li data-section='blurb-section' class='selected logo'><img src='/images/Logo.png'></li>
-          </ul>
-        </section>
-      </div>
-
-
-      <div id="content-section-wrap">
-        <div id='hn-section' class='content-section'>
-          <% hackernewsPosts.forEach(function(post, i) { %>
-            <div>
-              <div class='section-link'>
-                <div class='upvotes'>
-                  <div class='arrow' id='arrow-hackernews-link-<%= i %>'></div>
-                  <div><%= post.points %></div>
-                </div>
-                <div class='post-data'>
-                  <a class='cache site-link' data-id='hackernews-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a>
-                  <span class='website'>(<%= post.url.replace('http://','').replace('https://','').split(/[/?#]/)[0] %>)</span>
-                  <a class='cache comments' data-id='hackernews-comments-<%= i %>' href='https://news.ycombinator.com/item?id=<%= post.id %>'><%= post.commentCount %> comments</a>
-                </div>
-              </div>
-              <iframe sandbox="allow-same-origin" class='content' id='hackernews-link-<%= i %>'></iframe>
-              <iframe sandbox="allow-same-origin allow-scripts" class='content' id='hackernews-comments-<%= i %>'></iframe>
-            </div>
-          <% }); %>
+    <div class='animate' id='index'>
+      <div class='container'>
+        <div id='page-wrap'>
+          <section id='icons-section'>
+            <ul id='icons'>
+              <li data-section='hn-section' class='selected'><img src='/images/YC_on.png'></li>
+              <li data-section='reddit-section'><img src='/images/Reddit_on.png'></li>
+              <li data-section='medium-section'><img src='/images/Medium_on.png'></li>
+              <li class='add-section'><img src='/images/Plus.png'></li>
+              <li data-section='blurb-section' class='logo'><img src='/images/Logo.png'></li>
+            </ul>
+          </section>
         </div>
 
-        <div id='reddit-section' class='content-section'>
-          <% redditPosts.forEach(function(post, i) { %>
-            <div>
-              <div class='section-link'>
-                <div class='upvotes'>
-                  <div class='arrow' id='arrow-reddit-link-<%= i %>'></div>
-                  <div><%= post.score %></div>
+        <div id="content-section-wrap">
+          <div id='hn-section' class='active-section content-section'>
+            <% hackernewsPosts.forEach(function(post, i) { %>
+              <div>
+                <div class='section-link'>
+                  <div class='upvotes'>
+                    <div class='arrow' id='arrow-hackernews-link-<%= i %>'></div>
+                    <div><%= post.points %></div>
+                  </div>
+                  <div class='post-data'>
+                    <a class='cache site-link' data-id='hackernews-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a>
+                    <span class='website'>(<%= post.url.replace('http://','').replace('https://','').split(/[/?#]/)[0] %>)</span>
+                    <a class='cache comments' data-id='hackernews-comments-<%= i %>' href='https://news.ycombinator.com/item?id=<%= post.id %>'><%= post.commentCount %> comments</a>
+                  </div>
                 </div>
-                <div class='post-data'>
-                  <a class='cache site-link' data-id='reddit-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a>
-                  <span class='website'>(<%= post.url.replace('http://','').replace('https://','').split(/[/?#]/)[0] %>)</span>
-                  <a class='cache comments' data-id='reddit-comments-<%= i %>' href='http://reddit.com<%= post.permalink %>'><%= post.num_comments %> comments
-                  </a>
+                <iframe sandbox="allow-same-origin" class='content' id='hackernews-link-<%= i %>'></iframe>
+                <iframe sandbox="allow-same-origin allow-scripts" class='content' id='hackernews-comments-<%= i %>'></iframe>
+              </div>
+            <% }); %>
+          </div>
+
+          <div id='reddit-section' class='content-section'>
+            <% redditPosts.forEach(function(post, i) { %>
+              <div>
+                <div class='section-link'>
+                  <div class='upvotes'>
+                    <div class='arrow' id='arrow-reddit-link-<%= i %>'></div>
+                    <div><%= post.score %></div>
+                  </div>
+                  <div class='post-data'>
+                    <a class='cache site-link' data-id='reddit-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a>
+                    <span class='website'>(<%= post.url.replace('http://','').replace('https://','').split(/[/?#]/)[0] %>)</span>
+                    <a class='cache comments' data-id='reddit-comments-<%= i %>' href='http://reddit.com<%= post.permalink %>'><%= post.num_comments %> comments
+                    </a>
+                  </div>
                 </div>
+                <iframe sandbox="allow-same-origin" class='content' id='reddit-link-<%= i %>'></iframe>
+                <iframe sandbox="allow-same-origin allow-scripts" class='content' id='reddit-comments-<%= i %>'></iframe>
               </div>
-              <iframe sandbox="allow-same-origin" class='content' id='reddit-link-<%= i %>'></iframe>
-              <iframe sandbox="allow-same-origin allow-scripts" class='content' id='reddit-comments-<%= i %>'></iframe>
-            </div>
-          <% }); %>
-        </div>
-        <div id='medium-section' class='content-section'>
-          <% mediumPosts.forEach(function(post, i) { %>
-            <div>
-              <div class='section-link'>
-                <a class='cache site-link' data-id='medium-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a>
+            <% }); %>
+          </div>
+          <div id='medium-section' class='content-section'>
+            <% mediumPosts.forEach(function(post, i) { %>
+              <div>
+                <div class='section-link'>
+                  <a class='cache site-link' data-id='medium-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a>
+                </div>
+                <iframe class='content' id='medium-link-<%= i %>'></iframe>
               </div>
-              <iframe class='content' id='medium-link-<%= i %>'></iframe>
-            </div>
-          <% }); %>
+            <% }); %>
+          </div>
         </div>
       </div>
     </div>
 
     <div class='footer'>
       <div id="footer-text">
-      <span >Built with caffeine at GreylockU Hackfest 2014 by <a href="https://github.com/awiss">Alex</a>, <a href="http://yef.im/">Geoff</a>, <a href="http://connolly.io">Ian</a> &amp; <a href="https://twitter.com/kathleen_warner">Kathleen</a></span>
+        <span >Built with caffeine at GreylockU Hackfest 2014 by <a href="https://github.com/awiss">Alex</a>, <a href="http://yef.im/">Geoff</a>, <a href="http://connolly.io">Ian</a> &amp; <a href="https://twitter.com/kathleen_warner">Kathleen</a></span>
       </div>
     </div>
 

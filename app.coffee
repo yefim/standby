@@ -27,17 +27,17 @@ app.get '/', (req, res) ->
     console.log "loaded Reddit."
     redditPosts = redditResponse.body.data.children.map((p) -> p.data)
     redditPosts = redditPosts.filter (link) -> link.domain isnt STANDBY and not /nytimes.com/.test(link.url) and not link.over_18
-    res.render 'index', {redditPosts, hackernewsPosts: [], mediumPosts: []}
-    ###
     request.get HN, (hackernewsResponse) ->
       console.log "loaded HN."
       hackernewsPosts = hackernewsResponse.body?.items or []
       hackernewsPosts = hackernewsPosts.filter (link) -> link isnt STANDBY
+      res.render 'index', {redditPosts: redditPosts[0..2], hackernewsPosts: hackernewsPosts[0..2], mediumPosts: []}
+      ###
       request.get "https://medium.com/top-100", (mediumResponse) ->
         console.log "loaded Medium."
         mediumPosts = helper.parseMedium(mediumResponse.text)
         res.render 'index', {redditPosts, hackernewsPosts, mediumPosts}
-    ###
+      ###
 
 app.get '/cache', (req, res) ->
   url = req.query.url

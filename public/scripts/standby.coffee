@@ -92,6 +92,8 @@ $ ->
   finishedLoading = ->
     $('.last-line').addClass('done')
     NProgress.done()
+    $('#landing').addClass('landing')
+    $('#index').addClass('index')
 
   $('#icons').delegate 'li:not(.add-section)', 'click', (e) ->
     $this = $(@)

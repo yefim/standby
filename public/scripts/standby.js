@@ -117,7 +117,9 @@
     };
     finishedLoading = function() {
       $('.last-line').addClass('done');
-      return NProgress.done();
+      NProgress.done();
+      $('#landing').addClass('landing');
+      return $('#index').addClass('index');
     };
     $('#icons').delegate('li:not(.add-section)', 'click', function(e) {
       var $this;
