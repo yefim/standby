@@ -125,11 +125,14 @@ h2 {
   height: 80px;
   display: block;
   text-align: center;
-  background: rgba(92, 92, 92, 0.5);
+  background: rgba(255, 255, 255, 0.3);
+
   z-index: -1;
 }
 
 #footer-text {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  font-weight: 300;  height: 100%; 
   margin-top: 30px;
   margin-bottom: 30px;
 }
@@ -139,6 +142,10 @@ iframe {
   background-color: white;
   z-index: 1000;
 }
+
+
+
+
 
 .content {
   display: none;
