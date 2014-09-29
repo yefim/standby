@@ -1,4 +1,5 @@
 MAX_PINGS = 20
+CHUNK_SIZE = 5
 
 $ ->
   document.write = (p...) -> console.log(p)
@@ -10,44 +11,53 @@ $ ->
     else
       hideLink()
 
+  $progressbar = $('#progressbar')
+
   cacheLinks = ->
     total = $('.cache:not(.loaded)').length
     curr = 0
     stillInLoading = true
-    old_pct = 0
-    $('#progressbar').attr('max', total)
-    $('.cache:not(.loaded)').each (i, el) ->
-      $el = $(el)
-      $.get '/cache', {url: el.href}, (html) ->
-        return console.log(html.err) if html.err
-        console.log "fetched #{el.href}"
-        id = $el.data('id')
-        iframe = document.getElementById(id)
-        iframe = iframe.contentWindow or iframe.contentDocument.document or iframe.contentDocument
-        iframe.document.open()
-        iframe.document.write(html.replace('window.top.location','hahaiwin'))
-        iframe.document.close()
-        waitForLoaded 0, iframe, $el, (el) ->
-          curr++
-          pct = Math.floor(curr / total * 100)
-          el.addClass('loaded')
-          if stillInLoading
-            if pct == 100
-              stillInLoading = false
-              finishedLoading()
-            else if pct > 95
-              stillInLoading = false
-              setTimeout(->
-                finishedLoading()
-              , 1000)
-            else
-              $('#progressbar').val(curr)
-        $el.on 'click', (e) ->
-          e.preventDefault()
-          $el.addClass('site-link-visited')
-          id = $(@).data('id')
-          $("#arrow-#{id}").addClass('arrow-seen')
-          window.location.hash = id
+    $progressbar.attr('max', total)
+
+    allElements = $('.cache:not(.loaded)')
+    i = 0
+    len = allElements.length
+    while i < len
+      do (els = allElements.slice(i, i + CHUNK_SIZE).toArray()) ->
+        i += CHUNK_SIZE
+        urls = els.map (e) -> e.href
+        $.get '/batch', {urls}, (htmls) ->
+          htmls.forEach (html, index) ->
+            el = els[index]
+            $el = $(el)
+            console.log "fetched #{el.href}"
+            id = $el.data('id')
+            iframe = document.getElementById(id)
+            iframe = iframe.contentWindow or iframe.contentDocument.document or iframe.contentDocument
+            iframe.document.open()
+            iframe.document.write(html.replace('window.top.location','hahaiwin'))
+            iframe.document.close()
+            waitForLoaded 0, iframe, $el, (el) ->
+              curr++
+              pct = Math.floor(curr / total * 100)
+              el.addClass('loaded')
+              if stillInLoading
+                if pct == 100
+                  stillInLoading = false
+                  finishedLoading()
+                else if pct > 95
+                  stillInLoading = false
+                  setTimeout(->
+                    finishedLoading()
+                  , 1000)
+                else
+                  $progressbar.val(curr)
+            $el.on 'click', (e) ->
+              e.preventDefault()
+              $el.addClass('site-link-visited')
+              id = $(@).data('id')
+              $("#arrow-#{id}").addClass('arrow-seen')
+              window.location.hash = id
 
   openLink = (id) ->
     $("##{id}").addClass('fucklightboxes')
@@ -90,7 +100,7 @@ $ ->
       ), 200
 
   finishedLoading = ->
-    $('#progressbar').val $('#progressbar').attr('max')
+    $progressbar.val($progressbar.attr('max'))
     $('#landing').addClass('landing')
     $('#index').addClass('index')
 
