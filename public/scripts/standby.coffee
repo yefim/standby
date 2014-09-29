@@ -11,11 +11,11 @@ $ ->
       hideLink()
 
   cacheLinks = ->
-    NProgress.start()
     total = $('.cache:not(.loaded)').length
     curr = 0
     stillInLoading = true
     old_pct = 0
+    $('#progressbar').attr('max', total)
     $('.cache:not(.loaded)').each (i, el) ->
       $el = $(el)
       $.get '/cache', {url: el.href}, (html) ->
@@ -41,7 +41,7 @@ $ ->
                 finishedLoading()
               , 1000)
             else
-              NProgress.set(curr / total)
+              $('#progressbar').val(curr)
         $el.on 'click', (e) ->
           e.preventDefault()
           $el.addClass('site-link-visited')
@@ -90,8 +90,7 @@ $ ->
       ), 200
 
   finishedLoading = ->
-    $('.last-line').addClass('done')
-    NProgress.done()
+    $('#progressbar').val $('#progressbar').attr('max')
     $('#landing').addClass('landing')
     $('#index').addClass('index')
 

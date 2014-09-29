@@ -23,11 +23,11 @@
     };
     cacheLinks = function() {
       var curr, old_pct, stillInLoading, total;
-      NProgress.start();
       total = $('.cache:not(.loaded)').length;
       curr = 0;
       stillInLoading = true;
       old_pct = 0;
+      $('#progressbar').attr('max', total);
       return $('.cache:not(.loaded)').each(function(i, el) {
         var $el;
         $el = $(el);
@@ -60,7 +60,7 @@
                   return finishedLoading();
                 }, 1000);
               } else {
-                return NProgress.set(curr / total);
+                return $('#progressbar').val(curr);
               }
             }
           });
@@ -116,8 +116,7 @@
       }
     };
     finishedLoading = function() {
-      $('.last-line').addClass('done');
-      NProgress.done();
+      $('#progressbar').val($('#progressbar').attr('max'));
       $('#landing').addClass('landing');
       return $('#index').addClass('index');
     };

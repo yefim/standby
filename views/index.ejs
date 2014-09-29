@@ -3,14 +3,12 @@
   <head>
     <title>Stand By</title>
     <link rel='stylesheet' href='styles/bootstrap.min.css'>
-    <link rel='stylesheet' href='styles/nprogress.css'/>
     <link rel='stylesheet' href='styles/standby.css'>
 
     <link rel="icon" type="image/png" href='images/favicon.png'>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src='scripts/nprogress.js'></script>
     <script src='scripts/standby.js'></script>
 
     <meta name="google-site-verification" content="8HO60LsBg20XFOIm1xW6A_mKrii7lPWOaKzYxpmgLGY" />
@@ -40,7 +38,9 @@
           We're loading your favorite sites<br/>
           so you can bring them all over the world.
         </h2>
-        <div class='pace'></div>
+        <div class='centered'>
+          <progress id='progressbar'></progress>
+        </div>
       </div>
     </div>
 
