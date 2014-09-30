@@ -300,9 +300,11 @@ why is this even here? -kw
   background-size:0%; */
   background-color: #f3f3f3;  
   border: 0;  
-  height: 18px;  
- border-radius: 9px;  
+  height: 50px;  
+  width:200px;
+  border-radius: 9px;  
 } 
+
 
 #x {
   display: none;
@@ -365,8 +367,13 @@ why is this even here? -kw
 }
 
 .logo {
-  height:90px;
-  width: 124px;
+   background: url(public/images/sb-icon-smaller.png) 0 0 no-repeat;
+    width: 268px;
+    height: 96px;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
   padding: 7px 20px;
 
   display:inline-block;
