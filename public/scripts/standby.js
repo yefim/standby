@@ -3,7 +3,7 @@
   var CHUNK_SIZE, MAX_PINGS,
     __slice = [].slice;
 
-  MAX_PINGS = 20;
+  MAX_PINGS = 5;
 
   CHUNK_SIZE = 5;
 
@@ -121,11 +121,11 @@
       if (pings > MAX_PINGS || iframe.contentWindow && iframe.contentWindow.document && iframe.contentWindow.document.body && iframe.contentWindow.document.body.innerHTML) {
         return setTimeout((function() {
           return cb($el);
-        }), 200);
+        }), 500);
       } else {
         return setTimeout((function() {
           return waitForLoaded(pings + 1, iframe, $el, cb);
-        }), 200);
+        }), 500);
       }
     };
     finishedLoading = function() {

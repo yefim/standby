@@ -1,4 +1,4 @@
-MAX_PINGS = 20
+MAX_PINGS = 5
 CHUNK_SIZE = 5
 
 $ ->
@@ -93,11 +93,11 @@ $ ->
       # already pinged the same iframe enough times, assume it loaded
       setTimeout (->
         cb($el)
-      ), 200
+      ), 500
     else
       setTimeout (->
         waitForLoaded(pings+1, iframe, $el, cb)
-      ), 200
+      ), 500
 
   finishedLoading = ->
     $progressbar.val($progressbar.attr('max'))
