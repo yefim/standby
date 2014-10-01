@@ -437,6 +437,14 @@ progress::-webkit-progress-value {
   width: 85px;
 }
 
+@mixin vendor-prefix($name, $argument) {
+  -webkit-#{$name}: #{$argument};
+  -ms-#{$name}: #{$argument};
+  -moz-#{$name}: #{$argument};
+  -o-#{$name}: #{$argument};
+  #{$name}: #{$argument};
+}
+
 @keyframes fadeOut {
   0% {
     opacity: 1;
@@ -450,31 +458,31 @@ progress::-webkit-progress-value {
 @keyframes fadeInUp {
   0% {
     opacity: 0;
-    transform: translate3d(0, 20%, 0);
+    @include vendor-prefix(transform, translate3d(0, 20%, 0));
   }
 
   100% {
     opacity: 1;
-    transform: none;
+    @include vendor-prefix(transform, none);
   }
 }
 
 .animate {
-  animation-duration: 1s;
-  transition-timing-function: ease-in;
-  animation-fill-mode: both;
+  @include vendor-prefix(animation-duration, 1s);
+  @include vendor-prefix(animation-fill-mode, both);
+  @include vendor-prefix(transition-timing-function, ease-in);
   position: absolute;
   width: 100%;
   height: 100%;
 }
 
 .landing {
-  animation-name: fadeOut;
+  @include vendor-prefix(animation-name, fadeOut);
 }
 
 .index {
-  animation-name: fadeInUp;
-  animation-delay: 0.25s;
+  @include vendor-prefix(animation-name, fadeInUp);
+  @include vendor-prefix(animation-delay, 0.25s);
 }
 
 #index {

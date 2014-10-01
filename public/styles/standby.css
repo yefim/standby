@@ -355,23 +355,55 @@ progress::-webkit-progress-value {
 @keyframes fadeInUp {
   0% {
     opacity: 0;
+    -webkit-transform: translate3d(0, 20%, 0);
+    -ms-transform: translate3d(0, 20%, 0);
+    -moz-transform: translate3d(0, 20%, 0);
+    -o-transform: translate3d(0, 20%, 0);
     transform: translate3d(0, 20%, 0); }
   100% {
     opacity: 1;
+    -webkit-transform: none;
+    -ms-transform: none;
+    -moz-transform: none;
+    -o-transform: none;
     transform: none; } }
 .animate {
+  -webkit-animation-duration: 1s;
+  -ms-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -o-animation-duration: 1s;
   animation-duration: 1s;
-  transition-timing-function: ease-in;
+  -webkit-animation-fill-mode: both;
+  -ms-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
   animation-fill-mode: both;
+  -webkit-transition-timing-function: ease-in;
+  -ms-transition-timing-function: ease-in;
+  -moz-transition-timing-function: ease-in;
+  -o-transition-timing-function: ease-in;
+  transition-timing-function: ease-in;
   position: absolute;
   width: 100%;
   height: 100%; }
 
 .landing {
+  -webkit-animation-name: fadeOut;
+  -ms-animation-name: fadeOut;
+  -moz-animation-name: fadeOut;
+  -o-animation-name: fadeOut;
   animation-name: fadeOut; }
 
 .index {
+  -webkit-animation-name: fadeInUp;
+  -ms-animation-name: fadeInUp;
+  -moz-animation-name: fadeInUp;
+  -o-animation-name: fadeInUp;
   animation-name: fadeInUp;
+  -webkit-animation-delay: 0.25s;
+  -ms-animation-delay: 0.25s;
+  -moz-animation-delay: 0.25s;
+  -o-animation-delay: 0.25s;
   animation-delay: 0.25s; }
 
 #index {
