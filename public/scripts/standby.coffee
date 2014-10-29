@@ -37,27 +37,26 @@ $ ->
             iframe.document.open()
             iframe.document.write(html.replace('window.top.location','hahaiwin'))
             iframe.document.close()
-            waitForLoaded 0, iframe, $el, (el) ->
-              curr++
-              pct = Math.floor(curr / total * 100)
-              el.addClass('loaded')
-              if stillInLoading
-                if pct == 100
-                  stillInLoading = false
-                  finishedLoading()
-                else if pct > 95
-                  stillInLoading = false
-                  setTimeout(->
-                    finishedLoading()
-                  , 1000)
-                else
-                  $progressbar.val(curr)
             $el.on 'click', (e) ->
               e.preventDefault()
               $el.addClass('site-link-visited')
               id = $(@).data('id')
               $("#arrow-#{id}").addClass('arrow-seen')
               window.location.hash = id
+            waitForLoaded 0, iframe, $el, (el) ->
+              el.addClass('loaded')
+              curr++
+              pct = Math.round(curr / total * 100)
+              console.log(pct)
+              if stillInLoading
+                if pct == 100
+                  stillInLoading = false
+                  finishedLoading()
+                else if pct > 95
+                  stillInLoading = false
+                  setTimeout(finishedLoading, 1000)
+                else
+                  $progressbar.val(curr)
 
   openLink = (id) ->
     $("##{id}").addClass('fucklightboxes')
@@ -71,8 +70,10 @@ $ ->
     document.body.style.overflow = 'auto'
 
   $(document).keyup (e) ->
-    window.location.hash = "" if e.keyCode is 27
+    window.location.hash = "" if (e.which or e.keyCode) is 27
 
+  # First, disable all links
+  $('.cache').on 'click', -> return false
   # wait for background-image to load
   # http://stackoverflow.com/questions/5057990/how-can-i-check-if-a-background-image-is-loaded
   imageUrl = '/images/background.png'

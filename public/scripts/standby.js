@@ -55,31 +55,30 @@
               iframe.document.open();
               iframe.document.write(html.replace('window.top.location', 'hahaiwin'));
               iframe.document.close();
-              waitForLoaded(0, iframe, $el, function(el) {
+              $el.on('click', function(e) {
+                e.preventDefault();
+                $el.addClass('site-link-visited');
+                id = $(this).data('id');
+                $("#arrow-" + id).addClass('arrow-seen');
+                return window.location.hash = id;
+              });
+              return waitForLoaded(0, iframe, $el, function(el) {
                 var pct;
-                curr++;
-                pct = Math.floor(curr / total * 100);
                 el.addClass('loaded');
+                curr++;
+                pct = Math.round(curr / total * 100);
+                console.log(pct);
                 if (stillInLoading) {
                   if (pct === 100) {
                     stillInLoading = false;
                     return finishedLoading();
                   } else if (pct > 95) {
                     stillInLoading = false;
-                    return setTimeout(function() {
-                      return finishedLoading();
-                    }, 1000);
+                    return setTimeout(finishedLoading, 1000);
                   } else {
                     return $progressbar.val(curr);
                   }
                 }
-              });
-              return $el.on('click', function(e) {
-                e.preventDefault();
-                $el.addClass('site-link-visited');
-                id = $(this).data('id');
-                $("#arrow-" + id).addClass('arrow-seen');
-                return window.location.hash = id;
               });
             });
           });
@@ -98,9 +97,12 @@
       return document.body.style.overflow = 'auto';
     };
     $(document).keyup(function(e) {
-      if (e.keyCode === 27) {
+      if ((e.which || e.keyCode) === 27) {
         return window.location.hash = "";
       }
+    });
+    $('.cache').on('click', function() {
+      return false;
     });
     imageUrl = '/images/background.png';
     $('<img/>').attr('src', imageUrl).load(function() {

@@ -6,7 +6,6 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
-
 }
 
 h1 {
@@ -386,19 +385,6 @@ progress::-webkit-progress-value {
 
 .last-line.done {
   opacity: 1;
-}
-
-.logo {
-   background: url(public/images/sb-icon-smaller.png) 0 0 no-repeat;
-    width: 268px;
-    height: 96px;
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    z-index: 1000;
-  padding: 7px 20px;
-
-  display:inline-block;
 }
 
 #blurb-section {
