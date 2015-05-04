@@ -23,14 +23,14 @@ app.use(logger('combined'))
 STANDBY = 'http://trystandby.herokuapp.com'
 REDDIT = 'http://www.reddit.com/r/all.json'
 PH = 'http://hook-api.herokuapp.com/today'
-HN ='http://api.ihackernews.com/page'
+HN = 'http://api.ihackernews.com/page'
 
 app.get '/', (req, res) ->
   request.get REDDIT, (redditResponse) ->
     console.log 'loaded Reddit.'
     redditPosts = redditResponse.body.data.children.map((p) -> p.data)
     redditPosts = redditPosts.filter (link) -> link.domain isnt STANDBY and not /nytimes.com/.test(link.url) and not link.over_18
-    res.render 'index', {redditPosts, hackernewsPosts: [], mediumPosts: []}
+    res.render 'index', {redditPosts: redditPosts, hackernewsPosts: [], mediumPosts: []}
     ###
     request.get HN, (hackernewsResponse) ->
       console.log 'loaded HN.'

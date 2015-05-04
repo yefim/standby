@@ -1,4 +1,4 @@
-MAX_PINGS = 5
+MAX_PINGS = 40
 CHUNK_SIZE = 5
 
 $ ->
@@ -14,12 +14,12 @@ $ ->
   $progressbar = $('#progressbar')
 
   cacheLinks = ->
-    total = $('.cache:not(.loaded)').length
+    allElements = $('a.cache:not(.loaded)')
+    total = allElements.length
     curr = 0
     stillInLoading = true
     $progressbar.attr('max', total)
 
-    allElements = $('.cache:not(.loaded)')
     i = 0
     len = allElements.length
     while i < len
@@ -27,7 +27,7 @@ $ ->
         i += CHUNK_SIZE
         urls = els.map (e) -> e.href
         $.get '/batch', {urls}, (htmls) ->
-          htmls.forEach (html, index) ->
+          _.each htmls, (html, index) ->
             el = els[index]
             $el = $(el)
             console.log "fetched #{el.href}"
@@ -35,28 +35,41 @@ $ ->
             iframe = document.getElementById(id)
             iframe = iframe.contentWindow or iframe.contentDocument.document or iframe.contentDocument
             iframe.document.open()
-            iframe.document.write(html.replace('window.top.location','hahaiwin'))
+            iframe.document.write(html.replace('window.top.location', 'hahaiwin'))
             iframe.document.close()
             $el.on 'click', (e) ->
               e.preventDefault()
-              $el.addClass('site-link-visited')
+              $(@).addClass('site-link-visited')
               id = $(@).data('id')
               $("#arrow-#{id}").addClass('arrow-seen')
               window.location.hash = id
-            waitForLoaded 0, iframe, $el, (el) ->
-              el.addClass('loaded')
-              curr++
-              pct = Math.round(curr / total * 100)
-              console.log(pct)
-              if stillInLoading
-                if pct == 100
-                  stillInLoading = false
-                  finishedLoading()
-                else if pct > 95
-                  stillInLoading = false
-                  setTimeout(finishedLoading, 1000)
-                else
-                  $progressbar.val(curr)
+
+    waitForLoaded = (pings, els) ->
+      if pings > MAX_PINGS
+        stillInLoading = false
+        finishedLoading()
+        return
+      _.each els, (el, i) ->
+        $el = $(el)
+        id = $el.data('id')
+        contents = $("##{id}").contents().find('body').html() or ''
+        if contents.length
+          els.splice(i, 1)
+          $el.addClass('loaded')
+          curr += 1
+          pct = Math.round(curr / total * 100)
+          if stillInLoading
+            if pct == 100
+              stillInLoading = false
+              finishedLoading()
+            else if pct > 95
+              stillInLoading = false
+              setTimeout(finishedLoading, 750)
+            else
+              $progressbar.val(curr)
+      setTimeout(waitForLoaded.bind(null, pings+1, els), 250) if stillInLoading
+
+    waitForLoaded(0, _.clone(allElements))
 
   openLink = (id) ->
     $("##{id}").addClass('fucklightboxes')
@@ -69,7 +82,7 @@ $ ->
     $('#x').hide()
     document.body.style.overflow = 'auto'
 
-  $(document).keyup (e) ->
+  $(document).on 'keyup', (e) ->
     window.location.hash = "" if (e.which or e.keyCode) is 27
 
   # First, disable all links
@@ -88,17 +101,6 @@ $ ->
     $this = $(@)
     tab = $this.data('tab')
     $("li[data-section='#{tab}']").click()
-
-  waitForLoaded = (pings, iframe, $el, cb) ->
-    if pings > MAX_PINGS or iframe.contentWindow and iframe.contentWindow.document and iframe.contentWindow.document.body and iframe.contentWindow.document.body.innerHTML
-      # already pinged the same iframe enough times, assume it loaded
-      setTimeout (->
-        cb($el)
-      ), 500
-    else
-      setTimeout (->
-        waitForLoaded(pings+1, iframe, $el, cb)
-      ), 500
 
   finishedLoading = ->
     $progressbar.val($progressbar.attr('max'))
