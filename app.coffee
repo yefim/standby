@@ -22,15 +22,31 @@ app.use(logger('combined'))
 
 STANDBY = 'http://trystandby.herokuapp.com'
 REDDIT = 'http://www.reddit.com/r/all.json'
-PH = 'http://hook-api.herokuapp.com/today'
+PH = 'https://api.producthunt.com/v1/posts'
+PH_TOKEN = '3c93dd9e925398bf433b0c679fb063e1eefe0c6e7b41fe762e37d5826c9a5991'
 HN = 'http://api.ihackernews.com/page'
 
 app.get '/', (req, res) ->
-  request.get REDDIT, (redditResponse) ->
-    console.log 'loaded Reddit.'
-    redditPosts = redditResponse.body.data.children.map((p) -> p.data)
-    redditPosts = redditPosts.filter (link) -> link.domain isnt STANDBY and not /nytimes.com/.test(link.url) and not link.over_18
-    res.render 'index', {redditPosts: redditPosts, hackernewsPosts: [], mediumPosts: []}
+  request
+    .get(REDDIT)
+    .end (redditResponse) ->
+      console.log 'loaded Reddit.'
+      redditPosts = redditResponse.body.data.children.map((p) -> p.data)
+      redditPosts = redditPosts.filter (link) -> link.domain isnt STANDBY and not /nytimes.com/.test(link.url) and not link.over_18
+      request
+        .get(PH)
+        .set('Authorization', "Bearer #{PH_TOKEN}")
+        .end (productHuntResponse) ->
+          productHuntPosts = productHuntResponse.body.posts.map (p) ->
+            return {
+              name: p.name
+              tagline: p.tagline
+              votes_count: p.votes_count
+              redirect_url: p.redirect_url
+              discussion_url: p.discussion_url
+              comments_count: p.comments_count
+            }
+          res.render 'index', {redditPosts, productHuntPosts, hackernewsPosts: [], mediumPosts: []}
     ###
     request.get HN, (hackernewsResponse) ->
       console.log 'loaded HN.'

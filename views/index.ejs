@@ -77,6 +77,7 @@
             <ul id='icons'>
               <li data-section='hn-section' class='selected'><img src='/images/YC_on.png'></li>
               <li data-section='reddit-section'><img src='/images/Reddit_on.png'></li>
+              <li data-section='ph-section'><img src='/images/Product_on.png'></li>
               <li data-section='medium-section'><img src='/images/Medium_on.png'></li>
               <li class='add-section'><img src='/images/Plus.png'></li>
               <li data-section='blurb-section' class='logo'><img src='/images/Logo.png'></li>
@@ -125,6 +126,28 @@
               </div>
             <% }); %>
           </div>
+
+          <div id='ph-section' class='content-section'>
+            <% productHuntPosts.forEach(function(post, i) { %>
+              <div>
+                <div class='section-link'>
+                  <div class='upvotes'>
+                    <div class='arrow' id='arrow-ph-link-<%= i %>'></div>
+                    <div><%= post.votes_count %></div>
+                  </div>
+                  <div class='post-data'>
+                    <a class='cache site-link' data-id='ph-link-<%= i %>' href='<%= post.redirect_url %>'><%= post.name %></a>
+                    <span class='website'><%= post.tagline %></span>
+                    <a class='cache comments' data-id='ph-comments-<%= i %>' href='<%= post.discussion_url %>'><%= post.comments_count %> comments
+                    </a>
+                  </div>
+                </div>
+                <iframe sandbox="allow-same-origin" class='content' id='ph-link-<%= i %>'></iframe>
+                <iframe sandbox="allow-same-origin" class='content' id='ph-comments-<%= i %>'></iframe>
+              </div>
+            <% }); %>
+          </div>
+
           <div id='medium-section' class='content-section'>
             <% mediumPosts.forEach(function(post, i) { %>
               <div>
