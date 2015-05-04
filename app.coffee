@@ -24,7 +24,8 @@ STANDBY = 'http://trystandby.herokuapp.com'
 REDDIT = 'http://www.reddit.com/r/all.json'
 PH = 'https://api.producthunt.com/v1/posts'
 PH_TOKEN = '3c93dd9e925398bf433b0c679fb063e1eefe0c6e7b41fe762e37d5826c9a5991'
-HN = 'http://api.ihackernews.com/page'
+HN = 'https://hacker-news.firebaseio.com/v0/topstories.json'
+HN_ITEM = (id) -> "https://hacker-news.firebaseio.com/v0/item/#{id}.json"
 
 app.get '/', (req, res) ->
   request
@@ -46,7 +47,24 @@ app.get '/', (req, res) ->
               discussion_url: p.discussion_url
               comments_count: p.comments_count
             }
-          res.render 'index', {redditPosts, productHuntPosts, hackernewsPosts: [], mediumPosts: []}
+          request
+            .get(HN)
+            .end (hackernewsResponse) ->
+              urls = hackernewsResponse.body[0..15].map(HN_ITEM)
+              async.map urls, (url, cb) ->
+                request
+                  .get(url)
+                  .end (response) ->
+                    post = {
+                      id: response.body.id
+                      descendants: response.body.descendants
+                      score: response.body.score
+                      title: response.body.title
+                      url: response.body.url
+                    }
+                    cb(null, post)
+              , (err, hackernewsPosts) ->
+                res.render 'index', {redditPosts, productHuntPosts, hackernewsPosts, mediumPosts: []}
     ###
     request.get HN, (hackernewsResponse) ->
       console.log 'loaded HN.'
@@ -71,14 +89,16 @@ app.get '/batch', (req, res) ->
           client.set url, html
           cb(null, html)
         else
-          request.get url, (response) ->
-            html = response.text or ''
-            # parse relative css and js links
-            if response.headers['content-type']?.indexOf('html') > -1
-              html = helper.fixLinks(html, url)
-            client.set url, html
-            client.expire url, 180
-            cb(null, html)
+          request
+            .get(url)
+            .end (response) ->
+              html = response.text or ''
+              # parse relative css and js links
+              if response.headers['content-type']?.indexOf('html') > -1
+                html = helper.fixLinks(html, url)
+              client.set url, html
+              client.expire url, 180
+              cb(null, html)
   , (err, htmls) ->
     res.send(htmls)
 

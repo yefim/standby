@@ -92,12 +92,12 @@
                 <div class='section-link'>
                   <div class='upvotes'>
                     <div class='arrow' id='arrow-hackernews-link-<%= i %>'></div>
-                    <div><%= post.points %></div>
+                    <div><%= post.score %></div>
                   </div>
                   <div class='post-data'>
                     <a class='cache site-link' data-id='hackernews-link-<%= i %>' href='<%= post.url %>'><%= post.title %></a>
                     <span class='website'>(<%= post.url.replace('http://','').replace('https://','').split(/[/?#]/)[0] %>)</span>
-                    <a class='cache comments' data-id='hackernews-comments-<%= i %>' href='https://news.ycombinator.com/item?id=<%= post.id %>'><%= post.commentCount %> comments</a>
+                    <a class='cache comments' data-id='hackernews-comments-<%= i %>' href='https://news.ycombinator.com/item?id=<%= post.id %>'><%= post.descendants %> comments</a>
                   </div>
                 </div>
                 <iframe sandbox="allow-same-origin" class='content' id='hackernews-link-<%= i %>'></iframe>
