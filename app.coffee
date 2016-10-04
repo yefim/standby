@@ -122,4 +122,5 @@ app.get '/add', (req, res) ->
     res.json []
 
 port = Number(process.env.PORT or 3000)
-app.listen port, -> console.log 'Listening on http://localhost:3000'
+app.listen port, ->
+  console.log "Listening on http://localhost:#{port}"
