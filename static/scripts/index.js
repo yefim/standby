@@ -1,19 +1,18 @@
 import $ from 'jquery';
 
-import MyWorker from 'worker?inline=true!./worker';
+import Pool from './pool';
 
 $(document).ready(() => {
-  const worker = new MyWorker();
+  const contentSites = ['http://localhost:8081/hn'];
+  const pool = new Pool();
 
-  worker.addEventListener('message', (e) => {
-    console.log(e.data);
-  }, false);
+  contentSites.forEach((url) => {
+    const crawler = pool.getWorker();
 
-  worker.postMessage('http://localhost:8081/hn');
+    crawler.postMessage(url);
 
-  /*
-  $.get('/hn').then((resp) => {
-    console.log(resp);
+    crawler.onmessage = (e) => {
+      console.log(e.data);
+    };
   });
-  */
 });
