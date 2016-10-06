@@ -36,7 +36,7 @@ const crawl = (urls, callback) => {
 const renderFrame = (id, body) => {
   const iframe = document.createElement('iframe');
   iframe.id = id;
-  iframe.sandbox = 'allow-same-origin';
+  iframe.sandbox = 'allow-scripts';
   iframe.srcdoc = body;
 
   $iframes.append(iframe);
