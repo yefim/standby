@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-func indexHandler(w http.ResponseWriter, r *http.Request) {
+func hnHandler(w http.ResponseWriter, r *http.Request) {
 	response := crawlHackerNews()
 
 	w.Header().Set("Content-Type", "application/json")
@@ -26,8 +26,10 @@ func main() {
 	}
 
 	router := http.NewServeMux()
+	fs := http.FileServer(http.Dir("static"))
 
-	router.HandleFunc("/", indexHandler)
+	router.Handle("/", fs)
+	router.HandleFunc("/hn", hnHandler)
 
 	fmt.Println("Listing on port", port)
 	if err := http.ListenAndServe(":"+port, router); err != nil {
