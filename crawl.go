@@ -30,10 +30,7 @@ func crawl(urls []string) Response {
 }
 
 func fetch(url string) (string, error) {
-	var httpClient = &http.Client{
-		Timeout: time.Second * 6,
-	}
-	res, err := httpClient.Get(url)
+	res, err := get(url)
 	if err != nil {
 		return "", err
 	}
@@ -43,4 +40,11 @@ func fetch(url string) (string, error) {
 		return "", err
 	}
 	return string(body), nil
+}
+
+func get(url string) (*http.Response, error) {
+	var httpClient = &http.Client{
+		Timeout: time.Second * 6,
+	}
+	return httpClient.Get(url)
 }

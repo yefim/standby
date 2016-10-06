@@ -9,11 +9,7 @@ import (
 )
 
 func indexHander(w http.ResponseWriter, r *http.Request) {
-	urls := []string{
-		"https://hacker-news.firebaseio.com/v0/topstories.json",
-	}
-
-	response := crawl(urls)
+	response := crawlHackerNews()
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
