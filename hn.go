@@ -29,7 +29,7 @@ func crawlHackerNews() Response {
 	decoder := json.NewDecoder(res.Body)
 	decoder.Decode(&ids)
 
-	urls := make([]string, 0, 15)
+	urls := make([]string, 0, 2)
 
 	for i := 0; i < cap(urls); i++ {
 		urls = append(urls, itemUrl(ids[i]))
