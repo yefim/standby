@@ -9,9 +9,11 @@ Posts.prototype.add = function(newPosts) {
 };
 
 Posts.prototype.find = function(id) {
-  return _.find(this.posts, (post) => {
-    return post.id === id;
-  });
+  return _.find(this.posts, {id});
+};
+
+Posts.prototype.where = function(attrs) {
+  return _.find(this.posts, attrs);
 };
 
 export default Posts;

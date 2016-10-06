@@ -5,10 +5,12 @@ import Pool from './pool';
 import Posts from './posts';
 
 const ROOT = 'http://localhost:5555';
+const contentSites = [`${ROOT}/hn`, `${ROOT}/ph`];
 
 const pool = new Pool();
 const allPosts = new Posts();
 const $app = $('#app');
+const $iframes = $('#iframes');
 
 const crawl = (urls, callback) => {
   const crawler = pool.getWorker();
@@ -31,6 +33,15 @@ const crawl = (urls, callback) => {
   };
 };
 
+const renderFrame = (id, body) => {
+  const iframe = document.createElement('iframe');
+  iframe.id = id;
+  iframe.sandbox = 'allow-same-origin';
+  iframe.srcdoc = body;
+
+  $iframes.append(iframe);
+};
+
 const populateContentSite = (site) => {
   const url = site.url;
   const posts = site.data;
@@ -48,23 +59,28 @@ const populateContentSite = (site) => {
 
   $app.append(_.template(template)({url, posts}));
 
-  crawl(_.map(posts, 'url'));
+  crawl(_.map(posts, 'url'), ({data}) => {
+    data.forEach((result) => {
+      const { id } = allPosts.where({url: result.url});
+
+      if (!result.error) {
+        renderFrame(id, result.body);
+      }
+    });
+  });
   crawl(_.map(posts, 'comments'));
 };
 
-$(document).ready(() => {
-  $('body').on('click', 'a', (e) => {
-    e.preventDefault();
+$('body').on('click', 'a', (e) => {
+  e.preventDefault();
 
-    const postId = $(e.currentTarget).data('postId');
-    const post = allPosts.find(postId);
+  const postId = $(e.currentTarget).data('postId');
+  const post = allPosts.find(postId);
 
-    console.log(post);
-  });
+  console.log(post);
+});
 
-  const contentSites = [`${ROOT}/hn`, `${ROOT}/ph`];
-
-  contentSites.forEach((url) => {
-    crawl(url, populateContentSite);
-  });
+// :tada:
+contentSites.forEach((url) => {
+  crawl(url, populateContentSite);
 });
