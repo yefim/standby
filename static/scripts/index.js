@@ -45,7 +45,7 @@ const populateContentSite = (site) => {
   $app.append(_.template(template)({url, posts}));
 
   crawl(_.map(posts, 'url'));
-  // crawl(_.map(links, 'comments'));
+  crawl(_.map(posts, 'comments'));
 };
 
 $(document).ready(() => {
