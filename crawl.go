@@ -12,7 +12,7 @@ func crawl(urls []string) Response {
 
 	for _, url := range urls {
 		go func(url string) {
-			body, err := fetch(url)
+			body, err := fetch(request(url))
 			resc <- Page{
 				Url:   url,
 				Body:  body,
@@ -29,8 +29,13 @@ func crawl(urls []string) Response {
 	return pages
 }
 
-func fetch(url string) (string, error) {
-	res, err := get(url)
+func request(url string) *http.Request {
+	req, _ := http.NewRequest("GET", url, nil)
+	return req
+}
+
+func fetch(req *http.Request) (string, error) {
+	res, err := get(req)
 	if err != nil {
 		return "", err
 	}
@@ -42,9 +47,9 @@ func fetch(url string) (string, error) {
 	return string(body), nil
 }
 
-func get(url string) (*http.Response, error) {
-	var httpClient = &http.Client{
+func get(req *http.Request) (*http.Response, error) {
+	httpClient := &http.Client{
 		Timeout: time.Second * 6,
 	}
-	return httpClient.Get(url)
+	return httpClient.Do(req)
 }

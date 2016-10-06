@@ -18,6 +18,16 @@ func hnHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func phHandler(w http.ResponseWriter, r *http.Request) {
+	response := crawlProductHunt()
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	if err := json.NewEncoder(w).Encode(response); err != nil {
+		log.Fatal(err)
+	}
+}
+
 func crawlHandler(w http.ResponseWriter, r *http.Request) {
 	urls := r.URL.Query()["urls[]"]
 
@@ -43,6 +53,7 @@ func main() {
 	router.Handle("/", fs)
 	router.HandleFunc("/batch", crawlHandler)
 	router.HandleFunc("/hn", hnHandler)
+	router.HandleFunc("/ph", phHandler)
 
 	fmt.Println("Listing on port", port)
 	if err := http.ListenAndServe(":"+port, router); err != nil {

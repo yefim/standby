@@ -8,6 +8,27 @@ const ROOT = 'http://localhost:8081';
 const pool = new Pool();
 const $app = $('#app');
 
+const crawl = (urls, callback) => {
+  const crawler = pool.getWorker();
+
+  let crawlUrl;
+  if (_.isArray(urls)) {
+    crawlUrl = `${ROOT}/batch?${$.param({urls})}`;
+  } else {
+    crawlUrl = urls;
+  }
+
+  crawler.postMessage(crawlUrl);
+  crawler.onmessage = (e) => {
+    pool.releaseWorker(crawler);
+
+    if (e.data.success) {
+      console.log(e.data);
+      callback && callback(e.data);
+    }
+  };
+};
+
 const populateContentSite = (site) => {
   const links = _.map(site.data, ({url, error, body}) => {
     if (error) {
@@ -34,34 +55,14 @@ const populateContentSite = (site) => {
 
   $app.append(_.template(template)({url: site.url, links}));
 
-  const urls = _.map(links, 'url');
-  const crawler = pool.getWorker();
-
-  crawler.postMessage(`${ROOT}/batch?${$.param({urls})}`);
-
-  crawler.onmessage = (e) => {
-    pool.releaseWorker(crawler);
-
-    if (e.data.success) {
-      console.log(e.data);
-    }
-  };
+  crawl(_.map(links, 'url'));
+  // crawl(_.map(links, 'comments'));
 };
 
 $(document).ready(() => {
-  const contentSites = [`${ROOT}/hn`];
+  const contentSites = [`${ROOT}/hn`, `${ROOT}/ph`];
 
   contentSites.forEach((url) => {
-    const crawler = pool.getWorker();
-
-    crawler.postMessage(url);
-
-    crawler.onmessage = (e) => {
-      pool.releaseWorker(crawler);
-
-      if (e.data.success) {
-        populateContentSite(e.data);
-      }
-    };
+    crawl(url, populateContentSite);
   });
 });

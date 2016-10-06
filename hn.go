@@ -14,7 +14,7 @@ func itemUrl(id int) string {
 }
 
 func crawlHackerNews() Response {
-	res, err := get(HN)
+	res, err := get(request(HN))
 
 	if err != nil {
 		return Response{
@@ -35,5 +35,6 @@ func crawlHackerNews() Response {
 		urls = append(urls, itemUrl(ids[i]))
 	}
 
+	// TODO: output cleaner data
 	return crawl(urls)
 }
