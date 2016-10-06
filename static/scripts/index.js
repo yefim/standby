@@ -30,37 +30,27 @@ const crawl = (urls, callback) => {
 };
 
 const populateContentSite = (site) => {
-  const links = _.map(site.data, ({url, error, body}) => {
-    if (error) {
-      return {};
-    }
+  const url = site.url;
+  const posts = site.data;
 
-    try {
-      let jsonData = JSON.parse(body);
-      return _.pick(jsonData, ['id', 'title', 'score', 'url']);
-    } catch (e) {
-      return {};
-    }
-  });
-
-  // TODO: use underscore templates loaders
   const template = [
     '<h1><%= url %></h1>',
-    '<% _.each(links, function(link) { %>',
+    '<% _.each(posts, function(post) { %>',
       '<div>',
-        '<p><a href="<%= link.url %>"><%= link.title %></a> | <%= link.score %></p>',
+        '<p><a href="<%= post.url %>"><%= post.title %></a> | <%= post.score %></p>',
       '</div>',
     '<% }) %>'
   ].join('');
 
-  $app.append(_.template(template)({url: site.url, links}));
+  $app.append(_.template(template)({url, posts}));
 
-  crawl(_.map(links, 'url'));
+  crawl(_.map(posts, 'url'));
   // crawl(_.map(links, 'comments'));
 };
 
 $(document).ready(() => {
-  const contentSites = [`${ROOT}/hn`, `${ROOT}/ph`];
+  // const contentSites = [`${ROOT}/hn`, `${ROOT}/ph`];
+  const contentSites = [`${ROOT}/hn`];
 
   contentSites.forEach((url) => {
     crawl(url, populateContentSite);
