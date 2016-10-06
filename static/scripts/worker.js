@@ -7,13 +7,17 @@ const get = (url, callback) => {
       try {
         data = JSON.parse(xhr.responseText);
       } catch (e) {
-        console.log(xhr.responseText);
+        postMessage({success: false});
       }
 
       callback(data);
     } else {
-      console.log('error');
+      postMessage({success: false});
     }
+  };
+
+  xhr.onerror = () => {
+    postMessage({success: false});
   };
 
   xhr.open('GET', url, true);
@@ -24,6 +28,10 @@ onmessage = (e) => {
   const url = e.data;
 
   get(url, (data) => {
-    postMessage(data);
+    postMessage({
+      url,
+      data,
+      success: true
+    });
   });
 };
