@@ -49,8 +49,7 @@ const populateContentSite = (site) => {
 };
 
 $(document).ready(() => {
-  // const contentSites = [`${ROOT}/hn`, `${ROOT}/ph`];
-  const contentSites = [`${ROOT}/hn`];
+  const contentSites = [`${ROOT}/hn`, `${ROOT}/ph`];
 
   contentSites.forEach((url) => {
     crawl(url, populateContentSite);
