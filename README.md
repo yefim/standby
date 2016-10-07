@@ -1,4 +1,4 @@
-:construction: Stand By
+:construction: Stand By (Please stand by as we rebuild Stand By) :construction:
 ==========
 
 Browse Your Favorite Content Without Wi-Fi
