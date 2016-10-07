@@ -14,9 +14,10 @@ func crawl(urls []string) Response {
 		go func(url string) {
 			finalUrl, body, err := fetch(request(url))
 			resc <- Page{
-				Url:   finalUrl,
-				Body:  body,
-				Error: err,
+				OriginalUrl: url,
+				FinalUrl:    finalUrl,
+				Body:        body,
+				Error:       err,
 			}
 		}(url)
 	}
