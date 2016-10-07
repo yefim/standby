@@ -37,16 +37,31 @@ func crawlProductHunt() Posts {
 		decoder := json.NewDecoder(res.Body)
 		decoder.Decode(&phResponse)
 
+		postsc := make(chan Post)
+
 		for i := 0; i < cap(posts); i++ {
-			phPost := phResponse.Posts[i]
-			posts = append(posts, Post{
-				Id:          fmt.Sprint("ph-", phPost.Id),
-				Title:       phPost.Name + " - " + phPost.Tagline,
-				Score:       phPost.Score,
-				Url:         phPost.Url,
-				NumComments: phPost.NumComments,
-				Comments:    phPost.Comments,
-			})
+			go func(phPost ProductHuntPost) {
+				url := phPost.Url
+				res, err := get(request(url))
+
+				if err == nil {
+					url = res.Request.URL.String()
+				}
+
+				postsc <- Post{
+					Id:          fmt.Sprint("ph-", phPost.Id),
+					Title:       phPost.Name + " - " + phPost.Tagline,
+					Score:       phPost.Score,
+					Url:         url,
+					NumComments: phPost.NumComments,
+					Comments:    phPost.Comments,
+				}
+			}(phResponse.Posts[i])
+		}
+
+		for i := 0; i < cap(posts); i++ {
+			post := <-postsc
+			posts = append(posts, post)
 		}
 	}
 
