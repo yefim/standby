@@ -18,15 +18,23 @@ const contentSites = [`${ROOT}/hn`, `${ROOT}/ph`];
 const maxCrawls = contentSites.length * 3;
 let currentCrawls = 0;
 
+// number of sites * 2 (for comments and post) * number of posts per site
+const maxIframes = contentSites.length * 2 * 2;
+let currentIframes = 0;
+
 const allPosts = new Posts();
 const $iframes = $('#iframes');
 const $app = $('#app');
 const $progress = $('#progress');
 
+const updateProgress = () => {
+  const percent = (currentCrawls / maxCrawls * 50) + (currentIframes / maxIframes * 50);
+  $progress.css('width', `${Math.round(percent)}%`);
+};
 
 const populateContentSite = (site) => {
   currentCrawls += 1;
-  $progress.css('width', `${Math.round(currentCrawls / maxCrawls * 100)}%`);
+  updateProgress();
 
   const url = site.url;
   const posts = site.data;
@@ -47,25 +55,35 @@ const populateContentSite = (site) => {
 
   crawl(_.map(posts, 'url'), ({data}) => {
     currentCrawls += 1;
-    $progress.css('width', `${Math.round(currentCrawls / maxCrawls * 100)}%`);
+    updateProgress();
 
     data.forEach((result) => {
       const post = allPosts.where({url: result.url});
 
       if (!result.error) {
-        $iframes.append(renderFrame(post.id, post.url, result.body));
+        const iframe = renderFrame(post.id, post.url, result.body);
+        iframe.onload = () => {
+          currentIframes += 1;
+          updateProgress();
+        };
+        $iframes.append(iframe);
       }
     });
   });
   crawl(_.map(posts, 'comments'), ({data}) => {
     currentCrawls += 1;
-    $progress.css('width', `${Math.round(currentCrawls / maxCrawls * 100)}%`);
+    updateProgress();
 
     data.forEach((result) => {
       const post = allPosts.where({comments: result.url});
 
       if (!result.error) {
-        $iframes.append(renderFrame(`${post.id}-comments`, post.comments, result.body));
+        const iframe = renderFrame(`${post.id}-comments`, post.comments, result.body);
+        iframe.onload = () => {
+          currentIframes += 1;
+          updateProgress();
+        };
+        $iframes.append(iframe);
       }
     });
   });
