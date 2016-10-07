@@ -19,7 +19,7 @@ const maxCrawls = contentSites.length * 3;
 let currentCrawls = 0;
 
 // number of sites * 2 (for comments and post) * number of posts per site
-const maxIframes = contentSites.length * 2 * 4;
+const maxIframes = contentSites.length * 2 * 6;
 let currentIframes = 0;
 
 const allPosts = new Posts();
@@ -58,10 +58,10 @@ const populateContentSite = (site) => {
     updateProgress();
 
     data.forEach((result) => {
-      const post = allPosts.where({url: result.url});
+      const post = allPosts.where({url: result.originalUrl});
 
       if (!result.error) {
-        const iframe = renderFrame(post.id, post.url, result.body);
+        const iframe = renderFrame(post.id, result.finalUrl, result.body);
         iframe.onload = iframe.onerror = () => {
           currentIframes += 1;
           updateProgress();
@@ -75,10 +75,10 @@ const populateContentSite = (site) => {
     updateProgress();
 
     data.forEach((result) => {
-      const post = allPosts.where({comments: result.url});
+      const post = allPosts.where({comments: result.originalUrl});
 
       if (!result.error) {
-        const iframe = renderFrame(`${post.id}-comments`, post.comments, result.body);
+        const iframe = renderFrame(`${post.id}-comments`, result.finalUrl, result.body);
         iframe.onload = iframe.onerror = () => {
           currentIframes += 1;
           updateProgress();
