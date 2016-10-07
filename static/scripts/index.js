@@ -4,6 +4,7 @@ import _ from 'lodash';
 import Pool from './pool';
 import Posts from './posts';
 
+const ABSOLUTE_URL = /^(\/\/|http|javascript|data:)/i
 const ROOT = 'http://localhost:5555';
 const contentSites = [`${ROOT}/hn`, `${ROOT}/ph`];
 
@@ -33,11 +34,38 @@ const crawl = (urls, callback) => {
   };
 };
 
-const renderFrame = (id, body) => {
+// TODO: maybe push this to a worker?
+const clean = (url, body) => {
+  let $body = $(body).wrapAll('<html></html>').parent();
+
+  $body.find('link[rel="stylesheet"]').each((i, stylesheet) => {
+    if (stylesheet.href && ABSOLUTE_URL.test(stylesheet.href)) {
+      stylesheet.href = '';
+    }
+  });
+
+  $body.find('script').each((i, script) => {
+    if (script.src && ABSOLUTE_URL.test(script.src)) {
+      script.src = '';
+    }
+  });
+
+  $body.find('img').each((i, img) => {
+    if (img.src && ABSOLUTE_URL.test(img.src)) {
+      img.src = '';
+    }
+  });
+
+  $('video').removeAttr('autoplay');
+
+  return $body.prop('outerHTML');
+};
+
+const renderFrame = (post, body) => {
   const iframe = document.createElement('iframe');
-  iframe.id = id;
+  iframe.id = post.id;
   iframe.sandbox = 'allow-scripts';
-  iframe.srcdoc = body;
+  iframe.srcdoc = clean(post.url, body);
 
   $iframes.append(iframe);
 };
@@ -61,10 +89,10 @@ const populateContentSite = (site) => {
 
   crawl(_.map(posts, 'url'), ({data}) => {
     data.forEach((result) => {
-      const { id } = allPosts.where({url: result.url});
+      const post = allPosts.where({url: result.url});
 
       if (!result.error) {
-        renderFrame(id, result.body);
+        renderFrame(post, result.body);
       }
     });
   });
