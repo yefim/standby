@@ -13,6 +13,7 @@ const $iframes = $('#iframes');
 const renderFrame = (post, body) => {
   const iframe = document.createElement('iframe');
   iframe.id = post.id;
+  iframe.className = 'content';
   iframe.sandbox = 'allow-scripts';
   iframe.srcdoc = clean(post.url, body);
 
@@ -52,9 +53,19 @@ $('body').on('click', 'a', (e) => {
   e.preventDefault();
 
   const postId = $(e.currentTarget).data('postId');
-  const post = allPosts.find(postId);
 
-  console.log(post);
+  $(`#${postId}`).addClass('show');
+});
+
+$('#x').on('click', () => {
+  $('iframe').removeClass('show');
+});
+
+$(document).on('keydown', (e) => {
+  // ESC
+  if (e.which === 27) {
+    $('iframe').removeClass('show');
+  }
 });
 
 // :tada:

@@ -1,0 +1,35 @@
+#x {
+  position: fixed;
+  width: 100px;
+  height: 100px;
+  background-color: black;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+
+#iframes {
+  position: relative;
+}
+
+.content {
+  background-color: white;
+  position: absolute;
+  border: none;
+  display: block;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  transform: translateX(100%);
+  transition: transform 0.5s ease-in-out;
+}
+
+.show {
+  transform: translateX(0);
+}
+
+h1 {
+  margin: 0;
+}
