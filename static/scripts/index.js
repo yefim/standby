@@ -8,25 +8,26 @@ import _ from 'lodash';
 
 // scripts
 import Posts from './posts';
-import { crawl, clean, ROOT } from './utils';
+import { crawl, renderFrame, clean, ROOT } from './utils';
 
 const contentSites = [`${ROOT}/hn`, `${ROOT}/ph`];
 
+// once for the list of posts
+// once for the post content
+// once for the comments
+const maxCrawls = contentSites.length * 3;
+let currentCrawls = 0;
+
 const allPosts = new Posts();
-const $app = $('#app');
 const $iframes = $('#iframes');
+const $app = $('#app');
+const $progress = $('#progress');
 
-const renderFrame = (id, url, body) => {
-  const iframe = document.createElement('iframe');
-  iframe.id = id;
-  iframe.className = 'content';
-  iframe.sandbox = 'allow-scripts';
-  iframe.srcdoc = clean(url, body);
-
-  $iframes.append(iframe);
-};
 
 const populateContentSite = (site) => {
+  currentCrawls += 1;
+  $progress.css('width', `${Math.round(currentCrawls / maxCrawls * 100)}%`);
+
   const url = site.url;
   const posts = site.data;
 
@@ -45,20 +46,26 @@ const populateContentSite = (site) => {
   $app.append(_.template(template)({url, posts}));
 
   crawl(_.map(posts, 'url'), ({data}) => {
+    currentCrawls += 1;
+    $progress.css('width', `${Math.round(currentCrawls / maxCrawls * 100)}%`);
+
     data.forEach((result) => {
       const post = allPosts.where({url: result.url});
 
       if (!result.error) {
-        renderFrame(post.id, post.url, result.body);
+        $iframes.append(renderFrame(post.id, post.url, result.body));
       }
     });
   });
   crawl(_.map(posts, 'comments'), ({data}) => {
+    currentCrawls += 1;
+    $progress.css('width', `${Math.round(currentCrawls / maxCrawls * 100)}%`);
+
     data.forEach((result) => {
       const post = allPosts.where({comments: result.url});
 
       if (!result.error) {
-        renderFrame(`${post.id}-comments`, post.comments, result.body);
+        $iframes.append(renderFrame(`${post.id}-comments`, post.comments, result.body));
       }
     });
   });

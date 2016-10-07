@@ -28,6 +28,16 @@ export function crawl(urls, callback) {
   };
 }
 
+export function renderFrame(id, url, body) {
+  const iframe = document.createElement('iframe');
+  iframe.id = id;
+  iframe.className = 'content';
+  iframe.sandbox = 'allow-scripts';
+  iframe.srcdoc = clean(url, body);
+
+  return iframe;
+}
+
 const toAbsoluteUrl = (domain, path, relativeUrl) => {
   if (_.last(domain) === '/' && _.first(relativeUrl) === '/') {
     return domain + relativeUrl.substring(1);

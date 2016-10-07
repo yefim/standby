@@ -1,5 +1,6 @@
 $white: #fff;
 $black: #000;
+$red: #f00;
 
 #x {
   position: fixed;
@@ -31,6 +32,13 @@ $black: #000;
 
 .show {
   transform: translateX(0);
+}
+
+#progress {
+  background-color: $red;
+  height: 150px;
+  width: 0;
+  transition: width .2s linear;
 }
 
 h1 {
