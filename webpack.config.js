@@ -9,11 +9,19 @@ module.exports = {
   },
   resolve: {
     root: __dirname,
-    modulesDirectories: ['static/scripts', 'node_modules'],
-    extensions: ['', '.js']
+    modulesDirectories: ['static/scripts', 'static/styles', 'node_modules'],
+    extensions: ['', '.js', '.css', '.scss']
   },
   module: {
     loaders: [
+      {
+        loaders: ['style', 'css'],
+        test: /\.css$/
+      },
+      {
+        loaders: ['style', 'css', 'sass'],
+        test: /\.scss$/
+      },
       {
         loader: 'babel',
         exclude: /node_modules/,

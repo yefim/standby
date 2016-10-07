@@ -1,6 +1,12 @@
+// stylesheets
+import 'normalize.css';
+import 'style.scss';
+
+// libraries
 import $ from 'jquery';
 import _ from 'lodash';
 
+// scripts
 import Posts from './posts';
 import { crawl, clean, ROOT } from './utils';
 
