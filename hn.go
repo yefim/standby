@@ -16,7 +16,7 @@ type HackerNewsPost struct {
 }
 
 const HN = "https://hacker-news.firebaseio.com/v0/topstories.json"
-const NUM_POSTS = 2
+const NUM_POSTS = 20
 
 func itemUrl(id int) string {
 	return fmt.Sprint("https://hacker-news.firebaseio.com/v0/item/", id, ".json")

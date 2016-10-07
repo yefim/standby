@@ -32,7 +32,8 @@ export function renderFrame(id, url, body) {
   const iframe = document.createElement('iframe');
   iframe.id = id;
   iframe.className = 'content';
-  iframe.sandbox = 'allow-scripts';
+  // iframe.sandbox = 'allow-scripts';
+  iframe.sandbox = '';
   iframe.srcdoc = clean(url, body);
 
   return iframe;
