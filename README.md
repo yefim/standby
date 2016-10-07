@@ -1,9 +1,7 @@
-Stand By
+:construction: Stand By
 ==========
 
 Browse Your Favorite Content Without Wi-Fi
-
-
 
 Getting on the Caltrain or a plane without Wi-Fi soon? Stuck for something to read? Let us help.
 
@@ -19,26 +17,14 @@ We've already pre-fetched Hacker News, Reddit, and some of the best of Medium. T
 * Gmail offline
 * Mobile friendly version (download only a few articles/make an app)
 
-## Installation
+## Setup
 
-We depend on
+* `npm install`
 
-* ```node```
-* ```redis```
-* ```sass```
-* ```coffeescript```
+* `webpack` or `webpack --watch`
 
-All of which need to be installed and in your PATH.
+* `go get`
 
-To install the node dependencies just run ```npm install```
+* `go build`
 
-
-## Running
-
-* Run ```redis-server``` or ```redis-server &```
-
-* Compile the CoffeeScript with ```coffee -cw public/scripts```
-
-* Compile the Sass with ```sass --watch public/styles --style compressed```
-
-* Run ```coffee app.coffee``` and navigate to ```http://localhost:3000```
+* `./standby`
