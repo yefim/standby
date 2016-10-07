@@ -39,13 +39,35 @@ export function renderFrame(id, url, body) {
   return iframe;
 }
 
+// Prereqs:
+//  * base ends in /
+//  * relative does not start with /
+const absolute = (base, relative) => {
+  let stack = base.split('/');
+  let parts = relative.split('/');
+
+  stack.pop();
+
+  for (let i = 0; i < parts.length; i++) {
+    if (parts[i] === '.') {
+      continue;
+    }
+
+    if (parts[i] === '..') {
+      stack.pop();
+    } else {
+      stack.push(parts[i]);
+    }
+  }
+
+  return stack.join('/');
+}
+
 const toAbsoluteUrl = (domain, path, relativeUrl) => {
-  if (_.last(domain) === '/' && _.first(relativeUrl) === '/') {
-    return domain + relativeUrl.substring(1);
-  } else if (_.last(domain) !== '/' && _.first(relativeUrl) !== '/') {
-    return domain + path + '/' + relativeUrl;
-  } else {
+  if (_.first(relativeUrl) === '/') {
     return domain + relativeUrl;
+  } else {
+    return absolute(domain + path, relativeUrl);
   }
 };
 
@@ -54,24 +76,28 @@ export function clean(url, body) {
   let $body = $(body).wrapAll('<html></html>').parent();
   let parser = document.createElement('a');
   parser.href = url;
+
   const domain = parser.protocol + '//' + parser.host;
-  const path = parser.pathname
+  const path = parser.pathname;
 
   $body.find('link[rel="stylesheet"]').each((i, stylesheet) => {
-    if (stylesheet.href && !ABSOLUTE_URL.test(stylesheet.href)) {
-      stylesheet.href = toAbsoluteUrl(domain, path, stylesheet.href);
+    const href = stylesheet.getAttribute('href');
+    if (href && !ABSOLUTE_URL.test(href)) {
+      stylesheet.href = toAbsoluteUrl(domain, path, href);
     }
   });
 
   $body.find('script').each((i, script) => {
-    if (script.src && !ABSOLUTE_URL.test(script.src)) {
-      script.src = toAbsoluteUrl(domain, path, script.src);
+    const src = script.getAttribute('src');
+    if (src && !ABSOLUTE_URL.test(src)) {
+      script.src = toAbsoluteUrl(domain, path, src);
     }
   });
 
   $body.find('img').each((i, img) => {
-    if (img.src && !ABSOLUTE_URL.test(img.src)) {
-      img.src = toAbsoluteUrl(domain, path, img.src);
+    const src = img.getAttribute('src');
+    if (src && !ABSOLUTE_URL.test(src)) {
+      img.src = toAbsoluteUrl(domain, path, src);
     }
   });
 

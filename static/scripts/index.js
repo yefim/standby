@@ -19,7 +19,7 @@ const maxCrawls = contentSites.length * 3;
 let currentCrawls = 0;
 
 // number of sites * 2 (for comments and post) * number of posts per site
-const maxIframes = contentSites.length * 2 * 20;
+const maxIframes = contentSites.length * 2 * 4;
 let currentIframes = 0;
 
 const allPosts = new Posts();

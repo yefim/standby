@@ -21,7 +21,7 @@ type ProductHuntResponse struct {
 
 const PH = "https://api.producthunt.com/v1/posts"
 const PH_TOKEN = "3c93dd9e925398bf433b0c679fb063e1eefe0c6e7b41fe762e37d5826c9a5991"
-const NUM_PH_POSTS = 20
+const NUM_PH_POSTS = 4
 
 func crawlProductHunt() Posts {
 	posts := make(Posts, 0, NUM_PH_POSTS)
