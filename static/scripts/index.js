@@ -61,7 +61,12 @@ const populateContentSite = (site) => {
       const post = allPosts.where({url: result.originalUrl});
 
       if (!result.error) {
-        const iframe = renderFrame(post.id, result.finalUrl, result.body);
+        const iframe = renderFrame({
+          id: post.id,
+          url: result.finalUrl,
+          body: result.body
+        });
+
         iframe.onload = iframe.onerror = () => {
           currentIframes += 1;
           updateProgress();
@@ -78,7 +83,13 @@ const populateContentSite = (site) => {
       const post = allPosts.where({comments: result.originalUrl});
 
       if (!result.error) {
-        const iframe = renderFrame(`${post.id}-comments`, result.finalUrl, result.body);
+        const iframe = renderFrame({
+          id: `${post.id}-comments`,
+          url: result.finalUrl,
+          body: result.body,
+          sandbox: 'allow-scripts'
+        });
+
         iframe.onload = iframe.onerror = () => {
           currentIframes += 1;
           updateProgress();

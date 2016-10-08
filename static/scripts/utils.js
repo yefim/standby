@@ -28,12 +28,11 @@ export function crawl(urls, callback) {
   };
 }
 
-export function renderFrame(id, url, body) {
+export function renderFrame({id, url, body, sandbox = ''}) {
   const iframe = document.createElement('iframe');
   iframe.id = id;
   iframe.className = 'content';
-  // iframe.sandbox = 'allow-scripts';
-  iframe.sandbox = '';
+  iframe.sandbox = sandbox;
   iframe.srcdoc = clean(url, body);
 
   return iframe;
