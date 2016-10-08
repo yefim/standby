@@ -23,6 +23,10 @@ module.exports = {
         test: /\.scss$/
       },
       {
+        loader: 'ejs',
+        test: /\.ejs$/
+      },
+      {
         loader: 'babel',
         exclude: /node_modules/,
         test: /\.js$/,

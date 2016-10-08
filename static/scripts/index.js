@@ -10,6 +10,9 @@ import _ from 'lodash';
 import Posts from './posts';
 import { crawl, renderFrame, clean, ROOT } from './utils';
 
+// templates
+import { contentSite } from './templates';
+
 const contentSites = [`${ROOT}/hn`, `${ROOT}/ph`];
 
 // once for the list of posts
@@ -51,7 +54,7 @@ const populateContentSite = (site) => {
     '<% }) %>'
   ].join('');
 
-  $app.append(_.template(template)({url, posts}));
+  $app.append(contentSite({url, posts}));
 
   crawl(_.map(posts, 'url'), ({data}) => {
     currentCrawls += 1;
