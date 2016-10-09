@@ -1,21 +1,24 @@
 language: python
 python:
-  - "2.7"
+- '2.7'
+env:
+  global:
+  - secure: xc4jL+WniYpH0bbJUwP2YU+BFn8Oba9dbkx8TLoVM9/rXfSmIE5w8LQTie4EVo6vYSFTWryRGpARNYPy5nZP3VZXvEWG1RT/qqPWC9DOOGuoSKRtxNeU45d2dSJJmLt8IiAE6pe819OQP3KYypgjNniBF21HGkwVhjkRQFa6cik=
+  - secure: Eyq1KUsXTLDP5Gd2ir7cOgIxGN/HzaKp91LtAgbNYriMQgMbdtbsPX+qAH8EQ35Rmvz+EzAsVWbKpUl4715AYRNWRB8witU7ssj5egsQ8hvIn32Bwa9G8YSYLZwg91wMqKSr4siGJb4ACOwdaRpo+FxMCDOdACXGAzMyNSNmApI=
 install:
-  - "pip install awscli"
+- pip install awscli
 sudo: false
 cache:
   directories:
-    - node_modules
+  - node_modules
 script:
-  - "nvm install stable"
-  - "npm install"
-  - "webpack -p --config webpack-prod.config.js"
+- nvm install stable
+- npm install
+- webpack -p --config webpack-prod.config.js
 deploy:
   provider: s3
-  access_key_id: AKIAI3ABDFPSOQSGZP3A
-  secret_access_key:
-    secure: utGsyaThRqoo8a1e1F52xa8bgQrrBUR6/mkSFfYpozZInzDMiQ6di/a2JVbnmmivHNb0jKcnAaY/clDEUq6SqvSSSMgcPKq1dKdCVfEqou4V9NBThBGNJqjaZmLkuhRqcAa79zdHo49hYWpI99hVqEDmYmsqaKBZB90SXuGK+is=
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
   bucket: stand-by
   skip_cleanup: true
   local-dir: static/build/
@@ -24,5 +27,5 @@ deploy:
     repo: yefim/standby
     branch: master
 after_deploy:
-  - aws configure set preview.cloudfront true
-  - aws cloudfront create-invalidation --distribution-id E22NPM2CZKUNGS --paths "/index.html"
+- aws configure set preview.cloudfront true
+- aws cloudfront create-invalidation --distribution-id E22NPM2CZKUNGS --paths "/index.html"
