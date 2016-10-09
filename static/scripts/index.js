@@ -93,30 +93,28 @@ const populateContentSite = (site) => {
   });
 };
 
-$app.on('click', '.post', (e) => {
-  e.preventDefault();
+window.onhashchange = () => {
+  const hash = window.location.hash.substring(1);
 
-  const postId = $(e.currentTarget).data('postId');
-
-  $(`#${postId}`).addClass('show');
-});
-
-$app.on('click', '.comments', (e) => {
-  e.preventDefault();
-
-  const postId = $(e.currentTarget).data('postId');
-
-  $(`#${postId}-comments`).addClass('show');
-});
+  if (hash) {
+    $(`#${hash}`).addClass('show');
+    $('#x').show();
+    document.body.style.overflow = 'hidden';
+  } else {
+    $('iframe').removeClass('show');
+    $('#x').hide();
+    document.body.style.overflow = 'auto';
+  }
+};
 
 $('#x').on('click', () => {
-  $('iframe').removeClass('show');
+  window.location.hash = '';
 });
 
 $(document).on('keydown', (e) => {
   // ESC
   if (e.which === 27) {
-    $('iframe').removeClass('show');
+    window.location.hash = '';
   }
 });
 

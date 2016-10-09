@@ -1,7 +1,7 @@
 <h2><%= url %></h1>
 <% _.each(posts, function(post) { %>
   <div>
-    <p><a class="post" data-post-id="<%= post.id %>" href="<%= post.url %>"><%= post.title %></a> | <%= post.score %> points</p>
-    <p><a class="comments" data-post-id="<%= post.id %>" href="<%= post.comments %>"><%= post.numComments %> comments</a></p>
+    <p><a class="post" data-post-id="<%= post.id %>" href="#<%= post.id %>"><%= post.title %></a> | <%= post.score %> points</p>
+    <p><a class="comments" data-post-id="<%= post.id %>" href="#<%= post.id %>-comments"><%= post.numComments %> comments</a></p>
   </div>
 <% }) %>
