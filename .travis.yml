@@ -15,7 +15,7 @@ deploy:
     secure: utGsyaThRqoo8a1e1F52xa8bgQrrBUR6/mkSFfYpozZInzDMiQ6di/a2JVbnmmivHNb0jKcnAaY/clDEUq6SqvSSSMgcPKq1dKdCVfEqou4V9NBThBGNJqjaZmLkuhRqcAa79zdHo49hYWpI99hVqEDmYmsqaKBZB90SXuGK+is=
   bucket: stand-by
   skip_cleanup: true
-  local-dir: static/
+  local-dir: static/build/
   acl: public_read
   on:
     repo: yefim/standby
