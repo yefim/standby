@@ -44,16 +44,6 @@ const populateContentSite = (site) => {
 
   allPosts.add(posts);
 
-  const template = [
-    '<h1><%= url %></h1>',
-    '<% _.each(posts, function(post) { %>',
-      '<div>',
-        '<p><a class="post" data-post-id="<%= post.id %>" href="<%= post.url %>"><%= post.title %></a> | <%= post.score %></p>',
-        '<p><a class="comments" data-post-id="<%= post.id %>" href="<%= post.comments %>"><%= post.numComments %> comments</a></p>',
-      '</div>',
-    '<% }) %>'
-  ].join('');
-
   $app.append(contentSite({url, posts}));
 
   crawl(_.map(posts, 'url'), ({data}) => {
