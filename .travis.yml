@@ -5,6 +5,7 @@ sudo: false
 cache:
   directories:
   - node_modules
+before_deploy: "webpack -p"
 deploy:
   provider: s3
   access_key_id: AKIAI3ABDFPSOQSGZP3A
