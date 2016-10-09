@@ -6,7 +6,7 @@ cache:
   directories:
   - node_modules
 script:
-  - "webpack -p"
+  - "webpack -p --config webpack-prod.config.js"
 deploy:
   provider: s3
   access_key_id: AKIAI3ABDFPSOQSGZP3A
