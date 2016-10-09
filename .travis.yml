@@ -1,6 +1,6 @@
-language: node_js
-node_js:
-  - '6'
+language: python
+python:
+  - "2.7"
 install:
   - "pip install awscli"
 sudo: false
@@ -8,6 +8,8 @@ cache:
   directories:
     - node_modules
 script:
+  - "nvm install 0.12"
+  - "npm install"
   - "webpack -p --config webpack-prod.config.js"
 deploy:
   provider: s3
