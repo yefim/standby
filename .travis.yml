@@ -8,7 +8,7 @@ cache:
   directories:
     - node_modules
 script:
-  - "nvm install 0.12"
+  - "nvm install stable"
   - "npm install"
   - "webpack -p --config webpack-prod.config.js"
 deploy:
