@@ -5,3 +5,4 @@ node_modules/
 standby
 static/build/
 lambda/lambda.zip
+packages

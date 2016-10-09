@@ -1,5 +1,6 @@
 import requests
 import json
+from gevent import pool
 
 def handler(event, context):
     return {
@@ -15,4 +16,5 @@ def story(id):
     return requests.get('https://hacker-news.firebaseio.com/v0/item/%d.json' % id).json()
 
 def top_stories(limit=25):
-    return [story(id) for id in list(top_story_ids())[:limit]]
+    rpool = pool.Pool(size=25)
+    return rpool.map(story, list(top_story_ids())[:limit])
