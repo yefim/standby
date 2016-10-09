@@ -44,7 +44,7 @@ func main() {
 	port := os.Getenv("PORT")
 
 	if port == "" {
-		port = "5555"
+		port = "8081"
 	}
 
 	router := http.NewServeMux()
