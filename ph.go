@@ -37,7 +37,13 @@ func crawlProductHunt() Posts {
 		decoder := json.NewDecoder(res.Body)
 		decoder.Decode(&phResponse)
 
-		for i := 0; i < cap(posts); i++ {
+		maxPosts := NUM_PH_POSTS
+
+		if maxPosts > len(phResponse.Posts) {
+			maxPosts = len(phResponse.Posts)
+		}
+
+		for i := 0; i < maxPosts; i++ {
 			phPost := phResponse.Posts[i]
 			posts = append(posts, Post{
 				Id:          fmt.Sprint("ph-", phPost.Id),

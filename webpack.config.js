@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   context: __dirname,
@@ -7,7 +8,7 @@ module.exports = {
   },
   output: {
     path: './static/build',
-    filename: 'bundle.js'
+    filename: '[hash].bundle.js'
   },
   resolve: {
     root: __dirname,
@@ -36,13 +37,16 @@ module.exports = {
           presets: ['es2015'],
           cacheDirectory: true,
           plugins: ['transform-strict-mode', 'transform-object-rest-spread', 'es6-promise']
-        },
+        }
       }
     ]
   },
   plugins: [
     new webpack.ProvidePlugin({
         _: 'lodash'
+    }),
+    new HtmlWebpackPlugin({
+      template: 'static/index.ejs'
     })
   ]
 };

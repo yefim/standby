@@ -1,20 +1,27 @@
-language: node_js
-node_js:
-- '6'
+language: python
+python:
+- '2.7'
+install:
+- pip install awscli
 sudo: false
 cache:
   directories:
   - node_modules
 script:
-  - "webpack -p"
+- nvm install stable
+- npm install
+- webpack -p --config webpack-prod.config.js
 deploy:
   provider: s3
-  access_key_id: AKIAI3ABDFPSOQSGZP3A
-  secret_access_key:
-    secure: utGsyaThRqoo8a1e1F52xa8bgQrrBUR6/mkSFfYpozZInzDMiQ6di/a2JVbnmmivHNb0jKcnAaY/clDEUq6SqvSSSMgcPKq1dKdCVfEqou4V9NBThBGNJqjaZmLkuhRqcAa79zdHo49hYWpI99hVqEDmYmsqaKBZB90SXuGK+is=
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
   bucket: stand-by
   skip_cleanup: true
-  local-dir: static/
+  local-dir: static/build/
   acl: public_read
   on:
     repo: yefim/standby
+    branch: master
+after_deploy:
+- aws configure set preview.cloudfront true
+- aws cloudfront create-invalidation --distribution-id E22NPM2CZKUNGS --paths "/index.html"
