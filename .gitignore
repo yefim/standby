@@ -4,3 +4,4 @@ node_modules/
 .sass-cache
 standby
 static/build/
+lambda/lambda.zip
