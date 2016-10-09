@@ -1,10 +1,6 @@
 language: python
 python:
 - '2.7'
-env:
-  global:
-  - secure: xc4jL+WniYpH0bbJUwP2YU+BFn8Oba9dbkx8TLoVM9/rXfSmIE5w8LQTie4EVo6vYSFTWryRGpARNYPy5nZP3VZXvEWG1RT/qqPWC9DOOGuoSKRtxNeU45d2dSJJmLt8IiAE6pe819OQP3KYypgjNniBF21HGkwVhjkRQFa6cik=
-  - secure: Eyq1KUsXTLDP5Gd2ir7cOgIxGN/HzaKp91LtAgbNYriMQgMbdtbsPX+qAH8EQ35Rmvz+EzAsVWbKpUl4715AYRNWRB8witU7ssj5egsQ8hvIn32Bwa9G8YSYLZwg91wMqKSr4siGJb4ACOwdaRpo+FxMCDOdACXGAzMyNSNmApI=
 install:
 - pip install awscli
 sudo: false
