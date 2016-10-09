@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+- '6'
+sudo: false
+cache:
+  directories:
+  - node_modules
+deploy:
+  provider: s3
+  access_key_id: AKIAI3ABDFPSOQSGZP3A
+  secret_access_key:
+    secure: utGsyaThRqoo8a1e1F52xa8bgQrrBUR6/mkSFfYpozZInzDMiQ6di/a2JVbnmmivHNb0jKcnAaY/clDEUq6SqvSSSMgcPKq1dKdCVfEqou4V9NBThBGNJqjaZmLkuhRqcAa79zdHo49hYWpI99hVqEDmYmsqaKBZB90SXuGK+is=
+  bucket: stand-by
+  local-dir: static/
+  upload-dir: "/"
+  acl: public_read
+  on:
+    repo: yefim/standby
