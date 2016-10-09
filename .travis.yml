@@ -1,10 +1,12 @@
 language: node_js
 node_js:
-- '6'
+  - '6'
+install:
+  - "pip install awscli"
 sudo: false
 cache:
   directories:
-  - node_modules
+    - node_modules
 script:
   - "webpack -p --config webpack-prod.config.js"
 deploy:
@@ -18,3 +20,7 @@ deploy:
   acl: public_read
   on:
     repo: yefim/standby
+    branch: master
+after_deploy:
+  - aws configure set preview.cloudfront true
+  - aws cloudfront create-invalidation --distribution-id E22NPM2CZKUNGS --paths "/index.html"
