@@ -4,7 +4,7 @@ import urllib2
 
 
 def handler(event, context):
-    urls = event.get('queryStringParameters', {}).values()
+    urls = event.get('queryStringParameters', {}).get('urls').split(' ')
     return {
         'statusCode': 200,
         'headers': {
