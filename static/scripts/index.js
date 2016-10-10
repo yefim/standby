@@ -8,12 +8,12 @@ import _ from 'lodash';
 
 // scripts
 import Posts from './posts';
-import { crawl, renderFrame, clean, ROOT } from './utils';
+import { crawl, renderFrame, clean } from './utils';
 
 // templates
 import { contentSite } from './templates';
 
-const contentSites = [`${ROOT}/hn`, `${ROOT}/ph`];
+const contentSites = ['https://r5cx72j2gj.execute-api.us-east-1.amazonaws.com/prod/hn'];
 
 // once for the list of posts
 // once for the post content
@@ -22,7 +22,7 @@ const maxCrawls = contentSites.length * 3;
 let currentCrawls = 0;
 
 // number of sites * 2 (for comments and post) * number of posts per site
-const maxIframes = contentSites.length * 2 * 6;
+const maxIframes = contentSites.length * 2 * 15;
 let currentIframes = 0;
 
 const allPosts = new Posts();

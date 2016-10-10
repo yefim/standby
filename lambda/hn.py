@@ -1,13 +1,18 @@
-import requests
+import threading
 import json
-from gevent import pool
+import urllib2
 
 
 def handler(event, context):
     return {
         'statusCode': 200,
-        'headers': {"Access-Control-Allow-Origin":"*","Access-Control-Allow-Methods":"OPTIONS","Access-Control-Allow-Headers":"Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token","Content-Type":"application/json"},
-        'body': json.dumps(top_stories()),
+        'headers': {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+            'Content-Type': 'application/json'
+        },
+        'body': json.dumps(top_stories())
     }
 
 
@@ -22,15 +27,37 @@ def standardize(story):
     }
 
 
+def fetch_url(url):
+    urlHandler = urllib2.urlopen(url)
+    html = urlHandler.read()
+    return html
+
+
+def fetch_story(id, stories):
+    url = 'https://hacker-news.firebaseio.com/v0/item/%s.json' % id
+    html = fetch_url(url)
+    stories.append(standardize(json.loads(html)))
+
+
 def top_story_ids():
-    return requests.get('https://hacker-news.firebaseio.com/v0/topstories.json').json()
+    url = 'https://hacker-news.firebaseio.com/v0/topstories.json'
+    response = fetch_url(url)
+    response = response[1:-1]
+    return response.split(',')
 
 
-def story(id):
-    return requests.get('https://hacker-news.firebaseio.com/v0/item/%d.json' % id).json()
+def top_stories(limit=15):
+    stories = []
+    ids = top_story_ids()
 
+    threads = [threading.Thread(
+        target=fetch_story,
+        args=(id, stories,)
+    ) for id in ids[:limit]]
 
-def top_stories(limit=25):
-    rpool = pool.Pool(size=25)
-    stories = rpool.map(story, list(top_story_ids())[:limit])
-    return [standardize(x) for x in stories]
+    for thread in threads:
+        thread.start()
+    for thread in threads:
+        thread.join()
+
+    return stories

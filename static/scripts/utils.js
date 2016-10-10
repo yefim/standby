@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import Pool from './pool';
 
-export const ROOT = 'http://localhost:8081';
+const CRAWL_URL = 'https://r5cx72j2gj.execute-api.us-east-1.amazonaws.com/prod/crawl';
 const ABSOLUTE_URL = /^(\/\/|http|javascript|data:)/i
 
 const pool = new Pool();
@@ -13,7 +13,7 @@ export function crawl(urls, callback) {
 
   let crawlUrl;
   if (_.isArray(urls)) {
-    crawlUrl = `${ROOT}/batch?${$.param({urls})}`;
+    crawlUrl = `${CRAWL_URL}?urls=${urls.join(' ')}`;
   } else {
     crawlUrl = urls;
   }
