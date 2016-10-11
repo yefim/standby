@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import Pool from './pool';
 
-const CRAWL_URL = 'https://r5cx72j2gj.execute-api.us-east-1.amazonaws.com/prod/crawl';
+const CRAWL_URL = 'https://qxfl90z2w6.execute-api.us-west-2.amazonaws.com/prod/crawler?urls=http%3A%2F%2Fyef.im';
 const ABSOLUTE_URL = /^(\/\/|http|javascript|data:)/i
 
 const pool = new Pool();
