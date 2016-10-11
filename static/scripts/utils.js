@@ -13,7 +13,11 @@ export function crawl(urls, callback) {
 
   let crawlUrl;
   if (_.isArray(urls)) {
-    crawlUrl = `${CRAWL_URL}?urls=${urls.join(' ')}`;
+    const encoded = _.map(urls, (url) => {
+      return encodeURIComponent(url);
+    });
+
+    crawlUrl = `${CRAWL_URL}?urls=${encoded.join(',')}`;
   } else {
     crawlUrl = urls;
   }
