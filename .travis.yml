@@ -25,6 +25,10 @@ deploy:
 after_deploy:
 - aws configure set preview.cloudfront true
 - aws cloudfront create-invalidation --distribution-id E22NPM2CZKUNGS --paths "/index.html"
+- ./create-dist
+- ./lambda-update hn
+- ./lambda-update reddit
+- ./lambda-update crawler
 env:
   global:
   - secure: NAhMUVeSRsuoRzvPRwDxVCZFi66ljyOIR+toL2Ev39+U8zOd+UMnpIW2PlIPXYSYhGnWcO/DRgMd9i+nJUvhwops5nVtnQBg+cRop/vUGuN4LRl18ofV9q23lmt2Kev4wRmVBoLd0dkEIR7nZ2P23OwLk8eEdVnGaLSXUffRozQ=
