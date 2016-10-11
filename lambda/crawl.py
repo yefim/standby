@@ -17,7 +17,8 @@ def isAbsoluteUrl(url):
 def fetch_url(url, pages):
     urlHandler = urllib2.urlopen(url)
     html = urlHandler.read()
-    urlObj = urlparse(urlHandler.geturl())
+    finalUrl = urlHandler.geturl()
+    urlObj = urlparse(finalUrl)
     prefix = urlObj.scheme + "://" + urlObj.netloc + urlObj.path
 
     soup = BeautifulSoup(html, 'html.parser')
@@ -36,7 +37,7 @@ def fetch_url(url, pages):
 
     pages.append({
         'originalUrl': url,
-        'finalUrl': urlHandler.geturl(),
+        'finalUrl': finalUrl,
         'body': str(soup)
     })
 
