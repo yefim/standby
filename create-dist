@@ -1,0 +1,11 @@
+#!/bin/bash
+pushd ~/standby
+mkdir lambda-dist
+pip install -r lambda/requirements.txt -t lambda-dist
+cp lambda/* lambda-dist
+pushd ~/standby/lambda-dist
+zip -r lambda-dist.zip .
+popd
+mv lambda-dist/lambda-dist.zip .
+rm -rf lambda-dist
+popd

@@ -4,5 +4,6 @@ node_modules/
 .sass-cache
 standby
 static/build/
-lambda/lambda.zip
 packages
+*.pyc
+lambda-dist.zip

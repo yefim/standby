@@ -1,11 +1,2 @@
 #!/bin/bash
-pushd ~/standby
-mkdir lambda-dist
-pip install -r lambda/requirements.txt -t lambda-dist
-cp lambda/* lambda-dist
-pushd ~/standby/lambda-dist
-zip -r lambda-dist.zip .   
-aws lambda update-function-code --region us-west-2 --function-name $1 --zip-file fileb://~/standby/lambda-dist/lambda-dist.zip
-popd
-rm -rf lambda-dist
-popd
+aws lambda update-function-code --region us-west-2 --function-name $1 --zip-file fileb://~/standby/lambda-dist.zip
