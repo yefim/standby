@@ -60,7 +60,6 @@ const populateContentSite = (site) => {
       if (!result.error) {
         const iframe = renderFrame({
           id: post.id,
-          url: result.finalUrl,
           body: result.body
         });
 
@@ -82,7 +81,6 @@ const populateContentSite = (site) => {
       if (!result.error) {
         const iframe = renderFrame({
           id: `${post.id}-comments`,
-          url: result.finalUrl,
           body: result.body,
           sandbox: 'allow-scripts'
         });
