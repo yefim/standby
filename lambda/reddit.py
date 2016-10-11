@@ -1,11 +1,13 @@
-from utils import success_response
 import requests
 
+
 def handler(event, context):
-    return success_response([standardize(post['data']) for post in get_all_hot()['data']['children']])
+    return [standardize(post['data']) for post in get_all_hot()['data']['children']]
+
 
 def get_all_hot():
     return requests.get('https://www.reddit.com/r/all/hot.json').json()
+
 
 def standardize(post):
     print post
