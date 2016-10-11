@@ -22,9 +22,3 @@ We've already pre-fetched Hacker News, Reddit, and some of the best of Medium. T
 * `npm install`
 
 * `webpack` or `webpack --watch`
-
-* `go get`
-
-* `go build`
-
-* `./standby`
