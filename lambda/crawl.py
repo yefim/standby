@@ -1,24 +1,18 @@
 import threading
 import json
+
 import urllib2
 from bs4 import BeautifulSoup
 from urlparse import urlparse, urljoin
 
 
 def handler(event, context):
-    return {
-        'statusCode': 200,
-        'headers': {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
-            'Content-Type': 'application/json'
-        },
-        'body': json.dumps(crawl(event['urls']))
-    }
+    return crawl(event.get('urls', []))
+
 
 def isAbsoluteUrl(url):
-    return any([url.startswith(s) for s in ['//','http','javascript','data:']])
+    return any([url.startswith(s) for s in ['//', 'http', 'javascript', 'data:']])
+
 
 def fetch_url(url, pages):
     urlHandler = urllib2.urlopen(url)

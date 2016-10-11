@@ -4,16 +4,7 @@ import urllib2
 
 
 def handler(event, context):
-    return {
-        'statusCode': 200,
-        'headers': {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
-            'Content-Type': 'application/json'
-        },
-        'body': json.dumps(top_stories())
-    }
+    return top_stories()
 
 
 def standardize(story):
