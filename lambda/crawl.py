@@ -30,22 +30,15 @@ def fetch_url(url, pages):
 
     for script in soup.find_all('script'):
         if script.get('src') != None and not isAbsoluteUrl(script.get('src')):
-            print script.get('src')
-            print script
             script['src'] = urljoin(prefix, script.get('src'))
-            print script.get('src')
 
-    for stylesheet in soup.find_all('link[rel="stylesheet"]'):
+    for stylesheet in soup.find_all('link', rel='stylesheet'):
         if stylesheet.get('href') != None and not isAbsoluteUrl(stylesheet.get('href')):
-            print stylesheet.get('href')
-            stylehseet.href = urljoin(prefix, stylesheet.href)
-            print stylesheet.get('href')
+            stylesheet['href'] = urljoin(prefix, stylesheet.get('href'))
 
     for img in soup.find_all('img'):
         if img.get('src') != None and not isAbsoluteUrl(img.get('src')):
-            print img.get('src')
             img['src'] = urljoin(prefix, img.get('src'))
-            print img.get('src')
 
     pages.append({
         'originalUrl': url,
