@@ -11,7 +11,6 @@ def top_posts():
     return requests.get(PH, headers = {'Authorization': 'Bearer %s' % PH_TOKEN }).json()
 
 def standardize(post):
-    print post
     return {
         'id': post['id'],
         'title': post['name'],
