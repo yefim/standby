@@ -1,2 +1,2 @@
 #!/bin/bash
-aws lambda update-function-code --region us-west-2 --function-name $1 --zip-file fileb://~/standby/lambda-dist.zip
+aws lambda update-function-code --region us-west-2 --function-name $1 --zip-file fileb://./lambda-dist.zip
