@@ -72,7 +72,7 @@ const toAbsoluteUrl = (domain, path, relativeUrl) => {
 
 // TODO: maybe push this to a worker?
 export function clean(url, body) {
-  let $body = $(body).wrapAll('<html></html>').parent().parent();
+  let $body = $(body).wrapAll('<html></html>').parent();
   let parser = document.createElement('a');
   parser.href = url;
 
