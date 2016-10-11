@@ -1,10 +1,8 @@
 import $ from 'jquery';
-import _ from 'lodash';
 
 import Pool from './pool';
 
 const CRAWL_URL = 'https://qxfl90z2w6.execute-api.us-west-2.amazonaws.com/prod/scrape';
-const ABSOLUTE_URL = /^(\/\/|http|javascript|data:)/i
 
 const pool = new Pool();
 
@@ -12,8 +10,8 @@ export function crawl(urls, callback) {
   const crawler = pool.getWorker();
 
   let crawlUrl;
-  if (_.isArray(urls)) {
-    const encoded = _.map(urls, (url) => {
+  if (Array.isArray(urls)) {
+    const encoded = url.map((url) => {
       return encodeURIComponent(url);
     });
 
@@ -32,7 +30,7 @@ export function crawl(urls, callback) {
   };
 }
 
-export function renderFrame({id, url, body, sandbox = ''}) {
+export function renderFrame({id, body, sandbox = ''}) {
   const iframe = document.createElement('iframe');
   iframe.id = id;
   iframe.className = 'content';
