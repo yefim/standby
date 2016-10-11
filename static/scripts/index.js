@@ -13,7 +13,11 @@ import { crawl, renderFrame, clean } from './utils';
 // templates
 import { contentSite } from './templates';
 
-const contentSites = ['https://qxfl90z2w6.execute-api.us-west-2.amazonaws.com/prod/reddit', 'https://qxfl90z2w6.execute-api.us-west-2.amazonaws.com/prod/hn', 'https://qxfl90z2w6.execute-api.us-west-2.amazonaws.com/prod/ph']
+const contentSites = [
+  'https://qxfl90z2w6.execute-api.us-west-2.amazonaws.com/prod/hn',
+  'https://qxfl90z2w6.execute-api.us-west-2.amazonaws.com/prod/reddit',
+  'https://qxfl90z2w6.execute-api.us-west-2.amazonaws.com/prod/ph'
+];
 
 // once for the list of posts
 // once for the post content
@@ -56,7 +60,6 @@ const populateContentSite = (site) => {
       if (!result.error) {
         const iframe = renderFrame({
           id: post.id,
-          url: result.finalUrl,
           body: result.body
         });
 
@@ -78,7 +81,6 @@ const populateContentSite = (site) => {
       if (!result.error) {
         const iframe = renderFrame({
           id: `${post.id}-comments`,
-          url: result.finalUrl,
           body: result.body,
           sandbox: 'allow-scripts'
         });
