@@ -6,7 +6,6 @@ from urlparse import urlparse, urljoin
 
 
 def handler(event, context):
-    urls = event.get('queryStringParameters', {}).get('urls').split(' ')
     return {
         'statusCode': 200,
         'headers': {
@@ -15,7 +14,7 @@ def handler(event, context):
             'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
             'Content-Type': 'application/json'
         },
-        'body': json.dumps(crawl(urls))
+        'body': json.dumps(crawl(event['urls']))
     }
 
 def isAbsoluteUrl(url):

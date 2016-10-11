@@ -13,7 +13,7 @@ import { crawl, renderFrame, clean } from './utils';
 // templates
 import { contentSite } from './templates';
 
-const contentSites = ['https://r5cx72j2gj.execute-api.us-east-1.amazonaws.com/prod/hn'];
+const contentSites = ['https://qxfl90z2w6.execute-api.us-west-2.amazonaws.com/prod/reddit', 'https://qxfl90z2w6.execute-api.us-west-2.amazonaws.com/prod/hn', 'https://qxfl90z2w6.execute-api.us-west-2.amazonaws.com/prod/ph']
 
 // once for the list of posts
 // once for the post content
