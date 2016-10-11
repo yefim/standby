@@ -13,8 +13,8 @@ script:
 - webpack -p --config webpack-prod.config.js
 deploy:
   provider: s3
-  access_key_id: $AWS_ACCESS_KEY_ID
-  secret_access_key: $AWS_SECRET_ACCESS_KEY
+  access_key_id: "$AWS_ACCESS_KEY_ID"
+  secret_access_key: "$AWS_SECRET_ACCESS_KEY"
   bucket: stand-by
   skip_cleanup: true
   local-dir: static/build/
@@ -25,3 +25,7 @@ deploy:
 after_deploy:
 - aws configure set preview.cloudfront true
 - aws cloudfront create-invalidation --distribution-id E22NPM2CZKUNGS --paths "/index.html"
+env:
+  global:
+  - secure: NAhMUVeSRsuoRzvPRwDxVCZFi66ljyOIR+toL2Ev39+U8zOd+UMnpIW2PlIPXYSYhGnWcO/DRgMd9i+nJUvhwops5nVtnQBg+cRop/vUGuN4LRl18ofV9q23lmt2Kev4wRmVBoLd0dkEIR7nZ2P23OwLk8eEdVnGaLSXUffRozQ=
+  - secure: wulvJXRjbTYlLSYIyKXqN0/cyeKiDng+52qqTEoEmVEZbbSlag6P9HVFTSkRyjIVqHVxCTr0Us62QYVAlxKAa1aqDRrFYPG6HRrmG6c/NUqDerak4Dr+6AmwOLIX9ItGTW0QAhzG/Q2Zjn6iQBOAMtrnhoHQ9a+5twAhm1yC1nQ=
